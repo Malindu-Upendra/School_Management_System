@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import StudentRegistrationForm from "./StudentRegistrationForm/StudentRegisterForm";
+import StudentRetrieve from "./StudentRetrieve/StudentRetrieve";
 
 class AdminPaths extends Component{
 
     render() {
         return(
 
-                <section>
-
-
+            <Router>
+                <Switch>
                     <Route path="/admin/studentRegister" component={StudentRegistrationForm} exact/>
-
-
-                </section>
+                    <Route path="/admin/studentRetrieve" component={StudentRetrieve} exact/>
+                </Switch>
+            </Router>
 
         )
     }

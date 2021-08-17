@@ -2,14 +2,14 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const admin = require('./routes/admin.js');
+const admin = require('./routes/AdminRoutes');
 
 const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 
 const PORT = process.env.PORT || 5000;
-const MONGO_URI = ""
+const MONGO_URI = "mongodb+srv://malindu:nP2XX74YaxZWJFOE@cluster0.ztyq5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 mongoose.connect(MONGO_URI,{useNewUrlParser:true, useUnifiedTopology:true ,useCreateIndex:true , useFindAndModify:false}).
 then(() => app.listen(PORT,() => console.log(`connection established successfully on port: ${PORT}`))).
