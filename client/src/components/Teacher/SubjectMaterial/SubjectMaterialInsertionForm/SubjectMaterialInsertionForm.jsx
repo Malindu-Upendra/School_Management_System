@@ -6,8 +6,70 @@ import FormControl from "@material-ui/core/FormControl";
 import {InputBase, InputLabel, Select} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class SubjectMaterialInsertionForm extends Component{
+    constructor(props) {
+        super(props);
+    }
+
+    state = {
+        term: '',
+        week: '',
+        subjectChoose: '',
+        unitName: '',
+        lectureLink: '',
+        lessonUpload: '',
+        open:false
+    }
+
+    handleChange = (e) => {
+        const {name , value} = e.target;
+        this.setState({[name]:value});
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const  AddSubjectMaterials ={
+            "term": this.state.term,
+            "week": this.state.week,
+            "subjectChoose": this.state.subjectChoose,
+            "unitName": this.state.unitName,
+            "lectureLink": this.state.lectureLink,
+            "lessonUpload": this.state.lessonUpload
+        };
+        console.log('Data send:', AddSubjectMaterials)
+        await axios.post('http://localhost:5000/teacher/insertSubjectMaterials',AddSubjectMaterials)
+            .then(async response => {
+                if(response.data.success){
+                    this.setState({open:true});
+                    await setTimeout(() => {
+                        this.setState({open:false});
+                    }, 5000);
+                    await setTimeout(() => {
+                        window.location.reload(false);
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickAway') {
+            return;
+        }
+        this.setState({open:false});
+    };
+
     render() {
         return(
             <>
@@ -26,18 +88,18 @@ class SubjectMaterialInsertionForm extends Component{
                                 <Select
                                     required
                                     native
-                                    // value={state.age}
-                                    // onChange={handleChange}
+                                    value={this.state.term}
+                                    onChange={this.handleChange}
                                     label="Choose the Term"
                                     inputProps={{
-                                        name: 'SelectTerm',
+                                        name: 'term',
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
                                     <option aria-label="None" value="" />
-                                    <option value={10}>Term 1</option>
-                                    <option value={20}>Term 2</option>
-                                    <option value={30}>Term 3</option>
+                                    <option value={"Term 01"}>Term 1</option>
+                                    <option value={"Term 02"}>Term 2</option>
+                                    <option value={"Term 03"}>Term 3</option>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -48,25 +110,25 @@ class SubjectMaterialInsertionForm extends Component{
                                 <Select
                                     required
                                     native
-                                    // value={state.age}
-                                    // onChange={handleChange}
+                                    value={this.state.week}
+                                    onChange={this.handleChange}
                                     label="Choose the Week"
                                     inputProps={{
-                                        name: 'SelectTerm',
+                                        name: 'week',
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
                                     <option aria-label="None" value="" />
-                                    <option value={10}>Week 1</option>
-                                    <option value={20}>Week 2</option>
-                                    <option value={30}>Week 3</option>
-                                    <option value={40}>Week 4</option>
-                                    <option value={50}>Week 5</option>
-                                    <option value={60}>Week 6</option>
-                                    <option value={70}>Week 7</option>
-                                    <option value={80}>Week 8</option>
-                                    <option value={90}>Week 9</option>
-                                    <option value={100}>Week 10</option>
+                                    <option value={"Week 1"}>Week 1</option>
+                                    <option value={"Week 2"}>Week 2</option>
+                                    <option value={"Week 3"}>Week 3</option>
+                                    <option value={"Week 4"}>Week 4</option>
+                                    <option value={"Week 5"}>Week 5</option>
+                                    <option value={"Week 6"}>Week 6</option>
+                                    <option value={"Week 7"}>Week 7</option>
+                                    <option value={"Week 8"}>Week 8</option>
+                                    <option value={"Week 9"}>Week 9</option>
+                                    <option value={"Week 10"}>Week 10</option>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -77,19 +139,19 @@ class SubjectMaterialInsertionForm extends Component{
                             <Select
                                 required
                                 native
-                                // value={state.age}
-                                // onChange={handleChange}
+                                value={this.state.subjectChoose}
+                                onChange={this.handleChange}
                                 label="Select Subject"
                                 inputProps={{
-                                    name: 'SelectSubject',
+                                    name: 'subjectChoose',
                                     id: 'outlined-age-native-simple',
                                 }}
                             >
                                 <option aria-label="None" value="" />
-                                <option value={10}>Mathematics</option>
-                                <option value={20}>Science</option>
-                                <option value={30}>English</option>
-                                <option value={40}>History</option>
+                                <option value={"Mathematics"}>Mathematics</option>
+                                <option value={"Science"}>Science</option>
+                                <option value={"English"}>English</option>
+                                <option value={"History"}>History</option>
                             </Select>
                         </FormControl>
                     </Grid>
@@ -98,7 +160,9 @@ class SubjectMaterialInsertionForm extends Component{
                             <TextField
                                 required
                                 id="lessonName"
-                                name="LessonName"
+                                name="unitName"
+                                value={this.state.unitName}
+                                onChange={this.handleChange}
                                 label="Unit topic Name"
                                 placeholder="lesson name "
                                 fullWidth
@@ -109,8 +173,10 @@ class SubjectMaterialInsertionForm extends Component{
                         <Grid item xs={12}>
                             <TextField
                                 required
-                                id="lectureLink"
-                                name="lecLink"
+                                id="lecLink"
+                                name="lectureLink"
+                                value={this.state.lectureLink}
+                                onChange={this.handleChange}
                                 label="Lecture Link"
                                 placeholder="insert the lecture link here"
                                 variant="outlined"
@@ -142,12 +208,18 @@ class SubjectMaterialInsertionForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<SaveIcon />}
+                                onClick={this.handleSubmit}
                             >
                                 Insert
                             </Button>
 
                         </Grid>
                     </Grid>
+                    <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            Successfully Inserted!
+                        </Alert>
+                    </Snackbar>
                 </div>
             </>
         )
