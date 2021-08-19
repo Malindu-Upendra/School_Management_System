@@ -7,7 +7,6 @@ import SaveIcon from "@material-ui/icons/Save";
 import FormControl from "@material-ui/core/FormControl";
 import {InputLabel, Select} from "@material-ui/core";
 
-
 class NoticeInsertForm extends Component{
     render() {
         return(
@@ -85,5 +84,4 @@ class NoticeInsertForm extends Component{
         )
     }
 }
-
 export default NoticeInsertForm
