@@ -18,7 +18,7 @@ class NoticeInsertForm extends Component{
     constructor(props) {
         super(props);
     }
-    
+
     state = {
         noticeHeading: '',
         noticeDetails: '',
@@ -63,7 +63,6 @@ class NoticeInsertForm extends Component{
         }
         this.setState({open:false});
     };
-
 
     render() {
         return(

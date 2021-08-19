@@ -26,7 +26,6 @@ const subjectMaterialSchema = Schema({
     },
     lessonUpload:{
         type: String,
-        required: true
     },
     role:{
         type: String,
