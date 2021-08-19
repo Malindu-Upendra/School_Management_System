@@ -6,8 +6,65 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import FormControl from "@material-ui/core/FormControl";
 import {InputLabel, Select} from "@material-ui/core";
+import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class NoticeInsertForm extends Component{
+    constructor(props) {
+        super(props);
+    }
+    
+    state = {
+        noticeHeading: '',
+        noticeDetails: '',
+        subjectSelect: '',
+        open:false
+    }
+
+    handleChange = (e) => {
+        const {name , value} = e.target;
+        this.setState({[name]:value});
+    }
+
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const  AddNotices ={
+            "noticeHeading": this.state.noticeHeading,
+            "noticeDetails": this.state.noticeDetails,
+            "subjectSelect": this.state.subjectSelect
+        };
+        console.log('Data send:', AddNotices)
+       await axios.post('http://localhost:5000/teacher/insertSubjectNotices',AddNotices)
+            .then(async response => {
+                if(response.data.success){
+                    this.setState({open:true});
+                    await setTimeout(() => {
+                        this.setState({open:false});
+                    }, 5000);
+                    await setTimeout(() => {
+                        window.location.reload(false);
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickAway') {
+            return;
+        }
+        this.setState({open:false});
+    };
+
+
     render() {
         return(
             <>
@@ -24,7 +81,9 @@ class NoticeInsertForm extends Component{
                             <TextField
                                 required
                                 id="noticeHeading"
-                                name="noticeHead"
+                                name="noticeHeading"
+                                value={this.state.noticeHeading}
+                                onChange={this.handleChange}
                                 label="Notice Heading"
                                 placeholder="Type the heading"
                                 fullWidth
@@ -35,8 +94,10 @@ class NoticeInsertForm extends Component{
                         <Grid item xs={12}>
                             <TextField
                                 required
-                                id="noticeDetails"
-                                name="noticeDescription"
+                                id="noticeDescription"
+                                name="noticeDetails"
+                                value={this.state.noticeDetails}
+                                onChange={this.handleChange}
                                 label="Notice Details"
                                 placeholder="Describe the Notice"
                                 multiline
@@ -51,19 +112,19 @@ class NoticeInsertForm extends Component{
                                 <Select
                                     required
                                     native
-                                    // value={state.age}
-                                    // onChange={handleChange}
+                                    value={this.state.subjectSelect}
+                                    onChange={this.handleChange}
                                     label="Select Subject"
                                     inputProps={{
-                                        name: 'SelectSubject',
+                                        name: 'subjectSelect',
                                         id: 'outlined-age-native-simple',
                                     }}
                                 >
                                     <option aria-label="None" value="" />
-                                    <option value={10}>Mathematics</option>
-                                    <option value={20}>Science</option>
-                                    <option value={30}>English</option>
-                                    <option value={40}>History</option>
+                                    <option value={"Mathematics"}>Mathematics</option>
+                                    <option value={"Science"}>Science</option>
+                                    <option value={"English"}>English</option>
+                                    <option value={"History"}>History</option>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -74,11 +135,17 @@ class NoticeInsertForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<SaveIcon />}
+                                onClick={this.handleSubmit}
                             >
                                 Insert
                             </Button>
                         </Grid>
                     </Grid>
+                    <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            Successfully Inserted!
+                        </Alert>
+                    </Snackbar>
                 </div>
             </>
         )
