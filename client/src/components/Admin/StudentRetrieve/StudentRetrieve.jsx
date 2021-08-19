@@ -2,6 +2,7 @@ import React , {Component} from "react";
 import { DataGrid } from '@material-ui/data-grid';
 import {Modal, Button, Space, Alert} from 'antd';
 import Search from "antd/es/input/Search";
+import axios from "axios";
 
 class StudentRetrieve extends Component{
 
@@ -10,36 +11,58 @@ class StudentRetrieve extends Component{
         columns : [
             {
                 field: 'id',
+                headerName: '#',
+                width: 300
+            },
+            {
+                field: 'regNum',
                 headerName: 'Registration Number',
-                width: '450' },
+                width: 300,
+            },
             {
                 field: 'Name',
                 headerName: 'Name',
-                width: 350,
+                width: 300,
             },
             {
                 field: 'Grade',
                 headerName: 'Grade',
-                width: 400,
+                width: 300,
             },
 
         ],
-        rows : [
-            { id: 1, Name: 'Jon Snow',  Grade: 35 },
-            { id: 2, Name: 'Cersei Lannister',  Grade: 42 },
-            { id: 3, Name: 'Lannister',  Grade: 45 },
-            { id: 4, Name: 'Jaime Stark',  Grade: 16 },
-            { id: 5, Name: 'Daenerys Targaryen',  Grade: 5 },
-            { id: 6, Name: 'Melisandre',  Grade: 150 },
-            { id: 7, Name: 'Ferrara Clifford',  Grade: 44 },
-            { id: 8, Name: 'Rossini Frances',  Grade: 36 },
-            { id: 9, Name: 'Harvey Roxie',  Grade: 65 },
-        ],
+        rows : [],
         isModalVisible:false,
         selectedStudent:'',
         loading:false,
         found:false,
         empty:false
+    }
+
+    componentDidMount = async () => {
+
+       await axios.get('http://localhost:5000/admin/getStudents').then(res => {
+            if(res.data.success){
+                //id name grade
+                const response = res.data.data;
+                let person = [];
+                response.forEach((student,index) => {
+
+                    let s = {
+                        id:index+1,
+                        regNum:student.administrationNum,
+                        Name:student.name,
+                        Grade:student.grade
+                    }
+
+                    person.push(s);
+
+                })
+
+                this.setState({rows:person})
+            }
+        })
+
     }
 
     handleRowSelection = (e) => {
@@ -87,7 +110,7 @@ class StudentRetrieve extends Component{
         }else {
             this.state.rows.forEach((detail, index) => {
 
-                if (item - 1 === index) {
+                if (item === detail.regNum) {
                     console.log(detail);
                     count = 1;
                     this.setState({selectedStudent:detail});

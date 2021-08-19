@@ -23,15 +23,15 @@ const studentSchema = Schema({
         type: String,
         required: true
     },
-    role:{
-        type: String,
-        default: "student"
-    },
     email:{
         type:String,
     },
     password:{
         type: String,
+    },
+    role:{
+        type: String,
+        default: "student"
     }
 });
 

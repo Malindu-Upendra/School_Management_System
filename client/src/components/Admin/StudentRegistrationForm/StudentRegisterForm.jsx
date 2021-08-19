@@ -10,28 +10,115 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from "@material-ui/core/Button";
 import SaveIcon from '@material-ui/icons/Save';
+import axios from "axios";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class StudentRegistrationForm extends Component{
 
     state = {
+        AdministrationNumber:'',
+        firstName:'',
+        lastName:'',
         selectedDate:'',
-        grade:0
+        age:0,
+        grade:0,
+        email:'',
+        password:'',
+        minimumDate:'',
+        open:false
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         this.setState({selectedDate:new Date()})
-        console.log(this.state.selectedDate)
+        const date = new Date()
+        const minimum = "01/01/"+ (date.getFullYear()-19);
+        await this.setState({minimumDate:minimum});
+        console.log(minimum);
     }
 
-    handleDateChange = () => {
+    handleDateChange = async (date) => {
+        this.setState({selectedDate:date.getMonth()+ "/" +date.getDate()+ "/" +date.getFullYear()})
+        const currentDate = new Date()
+        const diff = await currentDate.getFullYear() - date.getFullYear();
+        this.setState({age:diff});
 
+        switch (diff) {
+            case 7: this.setState({grade:1})
+                break;
+            case 8: this.setState({grade:2})
+                break;
+            case 9: this.setState({grade:3})
+                break;
+            case 10: this.setState({grade:4})
+                break;
+            case 11: this.setState({grade:5})
+                break;
+            case 12: this.setState({grade:6})
+                break;
+            case 13: this.setState({grade:7})
+                break;
+            case 14: this.setState({grade:8})
+                break;
+            case 15: this.setState({grade:9})
+                break;
+            case 16: this.setState({grade:10})
+                break;
+            case 17: this.setState({grade:11})
+                break;
+            case 18: this.setState({grade:12})
+                break;
+            case 19: this.setState({grade:13})
+                break;
+            default: this.setState({grade:0})
+                break;
+
+        }
     }
 
-    handleChange = (event) => {
-
-        this.setState({ grade: event.target.value,
-        });
+    handleChange = (e) => {
+        const {name , value} = e.target;
+        this.setState({[name]:value});
     }
+
+    submitDetails = async (e) => {
+        e.preventDefault();
+
+        const student = {
+            "administrationNum":this.state.AdministrationNumber,
+            "name":this.state.firstName + " " + this.state.lastName,
+            "birthday":this.state.selectedDate,
+            "age":this.state.age,
+            "grade":this.state.grade,
+            "email":this.state.email,
+            "password":this.state.password
+
+        }
+
+        await axios.post('http://localhost:5000/admin/addStudent',student).then(async res => {
+            if(res.data.success){
+                this.setState({open:true});
+                await setTimeout(() => {
+                    this.setState({open:false});
+                }, 3000);
+                await setTimeout(() => {
+                window.location = "/admin/studentRetrieve"
+                }, 2000);
+            }
+        })
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({open:false});
+    };
 
     render() {
         return (
@@ -47,10 +134,11 @@ class StudentRegistrationForm extends Component{
                         <TextField
                             required
                             id="address1"
-                            name="address1"
+                            name="AdministrationNumber"
                             label="Administration Number"
                             fullWidth
                             autoComplete="shipping address-line1"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -61,6 +149,7 @@ class StudentRegistrationForm extends Component{
                             label="First name"
                             fullWidth
                             autoComplete="given-name"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -71,6 +160,7 @@ class StudentRegistrationForm extends Component{
                             label="Last name"
                             fullWidth
                             autoComplete="family-name"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -80,6 +170,8 @@ class StudentRegistrationForm extends Component{
                                 id="date-picker-dialog"
                                 label="Date picker dialog"
                                 format="MM/dd/yyyy"
+                                name="selectedDate"
+                                minDate={this.state.minimumDate}
                                 value={this.state.selectedDate}
                                 onChange={this.handleDateChange}
                                 KeyboardButtonProps={{
@@ -93,8 +185,9 @@ class StudentRegistrationForm extends Component{
                         <TextField
                             required
                             id="address1"
-                            name="address1"
+                            name="age"
                             label="Age"
+                            value={this.state.age}
                             fullWidth
                             type="number"
                             autoComplete="Age"
@@ -133,21 +226,23 @@ class StudentRegistrationForm extends Component{
                     <Grid item xs={12}>
                         <TextField
                             id="address2"
-                            name="address2"
+                            name="email"
                             label="Email"
                             type="email"
                             fullWidth
                             autoComplete="Email"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="address2"
-                            name="address2"
+                            name="password"
                             label="Password"
                             type="password"
                             fullWidth
                             autoComplete="Password"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -157,11 +252,17 @@ class StudentRegistrationForm extends Component{
                             size="large"
                             style={{marginTop:"15px",width:"100%"}}
                             startIcon={<SaveIcon />}
+                            onClick={this.submitDetails}
                         >
                             Save
                         </Button>
                     </Grid>
                 </Grid>
+                <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
+                    <Alert onClose={this.handleClose} severity="success">
+                        Successfully Inserted!
+                    </Alert>
+                </Snackbar>
             </div>
         );
     }
