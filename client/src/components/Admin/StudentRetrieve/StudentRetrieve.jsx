@@ -130,7 +130,7 @@ class StudentRetrieve extends Component{
     render() {
         return(
             <div>
-                <div style={{marginLeft:"20%",width:"60%",marginTop:"100px"}}>
+                <div style={{marginLeft:"20%",width:"60%",marginTop:"50px"}}>
                     <Space direction="vertical" style={{width:"100%"}}>
                         <Search placeholder="Search by Registration Number" onSearch={this.onSearch} style={{width:"100%"}} enterButton />
                     </Space>
