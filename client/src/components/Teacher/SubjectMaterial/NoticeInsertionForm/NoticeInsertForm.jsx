@@ -15,9 +15,9 @@ function Alert(props) {
 }
 
 class NoticeInsertForm extends Component{
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     state = {
         noticeHeading: '',

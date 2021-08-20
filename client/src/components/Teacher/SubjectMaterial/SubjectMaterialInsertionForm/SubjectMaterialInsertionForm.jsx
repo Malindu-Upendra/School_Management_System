@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import {InputBase, InputLabel, Select} from "@material-ui/core";
+import {InputLabel, Select} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import axios from "axios";
@@ -15,9 +15,9 @@ function Alert(props) {
 }
 
 class SubjectMaterialInsertionForm extends Component{
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     state = {
         term: '',
