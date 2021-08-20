@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const admin = require('./routes/AdminRoutes');
 
+
 const app = express();
 app.use(cors());
 app.use(bodyparser.json());
@@ -17,4 +18,5 @@ catch((err) => console.log(err.message));
 
 //declaring path to use Rest Services
 app.use('/admin',admin);
+
 
