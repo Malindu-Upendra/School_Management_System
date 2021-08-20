@@ -123,7 +123,7 @@ class StudentRegistrationForm extends Component{
     render() {
         return (
 
-            <div style={{width:"60%",marginLeft:"18%",marginTop:"100px",
+            <div style={{width:"60%",marginLeft:"18%",marginTop:"50px",
                 border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
                 boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
                 <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
@@ -168,7 +168,7 @@ class StudentRegistrationForm extends Component{
                             <KeyboardDatePicker
                                 margin="normal"
                                 id="date-picker-dialog"
-                                label="Date picker dialog"
+                                label="Date Of Birth"
                                 format="MM/dd/yyyy"
                                 name="selectedDate"
                                 minDate={this.state.minimumDate}

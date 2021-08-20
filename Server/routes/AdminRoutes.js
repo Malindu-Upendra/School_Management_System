@@ -30,4 +30,12 @@ router.get('/getStudents',async (req,res) => {
 
 })
 
+router.post('/test',(req,res) => {
+
+    const test = 'ST00001';
+    const afterDivided = test.split("");
+    const num = parseInt(afterDivided[2]+afterDivided[3]+afterDivided[4]+afterDivided[5]+afterDivided[6]);
+    console.log(num);
+})
+
 module.exports = router;
