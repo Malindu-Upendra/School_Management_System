@@ -3,6 +3,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import {Modal, Button, Space, Alert} from 'antd';
 import Search from "antd/es/input/Search";
 import axios from "axios";
+import {InputGroup,FormControl} from "react-bootstrap";
 
 class StudentRetrieve extends Component{
 
@@ -32,6 +33,7 @@ class StudentRetrieve extends Component{
 
         ],
         rows : [],
+        students : [],
         isModalVisible:false,
         selectedStudent:'',
         loading:false,
@@ -45,6 +47,7 @@ class StudentRetrieve extends Component{
             if(res.data.success){
                 //id name grade
                 const response = res.data.data;
+                this.setState({students:response});
                 let person = [];
                 response.forEach((student,index) => {
 
@@ -71,7 +74,7 @@ class StudentRetrieve extends Component{
         const location = e.at();
         console.log(location);
 
-        this.state.rows.forEach((detail,index) => {
+        this.state.students.forEach((detail,index) => {
 
             if(location - 1  === index){
                 this.setState({selectedStudent:detail});
@@ -86,12 +89,18 @@ class StudentRetrieve extends Component{
         this.setState({isModalVisible:true})
     };
 
-    handleOk = () => {
+    handleOk = (id) => {
+        console.log(id);
         this.setState({loading:true})
-        setTimeout(() => {
-            this.setState({ loading: false, visible: false });
-            this.setState({isModalVisible:false})
-        }, 3000);
+
+        axios.delete(`http://localhost:5000/admin/deleteStudent/${id}`).then(res => {
+        if(res.data.success){
+            setTimeout(() => {
+                this.setState({ loading: false, visible: false });
+                this.setState({isModalVisible:false})
+            }, 3000);
+
+        }})
     };
 
     handleCancel = () => {
@@ -108,9 +117,9 @@ class StudentRetrieve extends Component{
                 this.setState({empty:false})
             }, 3000);
         }else {
-            this.state.rows.forEach((detail, index) => {
+            this.state.students.forEach((detail, index) => {
 
-                if (item === detail.regNum) {
+                if (item === detail.administrationNum) {
                     console.log(detail);
                     count = 1;
                     this.setState({selectedStudent:detail});
@@ -166,14 +175,74 @@ class StudentRetrieve extends Component{
                         <Button key="back" onClick={this.handleCancel}>
                             Return
                         </Button>,
-                        <Button key="submit" type="danger" loading={this.state.loading} onClick={this.handleOk}>
+                        <Button key="submit" type="danger" loading={this.state.loading} onClick={this.handleOk.bind(this,this.state.selectedStudent._id)}>
                             Delete
                         </Button>,
                     ]}
                 >
-                    <p>ID = {this.state.selectedStudent.id}</p>
-                    <p>name = {this.state.selectedStudent.Name}</p>
-                    <p>grade = {this.state.selectedStudent.Grade}</p>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Administration Number</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.administrationNum}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Name</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.name}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Birthday</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.birthday}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Age</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.age}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Grade</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.grade}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Email</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.email}
+                            disabled
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="inputGroup-sizing-default">Password</InputGroup.Text>
+                        <FormControl
+                            aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default"
+                            value={this.state.selectedStudent.password}
+                            disabled
+                        />
+                    </InputGroup>
                 </Modal>
 
             </div>

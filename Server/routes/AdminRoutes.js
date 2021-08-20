@@ -31,13 +31,29 @@ router.get('/getStudents',async (req,res) => {
 
 })
 
+router.delete('/deleteStudent/:id', (req,res) =>{
+
+    const id = req.params.id;
+    console.log(id);
+    try {
+        Student.findByIdAndDelete({_id:id}).exec();
+        res.send({success: true})
+    }catch (e) {
+        res.send({success: false})
+    }
+})
+
 router.post('/test',(req,res) => {
 
-    const test = 'ST00001';
-    const afterDivided = test.split("");
-    const num = parseInt(afterDivided[2]+afterDivided[3]+afterDivided[4]+afterDivided[5]+afterDivided[6]);
-    console.log(num);
-=======
+    // const test = 'ST00001';
+    // const afterDivided = test.split("");
+    // const num = parseInt(afterDivided[2] + afterDivided[3] + afterDivided[4] + afterDivided[5] + afterDivided[6]);
+    // console.log(num);
+
+    res.send({data:Student.find({}).sort({_id:-1}).limit(1)})
+
+})
+
 router.post('/addTeacher',async (req,res) => {
 
     const tbody = req.body;
