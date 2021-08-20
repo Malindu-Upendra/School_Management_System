@@ -6,12 +6,40 @@ import {Row,Col} from "react-bootstrap";
 import Button from "@material-ui/core/Button";
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import axios from "axios";
 
 class MathematicsSubjectView extends Component{
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        Notices:[],
+        Materials:[]
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5000/teacher/getSubjectNotices').
+        then(res => {
+            const  Notices = res.data;
+            console.log("Damn" + Notices);
+            this.setState({Notices: Notices});
+        }).catch(err => err.message)
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        then(res => {
+            const  Materials = res.data;
+            console.log("Bull" + Materials);
+            this.setState({Materials: Materials});
+        }).catch(err => err.message)
+    }
+
     render() {
         return(
             <>
                 <div style={{marginLeft:"4%",marginTop:"70px"}}>
+                    {/*******************display welcome and view search bar*********************/}
                     <div>
                         <Row>
                             <Col>
@@ -34,20 +62,24 @@ class MathematicsSubjectView extends Component{
                             </Col>
                         </Row>
                     </div>
-
-                        <div style={{width:"70%",marginLeft:"15%",marginTop:"50px",
+                    {/***********************************Notice box ********************************/}
+                    {/*{this.state.Notices.map((Notices) => (*/}
+                        <div style={{width:"80%",marginLeft:"10%",marginTop:"50px",
                             border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                             boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
 
                             <Typography variant="h6" style={{textAlign:"Center", textDecorationLine: 'underline', color:'#ff3333'}} gutterBottom>
                                 Notices to All Students
+                                {/*{Notices.noticeHeading}*/}
                             </Typography>
 
                             <Typography variant="subtitle1" gutterBottom>
                                 subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                                {/*{Notices.noticeDetails}*/}
                             </Typography>
                         </div>
-
+                    {/*))}*/}
+                    {/***********************************Display Terms ********************************/}
                     <div
                         style={{marginTop:"25px",
                             backgroundColor:"#d1e0e0",
@@ -84,6 +116,7 @@ class MathematicsSubjectView extends Component{
                             Term 03
                         </Button>
                     </div>
+                    {/***********************************Display Materials ********************************/}
                     <Card title="Term 01"
                           style={{marginTop:"30px",
                               width:"97%",
