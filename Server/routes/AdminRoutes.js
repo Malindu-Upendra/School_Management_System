@@ -35,6 +35,7 @@ router.post('/addTeacher',async (req,res) => {
 
     const tbody = req.body;
 
+
     try {
         const teacher = new Teacher(tbody);
 
@@ -49,9 +50,10 @@ router.post('/addTeacher',async (req,res) => {
 router.get('/getTeachers',async (req,res) => {
 
     try {
-        const teachers = await Teacher.find();
 
-        res.send({data:teachers,success:true})
+        const teacher = await Teacher.find()
+            .then(teacher => res.json(teacher));
+
     }catch (e) {
         console.log(e)
     }

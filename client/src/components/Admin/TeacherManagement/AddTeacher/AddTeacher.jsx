@@ -77,7 +77,7 @@ class AddTeacher extends Component{
             //fullName : this.state.firstName + this.state.lastName,
             gender: this.state.gender,
             qualification: this.state.qualification,
-            SectionalHead: this.state.checkedB,
+            sectionalHead: this.state.checkedB,
             section: this.state.section,
             selectedGrades: this.state.selectedOptions,
             subject:this.state.subject
