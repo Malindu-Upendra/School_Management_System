@@ -83,4 +83,27 @@ router.get('/getTeachers',async (req,res) => {
 
 })
 
+router.get('/getSpecificTeacher/:id', async (req,res) => {
+
+    const id = req.params.id;
+
+    const teachers = await Teacher.findOne({_id:id});
+
+    res.send({data: teachers, success:true});
+})
+
+router.delete('/deleteTeacher/:id', async (req,res) => {
+
+    const id = req.params.id;
+
+    try {
+        const teachers = await Teacher.findByIdAndDelete({_id:id})
+
+        res.send({success:true})
+
+    }catch (e) {
+        console.log(e);
+    }
+})
+
 module.exports = router;

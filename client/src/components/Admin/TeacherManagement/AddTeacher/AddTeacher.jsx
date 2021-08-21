@@ -22,8 +22,6 @@ class AddTeacher extends Component{
     state = {
         selectedOptions:[],
         empNum:'',
-        // firstName:'',
-        // lastName:'',
         fullName:'',
         gender:'',
         qualification:'',
@@ -74,7 +72,6 @@ class AddTeacher extends Component{
         const teacher = {
             empNum:this.state.empNum,
             fullName : this.state.fullName,
-            //fullName : this.state.firstName + this.state.lastName,
             gender: this.state.gender,
             qualification: this.state.qualification,
             sectionalHead: this.state.checkedB,
@@ -101,9 +98,10 @@ class AddTeacher extends Component{
             <div style={{width:"60%",marginLeft:"18%",marginTop:"100px",
                 border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
                 boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
-                <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
+                <Typography variant="h6" style={{textAlign:"center", marginBottom:"35px"}} gutterBottom>
                     Teacher Recruitment Form
                 </Typography>
+
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <TextField
@@ -115,6 +113,7 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
+
                     <Grid item xs={12}>
                         <TextField
                             required
@@ -125,16 +124,7 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    {/*<Grid item xs={12} sm={6}>*/}
-                    {/*    <TextField*/}
-                    {/*        required*/}
-                    {/*        id="lastName"*/}
-                    {/*        name="lastName"*/}
-                    {/*        label="Last name"*/}
-                    {/*        onChange={this.handleChange}*/}
-                    {/*        fullWidth*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
+
                     <FormControl component="fieldset" style={{marginLeft:"2%",marginTop:"15px"}}>
                         <FormLabel component="legend">Gender</FormLabel>
                         <RadioGroup row aria-label="position" name="gender" onChange={this.handleChange} defaultValue="top">
@@ -142,6 +132,7 @@ class AddTeacher extends Component{
                             <FormControlLabel value="Female" control={<Radio color="primary" />} label="Female" />
                         </RadioGroup>
                     </FormControl>
+
                     <Grid item xs={12}>
                         <TextField
                             required
@@ -153,6 +144,7 @@ class AddTeacher extends Component{
                             type="text"
                         />
                     </Grid>
+
                     <FormControlLabel
                         style={{marginLeft: "1%"}}
                         control={
@@ -195,6 +187,7 @@ class AddTeacher extends Component{
                             className="basic-multi-select"
                             isMulti/>
                     </Form.Group>
+
                     <Grid item xs={12}>
                         <TextField
                             id="address2"
@@ -205,6 +198,7 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
+
                     <Grid item xs={12}>
                         <Button
                             variant="contained"

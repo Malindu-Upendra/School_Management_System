@@ -1,5 +1,7 @@
-import {Component} from "react";
-import axios from "axios";
+import React, {Component} from "react";
+import axios from "axios"
+import {Link} from "react-router-dom"
+import Typography from "@material-ui/core/Typography";
 
 class DisplayTeacher extends Component {
 
@@ -18,8 +20,14 @@ class DisplayTeacher extends Component {
     render() {
 
         return (
-            <div style={{ width: "80%", textAlign: "center" }}>
-                <table class="table">
+            <div style={{width:"70%",marginLeft:"15%",marginTop:"100px",
+                border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
+                boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
+                <Typography variant="h6" style={{textAlign:"center", marginBottom:"50px"}} gutterBottom>
+                    Teacher Database
+                </Typography>
+
+                <table class="table" style={{textAlign:"center"}}>
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">Employee Number</th>
@@ -33,15 +41,10 @@ class DisplayTeacher extends Component {
                     {
                         this.state.teachers.map(teacher =>
                                 <tr key ={teacher._id}>
-                                    <td><a href={"/admin/addTeacher"}>{teacher.empNum}</a></td>
+                                    <td><Link to={`/admin/DeleteTeacher/${teacher._id}`} style={{width:300}}>{teacher.empNum}</Link></td>
                                     <td>{teacher.fullName}</td>
                                     <td>{String(teacher.sectionalHead)}</td>
                                     <td>{teacher.selectedGrades}</td>
-
-                                    {/*teacher.selectedGrades.map(*/}
-                                    {/*    //sg[0] = <td>{sg}</td>*/}
-                                    {/*)*/}
-
                                     <td>{teacher.subject}</td>
                                 </tr>
                         )
