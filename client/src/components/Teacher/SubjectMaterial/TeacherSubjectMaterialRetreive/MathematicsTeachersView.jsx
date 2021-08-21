@@ -9,8 +9,33 @@ import BorderColorIcon from '@material-ui/icons/BorderColor';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import axios from "axios";
 
 class MathematicsTeachersView extends Component {
+    constructor(props) {
+        super(props);
+    }
+    state = {
+        TeacherNotices:[],
+        TeacherMaterials:[]
+    }
+
+    componentDidMount = async ()=> {
+        await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
+        then(res => {
+            const  TeacherNotices = res.data;
+            console.log("Damn" + TeacherNotices);
+            this.setState({TeacherNotices: TeacherNotices});
+        }).catch(err => err.message)
+
+        await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        then(res => {
+            const  TeacherMaterials = res.data;
+            console.log("Bull" + TeacherMaterials);
+            this.setState({TeacherMaterials: TeacherMaterials});
+        }).catch(err => err.message)
+    }
+
     render() {
         return(
             <>
@@ -89,6 +114,7 @@ class MathematicsTeachersView extends Component {
                                     color="secondary"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
+                                    onClick={()=> window.location.href="/teacher/subjectMaterial/noticeInsertForm"}
                                     style={{marginLeft:"45%",width:"50%",backgroundColor: "#4080bf",color:"white"}}
                                 >
                                    Insert Notices
@@ -101,6 +127,7 @@ class MathematicsTeachersView extends Component {
                                     color="default"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
+                                    onClick={()=> window.location.href="/teacher/subjectMaterial/subjectMaterialInsertForm"}
                                     style={{marginLeft:"10px",width:"50%", backgroundColor: "#008080",color:"white"}}
                                 >
                                     Insert Subject Materials
