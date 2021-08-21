@@ -17,17 +17,15 @@ class MathematicsSubjectView extends Component{
         Materials:[]
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/teacher/getSubjectNotices').
+    componentDidMount = async ()=> {
+      await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
         then(res => {
             const  Notices = res.data;
             console.log("Damn" + Notices);
             this.setState({Notices: Notices});
         }).catch(err => err.message)
-    }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
         then(res => {
             const  Materials = res.data;
             console.log("Bull" + Materials);
@@ -62,8 +60,10 @@ class MathematicsSubjectView extends Component{
                             </Col>
                         </Row>
                     </div>
+
                     {/***********************************Notice box ********************************/}
-                    {/*{this.state.Notices.map((Notices) => (*/}
+                    <div>
+                        {/*{this.state.Notices.map((Notices) => (*/}
                         <div style={{width:"80%",marginLeft:"10%",marginTop:"50px",
                             border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                             boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
@@ -77,8 +77,10 @@ class MathematicsSubjectView extends Component{
                                 subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                                 {/*{Notices.noticeDetails}*/}
                             </Typography>
+
                         </div>
-                    {/*))}*/}
+                                {/*))}*/}
+                    </div>
                     {/***********************************Display Terms ********************************/}
                     <div
                         style={{marginTop:"25px",
