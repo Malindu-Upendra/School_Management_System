@@ -140,13 +140,13 @@ class MathematicsSubjectView extends Component{
                                 {Materials.unitName}
                             </Divider>
 
-                            <Typography variant="h6" style={{textAlign:"left"}} gutterBottom>
+                            <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PictureAsPdfIcon/>
                                 {" "}
                                 Lecture Material
                             </Typography>
 
-                            <Typography variant="h6" style={{textAlign:"left"}} gutterBottom>
+                            <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PlayCircleOutlineIcon/>
                                 {" "}
                                 {Materials.lectureLink}
