@@ -25,6 +25,18 @@ router.get('/getSubjectNotices',async (req,res) => {
     }
 })
 
+//Delete the Subject notices
+router.delete('/deleteSubjectNotices/:id', (req,res) =>{
+    const id = req.params.id;
+    console.log(id);
+    try {
+        SubjectNotice.findByIdAndDelete({_id:id}).exec();
+        res.send({success: true})
+    }catch (e) {
+        res.send({success: false})
+    }
+})
+
 //**************crud for Subject Materials****************************************************
 //insert the Subject Materials
 router.post('/insertSubjectMaterials',async (req,res) => {
@@ -46,5 +58,19 @@ router.get('/getSubjectMaterials',async (req,res) => {
         console.log(e)
     }
 })
+
+//Delete the Subject Materials
+router.delete('/deleteSubjectMaterials/:id', (req,res) =>{
+    const id = req.params.id;
+    console.log(id);
+    try {
+        SubjectMaterial.findByIdAndDelete({_id:id}).exec();
+        res.send({success: true})
+    }catch (e) {
+        res.send({success: false})
+    }
+})
+
+
 
 module.exports = router;
