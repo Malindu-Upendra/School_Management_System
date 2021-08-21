@@ -10,6 +10,12 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import axios from "axios";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class MathematicsTeachersView extends Component {
     constructor(props) {
@@ -17,7 +23,8 @@ class MathematicsTeachersView extends Component {
     }
     state = {
         TeacherNotices:[],
-        TeacherMaterials:[]
+        TeacherMaterials:[],
+        open:false
     }
 
     componentDidMount = async () => {
@@ -35,6 +42,51 @@ class MathematicsTeachersView extends Component {
             this.setState({TeacherMaterials: TeacherMaterials});
         }).catch(err => err.message)
     }
+
+    handleNoticeDelete = (id) => {
+        axios.delete(`http://localhost:5000/teacher/deleteSubjectNotices/${id}`)
+        .then(async response => {
+                if(response.data.success){
+                    this.setState({open:true});
+                    await setTimeout(() => {
+                        this.setState({open:false});
+                    }, 5000);
+                    await setTimeout(() => {
+                        window.location.reload(false);
+                    }, 2000);
+                }
+            })
+                .catch(error => {
+                    console.log(error.message);
+                    alert(error.message)
+                })
+        }
+
+    handleMaterialDelete = (id) => {
+        axios.delete(`http://localhost:5000/teacher/deleteSubjectMaterials/${id}`)
+        .then(async response => {
+                if(response.data.success){
+                    this.setState({open:true});
+                    await setTimeout(() => {
+                        this.setState({open:false});
+                    }, 5000);
+                    await setTimeout(() => {
+                        window.location.reload(false);
+                    }, 2000);
+                }
+            })
+                .catch(error => {
+                    console.log(error.message);
+                    alert(error.message)
+                })
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickAway') {
+            return;
+        }
+        this.setState({open:false});
+    };
 
     render() {
         return(
@@ -83,6 +135,7 @@ class MathematicsTeachersView extends Component {
                             color="secondary"
                             // className={classes.button}
                             startIcon={<DeleteIcon />}
+                            onClick={this.handleNoticeDelete.bind(this,Notices._id)}
                             style={{marginLeft:"60%",width:"30%"}}
                         >
                             Delete
@@ -188,7 +241,9 @@ class MathematicsTeachersView extends Component {
                             title=   {Materials.week}
                             style={{border:"#527a7a",
                                 borderStyle:"solid",
-                                borderWidth:"1px"}}
+                                borderWidth:"1px",
+                                padding:"2%"
+                            }}
                         >
                             <Divider
                                 orientation="left"
@@ -216,6 +271,7 @@ class MathematicsTeachersView extends Component {
                                         color="secondary"
                                         // className={classes.button}
                                         startIcon={<DeleteIcon />}
+                                        onClick={this.handleMaterialDelete.bind(this,Materials._id)}
                                         style={{marginLeft:"60%",width:"30%"}}
                                     >
                                         Delete
@@ -242,6 +298,11 @@ class MathematicsTeachersView extends Component {
                             </>
                         ))}
                     </Card>
+                    <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
+                        <Alert onClose={this.handleClose} severity="success">
+                            Successfully Deleted!
+                        </Alert>
+                    </Snackbar>
                 </div>
             </>
         )
