@@ -1,6 +1,6 @@
 import React , {Component} from "react";
 import { DataGrid } from '@material-ui/data-grid';
-import {Modal, Button, Space, Alert} from 'antd';
+import {Modal, Button, Space, Alert, Result} from 'antd';
 import Search from "antd/es/input/Search";
 import axios from "axios";
 import {InputGroup,FormControl} from "react-bootstrap";
@@ -38,7 +38,8 @@ class StudentRetrieve extends Component{
         selectedStudent:'',
         loading:false,
         found:false,
-        empty:false
+        empty:false,
+        deleteModal:false
     }
 
     componentDidMount = async () => {
@@ -95,11 +96,15 @@ class StudentRetrieve extends Component{
 
         axios.delete(`http://localhost:5000/admin/deleteStudent/${id}`).then(res => {
         if(res.data.success){
+            this.setState({deleteModal:true})
             setTimeout(() => {
+                this.setState({deleteModal:false})
                 this.setState({ loading: false, visible: false });
                 this.setState({isModalVisible:false})
-            }, 3000);
-
+            }, 3500);
+            setTimeout(() => {
+                window.location.reload(false);
+            },1000)
         }})
     };
 
@@ -244,7 +249,17 @@ class StudentRetrieve extends Component{
                         />
                     </InputGroup>
                 </Modal>
-
+                <Modal
+                    visible={this.state.deleteModal}
+                    title="Student Details"
+                    cancelButtonProps={{disabled:  true }}
+                    okButtonProps={{disabled:  true }}
+                >
+                    <Result
+                        status="success"
+                        title="Successfully Deleted"
+                    />
+                </Modal>
             </div>
         )
     }

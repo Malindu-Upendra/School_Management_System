@@ -43,14 +43,20 @@ router.delete('/deleteStudent/:id', (req,res) =>{
     }
 })
 
-router.post('/test',(req,res) => {
+router.get('/getGeneratedId',async (req,res) => {
 
-    // const test = 'ST00001';
-    // const afterDivided = test.split("");
-    // const num = parseInt(afterDivided[2] + afterDivided[3] + afterDivided[4] + afterDivided[5] + afterDivided[6]);
-    // console.log(num);
+    try{
+    const student = await Student.findOne().limit(1).sort({$natural:-1})
+    const test = student.administrationNum;
+    const afterDivided = test.split("");
+    let num = parseInt(afterDivided[2] + afterDivided[3] + afterDivided[4] + afterDivided[5] + afterDivided[6]);
+    const id = "ST000"+(num + 1);
+    console.log(id);
 
-    res.send({data:Student.find({}).sort({_id:-1}).limit(1)})
+    res.send({id:id,success:true});
+    }catch (e) {
+        console.log(e);
+    }
 
 })
 
