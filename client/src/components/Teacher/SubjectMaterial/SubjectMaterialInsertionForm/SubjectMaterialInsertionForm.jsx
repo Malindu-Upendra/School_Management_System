@@ -39,7 +39,6 @@ class SubjectMaterialInsertionForm extends Component{
         console.log(e.target.files[0])
     }
 
-
     handleSubmit = async (e) => {
         e.preventDefault();
         let  AddSubjectMaterials = new FormData();
@@ -220,7 +219,6 @@ class SubjectMaterialInsertionForm extends Component{
                             >
                                 Insert
                             </Button>
-
                         </Grid>
                     </Grid>
                     <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
