@@ -39,18 +39,7 @@ router.delete('/deleteSubjectNotices/:id', (req,res) =>{
 })
 
 //**************crud for Subject Materials****************************************************
-//insert the Subject Materials
-// router.post('/insertSubjectMaterials',async (req,res) => {
-//     const body = req.body;
-//     try {
-//         const subjectMaterial = new SubjectMaterial(body);
-//         await subjectMaterial.save();
-//         res.send({success:true})
-//     }catch (e) {
-//         console.log(e)
-//     }
-// })
-
+//insert the Subject Materials and File upload
 router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,res) => {
     try {
         // Upload image to cloudinary
@@ -71,7 +60,6 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
     } catch (err) {
         console.log(err);
     }
-
 })
 
 //retrieve the subject Materials
