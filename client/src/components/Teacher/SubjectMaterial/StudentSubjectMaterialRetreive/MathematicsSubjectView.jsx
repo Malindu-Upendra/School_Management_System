@@ -4,7 +4,7 @@ import {Card, Divider, Space} from "antd";
 import Search from "antd/es/input/Search";
 import {Row,Col} from "react-bootstrap";
 import Button from "@material-ui/core/Button";
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import PictureAsPdfIcon from "@material-ui/icons/InsertDriveFile";
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import axios from "axios";
 
@@ -140,11 +140,13 @@ class MathematicsSubjectView extends Component{
                                 {Materials.unitName}
                             </Divider>
 
-                            <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
-                                <PictureAsPdfIcon/>
-                                {" "}
-                                Lecture Material
-                            </Typography>
+                            <a href={Materials.lessonUpload}>
+                                <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                    <PictureAsPdfIcon/>
+                                    {" "}
+                                    {Materials.cloudinaryID}
+                                </Typography>
+                            </a>
 
                             <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PlayCircleOutlineIcon/>

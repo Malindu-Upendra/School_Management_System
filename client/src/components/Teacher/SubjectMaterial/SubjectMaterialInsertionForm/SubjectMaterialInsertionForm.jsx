@@ -34,16 +34,22 @@ class SubjectMaterialInsertionForm extends Component{
         this.setState({[name]:value});
     }
 
+    handleLessonUpload = (e) => {
+        this.setState({lessonUpload:e.target.files[0]})
+        console.log(e.target.files[0])
+    }
+
+
     handleSubmit = async (e) => {
         e.preventDefault();
-        const  AddSubjectMaterials ={
-            "term": this.state.term,
-            "week": this.state.week,
-            "subjectChoose": this.state.subjectChoose,
-            "unitName": this.state.unitName,
-            "lectureLink": this.state.lectureLink,
-            "lessonUpload": this.state.lessonUpload
-        };
+        let  AddSubjectMaterials = new FormData();
+        AddSubjectMaterials.append("term", this.state.term);
+        AddSubjectMaterials.append("week", this.state.week);
+        AddSubjectMaterials.append("subjectChoose", this.state.subjectChoose);
+        AddSubjectMaterials.append("unitName", this.state.unitName);
+        AddSubjectMaterials.append("lectureLink", this.state.lectureLink);
+        AddSubjectMaterials.append("lessonUpload", this.state.lessonUpload);
+
         console.log('Data send:', AddSubjectMaterials)
         await axios.post('http://localhost:5000/teacher/insertSubjectMaterials',AddSubjectMaterials)
             .then(async response => {
@@ -196,6 +202,8 @@ class SubjectMaterialInsertionForm extends Component{
                             <input
                                 accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation"
                                 // className={classes.input}
+                                onChange={this.handleLessonUpload}
+                                name="lessonUpload"
                                 id="contained-button-file"
                                 multiple
                                 type="file"

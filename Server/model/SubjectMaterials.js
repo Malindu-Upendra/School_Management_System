@@ -27,6 +27,9 @@ const subjectMaterialSchema = Schema({
     lessonUpload:{
         type: String,
     },
+    cloudinaryID:{
+        type: String
+    },
     role:{
         type: String,
         default: "teacher"
