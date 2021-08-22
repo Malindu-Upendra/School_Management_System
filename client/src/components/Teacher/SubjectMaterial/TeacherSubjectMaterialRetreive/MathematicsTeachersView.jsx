@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import PictureAsPdfIcon from "@material-ui/icons/InsertDriveFile";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import axios from "axios";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -252,11 +252,13 @@ class MathematicsTeachersView extends Component {
                                 {Materials.unitName}
                             </Divider>
 
+                            <a href={Materials.lessonUpload}>
                             <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PictureAsPdfIcon/>
                                 {" "}
-                                Lecture Material
+                                {Materials.cloudinaryID}
                             </Typography>
+                            </a>
 
                             <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PlayCircleOutlineIcon/>
