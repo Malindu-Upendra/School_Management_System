@@ -30,14 +30,24 @@ class StudentRegistrationForm extends Component{
         email:'',
         password:'',
         minimumDate:'',
-        open:false
+        open:false,
+        maximumDate:''
     }
 
     componentDidMount = async () => {
-        this.setState({selectedDate:new Date()})
         const date = new Date()
-        const minimum = "01/01/"+ (date.getFullYear()-19);
+        const minimum = "01/01/"+ await (date.getFullYear()-19);
+        const maximum = "12/31/"+ await (date.getFullYear()-7);
+        await this.setState({selectedDate:maximum})
         await this.setState({minimumDate:minimum});
+        await this.setState({maximumDate:maximum});
+
+        await axios.get('http://localhost:5000/admin/getGeneratedId').then(res => {
+            if(res.data.success){
+                this.setState({AdministrationNumber:res.data.id})
+            }
+        })
+
         console.log(minimum);
     }
 
@@ -137,6 +147,7 @@ class StudentRegistrationForm extends Component{
                             name="AdministrationNumber"
                             label="Administration Number"
                             fullWidth
+                            value={this.state.AdministrationNumber}
                             autoComplete="shipping address-line1"
                             onChange={this.handleChange}
                         />
@@ -172,6 +183,7 @@ class StudentRegistrationForm extends Component{
                                 format="MM/dd/yyyy"
                                 name="selectedDate"
                                 minDate={this.state.minimumDate}
+                                maxDate={this.state.maximumDate}
                                 value={this.state.selectedDate}
                                 onChange={this.handleDateChange}
                                 KeyboardButtonProps={{
