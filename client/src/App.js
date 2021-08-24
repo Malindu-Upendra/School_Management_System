@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TeacherPaths from "./components/Teacher/TeacherPaths";
 import Header from "./components/Public/Header/Header";
+import PublicPaths from "./components/Public/PublicPaths";
 
 class App extends Component{
 
@@ -13,6 +14,7 @@ class App extends Component{
             <Header/>
           <AdminPaths/>
           <TeacherPaths/>
+          <PublicPaths/>
         </>
     )
   }
