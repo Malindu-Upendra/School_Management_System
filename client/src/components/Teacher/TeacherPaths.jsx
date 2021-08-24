@@ -4,7 +4,7 @@ import NoticeInsertForm from "./SubjectMaterial/NoticeInsertionForm/NoticeInsert
 import SubjectMaterialInsertionForm from "./SubjectMaterial/SubjectMaterialInsertionForm/SubjectMaterialInsertionForm";
 import MathematicsSubjectView from "./SubjectMaterial/StudentSubjectMaterialRetreive/MathematicsSubjectView";
 import MathematicsTeachersView from "./SubjectMaterial/TeacherSubjectMaterialRetreive/MathematicsTeachersView";
-import Classroom_timetable from "./SubjectMaterial/ClassroomTimetableInsertForm/Classroom_timetable";
+import Classroom_timetable from "./ClassroomTimetableInsertForm/Classroom_timetable";
 
 class TeacherPaths extends Component{
     render() {
