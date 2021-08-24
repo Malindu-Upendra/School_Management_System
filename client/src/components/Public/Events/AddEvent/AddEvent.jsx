@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
 import {Alert} from "@material-ui/lab";
+import {Input, TextareaAutosize} from "@material-ui/core";
 
 class AddEvent extends Component{
 
@@ -23,8 +24,8 @@ class AddEvent extends Component{
             <div style={{width:"60%",marginLeft:"18%",marginTop:"50px",
                 border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
                 boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
-                <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
-                    Add Event
+                <Typography variant="h4" style={{textAlign:"center"}} gutterBottom>
+                    Event
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
@@ -39,25 +40,31 @@ class AddEvent extends Component{
                             onChange={this.handleChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
+                        <TextareaAutosize
+                            minRows={7}
+                            style={{width:"100%"}}
+                            aria-label="maximum height"
+                            placeholder="Description"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
                         <TextField
-                            required
-                            id="firstName"
-                            name="firstName"
-                            label="First name"
+                            id="lastName"
+                            name="lastName"
+                            label="Venue (Optional)"
+                            type="text"
                             fullWidth
-                            autoComplete="given-name"
                             onChange={this.handleChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                         <TextField
-                            required
                             id="lastName"
                             name="lastName"
-                            label="Last name"
+                            label="Link (Optional)"
+                            type="text"
                             fullWidth
-                            autoComplete="family-name"
                             onChange={this.handleChange}
                         />
                     </Grid>
@@ -66,7 +73,7 @@ class AddEvent extends Component{
                             <KeyboardDatePicker
                                 margin="normal"
                                 id="date-picker-dialog"
-                                label="Date Of Birth"
+                                label="Date"
                                 format="MM/dd/yyyy"
                                 name="selectedDate"
                                 minDate={this.state.minimumDate}
@@ -80,47 +87,29 @@ class AddEvent extends Component{
                             />
                         </Grid>
                     </MuiPickersUtilsProvider>
+                    {/*Choose File*/}
+                    <Grid item xs={12}>
+                        <Input
+                            id="lastName"
+                            name="lastName"
+                            type="file"
+                            fullWidth
+                            onChange={this.handleChange}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                            <h4 style={{textAlign:"center"}}>Contact Person's Details</h4>
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                             required
                             id="address1"
                             name="age"
-                            label="Age"
+                            label="Name"
                             value={this.state.age}
                             fullWidth
-                            type="number"
-                            autoComplete="Age"
+                            type="text"
                         />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControl variant="outlined" style={{width:"100%"}}>
-                            <InputLabel htmlFor="outlined-age-native-simple" style={{width:"98%"}}>Grade</InputLabel>
-                            <Select
-                                native
-                                value={this.state.grade}
-                                onChange={this.handleChange}
-                                label="Grade"
-                                inputProps={{
-                                    name: 'grade',
-                                    id: 'outlined-age-native-simple',
-                                }}
-                            >
-                                <option aria-label="Select Grade" value="Select Grade" />
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                                <option value={6}>6</option>
-                                <option value={7}>7</option>
-                                <option value={8}>8</option>
-                                <option value={9}>9</option>
-                                <option value={10}>10</option>
-                                <option value={11}>11</option>
-                                <option value={12}>12</option>
-                                <option value={13}>13</option>
-                            </Select>
-                        </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -136,11 +125,11 @@ class AddEvent extends Component{
                     <Grid item xs={12}>
                         <TextField
                             id="address2"
-                            name="password"
-                            label="Password"
-                            type="password"
+                            name="email"
+                            label="Phone Number"
+                            type="number"
                             fullWidth
-                            autoComplete="Password"
+                            autoComplete="Email"
                             onChange={this.handleChange}
                         />
                     </Grid>
