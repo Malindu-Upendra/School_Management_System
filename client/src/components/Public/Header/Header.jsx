@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core'
+import {Divider, makeStyles} from '@material-ui/core'
 import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     userInput: {
         marginRight: theme.spacing(2),
         [`& fieldset`]: {
-            borderRadius: 0,
+            borderRadius: 5,
         },
         [`& input`]: {
             paddingLeft: 50,
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     userPassword: {
         marginRight: theme.spacing(2),
         [`& fieldset`]: {
-            borderRadius: 0,
+            borderRadius: 5,
         },
         [`& input`]: {
             paddingLeft: 50,
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     loginBtn: {
-        background: 'red',
+        background: '#006666',
         height: 40,
         borderRadius: 0,
         color: '#fff'
@@ -63,12 +63,14 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'right',
     },
     menuContianer: {
-        marginLeft: theme.spacing(8),
-        marginRight: theme.spacing(8),
-        background: 'gray',
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(5),
+        background: '#334d4d',
         width: 'inherit',
+        boxShadow: "0 1rem 2.5rem rgba(0,0,0,0.4)"
     },
     menuBtn: {
+        color: 'whitesmoke',
         minWidth: 100,
         height: 50,
     },
@@ -78,9 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
-
     const classes = useStyles();
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -90,15 +90,12 @@ export default function Header() {
     };
 
     return (
-
         <>
             <Grid container justifyContent="space-between" alignItems="center">
                 <Grid item className={classes.gridLeftSpacing}>
                     <img src="/Assets/SLIIT.png" alt="" className={classes.headerLogo} />
                 </Grid>
                 <Grid item className={classes.gridRightSpacing}>
-
-
 
                     <form className={classes.root} noValidate autoComplete="off">
                         <TextField
@@ -119,12 +116,11 @@ export default function Header() {
                         />
                         <Button variant="contained" className={classes.loginBtn}><ChevronRightIcon /></Button>
                         <Typography className={classes.userLink}>
-                            <Link href="#">
+                            <Link style={{color:"#006666"}} href="#">
                                 Forgotten your username or password ?
                             </Link>
                         </Typography>
                     </form>
-
                 </Grid>
             </Grid>
 
@@ -132,14 +128,14 @@ export default function Header() {
                 <Grid item xs={6}>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Menu 1</Button>
+                            <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Menu 2</Button>
+                            <Button className={classes.menuBtn}>Events</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
-                                Menu 3
+                                Subjects
                                 <KeyboardArrowDownIcon />
                             </Button>
                             <Menu
@@ -149,10 +145,37 @@ export default function Header() {
                                 open={Boolean(anchorEl)}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                <MenuItem
+                                    style={{background:"#006666",color:"white"}}
+                                    onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
+                                >
+                                    Mathematics
+                                </MenuItem>
+                                <Divider dark/>
+                                <MenuItem
+                                    style={{background:"#006666",color:"white"}}
+                                    onClick={()=> window.location.href="/teacher/subjectMaterial/ScienceTeachersView"}
+                                >
+                                    Science
+                                </MenuItem>
+                                <Divider dark/>
+                                <MenuItem
+                                    style={{background:"#006666",color:"white"}}
+                                    onClick={handleClose}>
+                                    English
+                                </MenuItem>
+                                <Divider dark/>
+                                <MenuItem
+                                    style={{background:"#006666",color:"white"}}
+                                    onClick={handleClose}>
+                                    History
+                                </MenuItem>
+                                <Divider dark/>
                             </Menu>
+                        </Grid>
+
+                        <Grid item className={classes.menuItem}>
+                            <Button className={classes.menuBtn}>Time Table</Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -160,12 +183,17 @@ export default function Header() {
                 <Grid item>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Menu 2</Button>
+                            <Button className={classes.menuBtn}>Profile</Button>
+                        </Grid>
+                        <Grid item className={classes.menuItem}>
+                            <Button className={classes.menuBtn}>
+                                <i className="fas fa-sign-out-alt"></i>
+                                 Logout
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-
         </>
     )
 }
