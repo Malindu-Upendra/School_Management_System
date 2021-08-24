@@ -42,7 +42,7 @@ class MathematicsSubjectView extends Component{
                         <Row>
                             <Col>
                 <Typography variant="h6" style={{textAlign:"left"}} gutterBottom>
-                    Welcome to Mathematics!
+                    Welcome to Mathematics!!
                 </Typography>
                             </Col>
 
@@ -64,6 +64,8 @@ class MathematicsSubjectView extends Component{
                     {/***********************************Notice box ********************************/}
                     <div>
                         {this.state.Notices.map((Notices) => (
+                            <>
+                            {Notices.subjectSelect==='Mathematics' ?
                         <div style={{width:"80%",marginLeft:"10%",marginTop:"50px",
                             border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                             boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
@@ -78,6 +80,8 @@ class MathematicsSubjectView extends Component{
                             </Typography>
 
                         </div>
+                                : null }
+                            </>
                                 ))}
                     </div>
                     {/***********************************Display Terms ********************************/}
@@ -126,6 +130,8 @@ class MathematicsSubjectView extends Component{
                               borderWidth:"1px"}}>
                         {this.state.Materials.map((Materials) => (
                             <>
+                            {Materials.subjectChoose==='Mathematics' ?
+                                <>
                         <Card
                             type="inner"
                             title={Materials.week}
@@ -158,6 +164,8 @@ class MathematicsSubjectView extends Component{
                             borderStyle:"solid",
                             borderWidth:"1px"}}
                         />
+                                </>
+                                : null }
                             </>
                         ))}
                     </Card>
