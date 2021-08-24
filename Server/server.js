@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const admin = require('./routes/AdminRoutes');
 const teacher = require('./routes/TeacherRoutes');
+const timetable = require('./routes/TeacherTimetableRoutes');
 
 
 const app = express();
@@ -20,5 +21,6 @@ catch((err) => console.log(err.message));
 //declaring path to use Rest Services
 app.use('/admin',admin);
 app.use('/teacher',teacher);
+app.use('/classroom',timetable);
 
 
