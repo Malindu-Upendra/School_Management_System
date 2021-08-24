@@ -1,7 +1,8 @@
 const express = require('express');
 const SubjectNotice = require('../model/SubjectNotice.js')
 const SubjectMaterial = require('../model/SubjectMaterials')
-
+const cloudinary = require('../utils/cloudinary.js');
+const upload = require('../utils/multer.js');
 const router = express.Router();
 //***********Crud for Subject Notices**********************************
 //insert the subject notices
@@ -38,17 +39,29 @@ router.delete('/deleteSubjectNotices/:id', (req,res) =>{
 })
 
 //**************crud for Subject Materials****************************************************
-//insert the Subject Materials
-router.post('/insertSubjectMaterials',async (req,res) => {
-    const body = req.body;
+//insert the Subject Materials and File upload
+router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,res) => {
     try {
-        const subjectMaterial = new SubjectMaterial(body);
+        // Upload image to cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path,{ public_id: req.file.originalname,resource_type: "raw" });
+        console.log(result);
+        let subjectMaterial = new SubjectMaterial({
+            term: req.body.term,
+            week: req.body.week,
+            subjectChoose: req.body.subjectChoose,
+            unitName: req.body.unitName,
+            lectureLink: req.body.lectureLink,
+            lessonUpload: result.url,
+            cloudinaryID: result.public_id,
+        });
+        // to Save these
         await subjectMaterial.save();
         res.send({success:true})
-    }catch (e) {
-        console.log(e)
+    } catch (err) {
+        console.log(err);
     }
 })
+
 //retrieve the subject Materials
 router.get('/getSubjectMaterials',async (req,res) => {
     try {
@@ -60,11 +73,13 @@ router.get('/getSubjectMaterials',async (req,res) => {
 })
 
 //Delete the Subject Materials
-router.delete('/deleteSubjectMaterials/:id', (req,res) =>{
+router.delete('/deleteSubjectMaterials/:id', async (req,res) =>{
     const id = req.params.id;
     console.log(id);
     try {
-        SubjectMaterial.findByIdAndDelete({_id:id}).exec();
+        const data = await SubjectMaterial.findOne({_id:id}).exec();
+        await SubjectMaterial.findByIdAndDelete({_id:id}).exec();
+        await cloudinary.uploader.destroy(data.cloudinaryID);
         res.send({success: true})
     }catch (e) {
         res.send({success: false})

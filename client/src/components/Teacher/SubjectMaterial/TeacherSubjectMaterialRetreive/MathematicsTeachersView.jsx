@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import BorderColorIcon from '@material-ui/icons/BorderColor';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import PictureAsPdfIcon from "@material-ui/icons/PictureAsPdf";
+import PictureAsPdfIcon from "@material-ui/icons/InsertDriveFile";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import axios from "axios";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -117,6 +117,8 @@ class MathematicsTeachersView extends Component {
                     </div>
                     {/***********************************Notice box ********************************/}<>
                     {this.state.TeacherNotices.map((Notices) => (
+                        <>
+                        {Notices.subjectSelect==='Mathematics' ?
                     <div style={{width:"80%",marginLeft:"10%",marginTop:"50px",
                         border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                         boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
@@ -155,6 +157,8 @@ class MathematicsTeachersView extends Component {
                             </Col>
                         </Row>
                     </div>
+                            : null }
+                        </>
                     ))}
                 </>
                     {/************************Insert Buttons**************************************/}
@@ -236,6 +240,8 @@ class MathematicsTeachersView extends Component {
 
                         {this.state.TeacherMaterials.map((Materials) => (
                             <>
+                            {Materials.subjectChoose==='Mathematics' ?
+                                <>
                         <Card
                             type="inner"
                             title=   {Materials.week}
@@ -252,11 +258,13 @@ class MathematicsTeachersView extends Component {
                                 {Materials.unitName}
                             </Divider>
 
+                            <a href={Materials.lessonUpload}>
                             <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PictureAsPdfIcon/>
                                 {" "}
-                                Lecture Material
+                                {Materials.cloudinaryID}
                             </Typography>
+                            </a>
 
                             <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
                                 <PlayCircleOutlineIcon/>
@@ -295,6 +303,8 @@ class MathematicsTeachersView extends Component {
                             borderStyle:"solid",
                             borderWidth:"1px"}}
                             />
+                                </>
+                                : null }
                             </>
                         ))}
                     </Card>
