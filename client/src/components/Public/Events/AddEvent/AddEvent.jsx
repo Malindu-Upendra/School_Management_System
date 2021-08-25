@@ -4,9 +4,6 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -16,7 +13,23 @@ import {Input, TextareaAutosize} from "@material-ui/core";
 class AddEvent extends Component{
 
     state = {
-        eventName:''
+        eventName:'',
+        description:'',
+        venue:'',
+        link:'',
+        selectedDate:'',
+        flyer:'',
+        name:'',
+        email:'',
+        phoneNumber:'',
+        minimumDate:''
+    }
+
+    componentDidMount = () => {
+
+        this.setState({minimumDate: new Date()})
+        this.setState({selectedDate: new Date()})
+
     }
 
     render() {
@@ -35,7 +48,6 @@ class AddEvent extends Component{
                             name="eventName"
                             label="Event Name"
                             fullWidth
-                            value={this.state.eventName}
                             autoComplete="shipping address-line1"
                             onChange={this.handleChange}
                         />
@@ -46,12 +58,13 @@ class AddEvent extends Component{
                             style={{width:"100%"}}
                             aria-label="maximum height"
                             placeholder="Description"
+                            name="description"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="lastName"
-                            name="lastName"
+                            name="venue"
                             label="Venue (Optional)"
                             type="text"
                             fullWidth
@@ -61,7 +74,7 @@ class AddEvent extends Component{
                     <Grid item xs={12}>
                         <TextField
                             id="lastName"
-                            name="lastName"
+                            name="link"
                             label="Link (Optional)"
                             type="text"
                             fullWidth
@@ -71,13 +84,13 @@ class AddEvent extends Component{
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Grid container justifyContent="space-around">
                             <KeyboardDatePicker
+                                required
                                 margin="normal"
                                 id="date-picker-dialog"
                                 label="Date"
                                 format="MM/dd/yyyy"
                                 name="selectedDate"
                                 minDate={this.state.minimumDate}
-                                maxDate={this.state.maximumDate}
                                 value={this.state.selectedDate}
                                 onChange={this.handleDateChange}
                                 KeyboardButtonProps={{
@@ -87,11 +100,10 @@ class AddEvent extends Component{
                             />
                         </Grid>
                     </MuiPickersUtilsProvider>
-                    {/*Choose File*/}
                     <Grid item xs={12}>
                         <Input
                             id="lastName"
-                            name="lastName"
+                            name="flyer"
                             type="file"
                             fullWidth
                             onChange={this.handleChange}
@@ -104,19 +116,19 @@ class AddEvent extends Component{
                         <TextField
                             required
                             id="address1"
-                            name="age"
+                            name="name"
                             label="Name"
-                            value={this.state.age}
                             fullWidth
                             type="text"
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            required
                             id="address2"
                             name="email"
                             label="Email"
-                            type="email"
+                            type="text"
                             fullWidth
                             autoComplete="Email"
                             onChange={this.handleChange}
@@ -124,8 +136,9 @@ class AddEvent extends Component{
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            required
                             id="address2"
-                            name="email"
+                            name="phoneNumber"
                             label="Phone Number"
                             type="number"
                             fullWidth
