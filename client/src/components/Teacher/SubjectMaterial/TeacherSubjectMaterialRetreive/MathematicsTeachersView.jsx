@@ -81,6 +81,14 @@ class MathematicsTeachersView extends Component {
                 })
     }
 
+    handleEdit = (id) => {
+        window.location = `/teacher/subjectMaterial/noticeUpdateForm/${id}`;
+    }
+
+    handleEditMaterials = (id) => {
+        window.location = `/teacher/subjectMaterial/materialUpdateForm/${id}`;
+    }
+
     handleClose = (event, reason) => {
         if (reason === 'clickAway') {
             return;
@@ -119,7 +127,7 @@ class MathematicsTeachersView extends Component {
                     {this.state.TeacherNotices.map((Notices) => (
                         <>
                         {Notices.subjectSelect==='Mathematics' ?
-                    <div style={{width:"80%",marginLeft:"10%",marginTop:"50px",
+                    <div style={{width:"80%",marginLeft:"10%",marginTop:"51px",
                         border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                         boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
 
@@ -150,6 +158,8 @@ class MathematicsTeachersView extends Component {
                                     color="default"
                                     // className={classes.button}
                                     startIcon={<BorderColorIcon />}
+                                    // onClick={()=> window.location.href="/teacher/subjectMaterial/noticeUpdateForm"}
+                                    onClick={this.handleEdit.bind(this,Notices._id)}
                                     style={{marginLeft:"10px",width:"30%",backgroundColor: "#282c34",color:"white"}}
                                 >
                                     Edit
@@ -291,6 +301,7 @@ class MathematicsTeachersView extends Component {
                                         variant="contained"
                                         color="default"
                                         // className={classes.button}
+                                        onClick={this.handleEditMaterials.bind(this,Materials._id)}
                                         startIcon={<BorderColorIcon />}
                                         style={{marginLeft:"10px",width:"30%",backgroundColor: "#282c34",color:"white"}}
                                     >

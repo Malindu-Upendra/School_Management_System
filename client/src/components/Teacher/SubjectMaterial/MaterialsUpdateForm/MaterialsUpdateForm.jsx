@@ -1,24 +1,21 @@
 import React, {Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import {InputLabel, Select} from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
-import axios from "axios";
-import MuiAlert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import BorderColorIcon from "@material-ui/icons/BorderColor";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from "axios";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-class SubjectMaterialInsertionForm extends Component{
-    // constructor(props) {
-    //     super(props);
-    // }
+class MaterialsUpdateForm extends Component{
 
     state = {
         term: '',
@@ -27,31 +24,68 @@ class SubjectMaterialInsertionForm extends Component{
         unitName: '',
         lectureLink: '',
         lessonUpload: '',
+        cloudinaryID: '',
+        previewUpload: '',
         open:false
     }
+
+    componentDidMount = () => {
+        const id = this.props.match.params.id;
+        console.log(id);
+        axios.get(`http://localhost:5000/teacher/getSpecificMaterials/${id}`).then(res => {
+            if(res.data.success){
+                const data = res.data.data
+                this.setState({id:data._id})
+                this.setState({term:data.term})
+                this.setState({week:data.week})
+                this.setState({subjectChoose:data.subjectChoose})
+                this.setState({unitName:data.unitName})
+                this.setState({lectureLink:data.lectureLink})
+                this.setState({lessonUpload:data.lessonUpload})
+                this.setState({previewUpload:data.lessonUpload})
+                this.setState({cloudinaryID:data.cloudinaryID})
+            }
+        })
+    }
+
+    handlePreviewUpload = (lessonUpload) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(lessonUpload);
+        reader.onloadend = () => {
+            this.setState({previewUpload:reader.result});
+        }
+    }
+
+    handleLessonUpload = (e) => {
+        this.setState({lessonUpload:e.target.files[0]})
+        this.handlePreviewUpload(e.target.files[0])
+        console.log(e.target.files[0])
+    }
+
+    handleClose = (event, reason) => {
+        if (reason === 'clickAway') {
+            return;
+        }
+        this.setState({open:false});
+    };
 
     handleChange = (e) => {
         const {name , value} = e.target;
         this.setState({[name]:value});
     }
 
-    handleLessonUpload = (e) => {
-        this.setState({lessonUpload:e.target.files[0]})
-        console.log(e.target.files[0])
-    }
-
     handleSubmit = async (e) => {
         e.preventDefault();
-        let  AddSubjectMaterials = new FormData();
-        AddSubjectMaterials.append("term", this.state.term);
-        AddSubjectMaterials.append("week", this.state.week);
-        AddSubjectMaterials.append("subjectChoose", this.state.subjectChoose);
-        AddSubjectMaterials.append("unitName", this.state.unitName);
-        AddSubjectMaterials.append("lectureLink", this.state.lectureLink);
-        AddSubjectMaterials.append("lessonUpload", this.state.lessonUpload);
+        let  UpdateSubjectMaterials = new FormData();
+        UpdateSubjectMaterials.append("term", this.state.term);
+        UpdateSubjectMaterials.append("week", this.state.week);
+        UpdateSubjectMaterials.append("subjectChoose", this.state.subjectChoose);
+        UpdateSubjectMaterials.append("unitName", this.state.unitName);
+        UpdateSubjectMaterials.append("lectureLink", this.state.lectureLink);
+        UpdateSubjectMaterials.append("lessonUpload", this.state.lessonUpload);
+        UpdateSubjectMaterials.append("cloudinaryID", this.state.cloudinaryID);
 
-        console.log('Data send:', AddSubjectMaterials)
-        await axios.post('http://localhost:5000/teacher/insertSubjectMaterials',AddSubjectMaterials)
+        await axios.put('http://localhost:5000/teacher/updateMaterials',UpdateSubjectMaterials)
             .then(async response => {
                 if(response.data.success){
                     this.setState({open:true});
@@ -69,13 +103,6 @@ class SubjectMaterialInsertionForm extends Component{
             })
     }
 
-    handleClose = (event, reason) => {
-        if (reason === 'clickAway') {
-            return;
-        }
-        this.setState({open:false});
-    };
-
     render() {
         return(
             <>
@@ -84,7 +111,7 @@ class SubjectMaterialInsertionForm extends Component{
                     boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
 
                     <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
-                        Subject Materials
+                        Edit Subject Materials
                     </Typography>
 
                     <Grid container spacing={3}>
@@ -140,27 +167,27 @@ class SubjectMaterialInsertionForm extends Component{
                         </Grid>
 
                         <Grid item xs={12}>
-                        <FormControl variant="outlined" style={{width:"100%"}}>
-                            <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>
-                            <Select
-                                required
-                                native
-                                value={this.state.subjectChoose}
-                                onChange={this.handleChange}
-                                label="Select Subject"
-                                inputProps={{
-                                    name: 'subjectChoose',
-                                    id: 'outlined-age-native-simple',
-                                }}
-                            >
-                                <option aria-label="None" value="" />
-                                <option value={"Mathematics"}>Mathematics</option>
-                                <option value={"Science"}>Science</option>
-                                <option value={"English"}>English</option>
-                                <option value={"History"}>History</option>
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                            <FormControl variant="outlined" style={{width:"100%"}}>
+                                <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>
+                                <Select
+                                    required
+                                    native
+                                    value={this.state.subjectChoose}
+                                    onChange={this.handleChange}
+                                    label="Select Subject"
+                                    inputProps={{
+                                        name: 'subjectChoose',
+                                        id: 'outlined-age-native-simple',
+                                    }}
+                                >
+                                    <option aria-label="None" value="" />
+                                    <option value={"Mathematics"}>Mathematics</option>
+                                    <option value={"Science"}>Science</option>
+                                    <option value={"English"}>English</option>
+                                    <option value={"History"}>History</option>
+                                </Select>
+                            </FormControl>
+                        </Grid>
 
                         <Grid item xs={12}>
                             <TextField
@@ -194,7 +221,7 @@ class SubjectMaterialInsertionForm extends Component{
 
                         <Grid item xs={12} sm={4}>
                             <Typography variant="subtitle1" display="block" gutterBottom>
-                               Upload Lesson Materials
+                                Upload Lesson Materials
                             </Typography>
                         </Grid>
 
@@ -218,7 +245,7 @@ class SubjectMaterialInsertionForm extends Component{
                                 startIcon={<ArrowBackIcon />}
                                 onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
                             >
-                                cancel
+                                Cancel
                             </Button>
                         </Grid>
 
@@ -227,16 +254,16 @@ class SubjectMaterialInsertionForm extends Component{
                                 variant="outlined"
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
-                                startIcon={<SaveIcon />}
+                                startIcon={<BorderColorIcon />}
                                 onClick={this.handleSubmit}
                             >
-                                Insert
+                                Update
                             </Button>
                         </Grid>
                     </Grid>
                     <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
                         <Alert onClose={this.handleClose} severity="success">
-                            Successfully Inserted!
+                            Successfully Updated!
                         </Alert>
                     </Snackbar>
                 </div>
@@ -244,4 +271,5 @@ class SubjectMaterialInsertionForm extends Component{
         )
     }
 }
-export default SubjectMaterialInsertionForm
+
+export default MaterialsUpdateForm

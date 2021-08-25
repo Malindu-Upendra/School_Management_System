@@ -81,6 +81,10 @@ class ScienceTeachersView extends Component{
             })
     }
 
+    handleEdit = (id) => {
+        window.location = `/teacher/subjectMaterial/noticeUpdateForm/${id}`;
+    }
+
     handleClose = (event, reason) => {
         if (reason === 'clickAway') {
             return;
@@ -149,6 +153,7 @@ class ScienceTeachersView extends Component{
                                                 color="default"
                                                 // className={classes.button}
                                                 startIcon={<BorderColorIcon />}
+                                                onClick={this.handleEdit.bind(this,Notices._id)}
                                                 style={{marginLeft:"10px",width:"30%",backgroundColor: "#282c34",color:"white"}}
                                             >
                                                 Edit
