@@ -103,9 +103,9 @@ class SubjectMaterialInsertionForm extends Component{
                                     }}
                                 >
                                     <option aria-label="None" value="" />
-                                    <option value={"Term 01"}>Term 1</option>
-                                    <option value={"Term 02"}>Term 2</option>
-                                    <option value={"Term 03"}>Term 3</option>
+                                    <option value={1}>Term 1</option>
+                                    <option value={2}>Term 2</option>
+                                    <option value={3}>Term 3</option>
                                 </Select>
                             </FormControl>
                         </Grid>
