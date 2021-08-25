@@ -18,29 +18,27 @@ function Alert(props) {
 }
 
 class MathematicsTeachersView extends Component {
-    constructor(props) {
-        super(props);
-    }
     state = {
         TeacherNotices:[],
         TeacherMaterials:[],
-        open:false
+        open:false,
+        term:'1'
     }
 
     componentDidMount = async () => {
         await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
         then(res => {
             const  TeacherNotices = res.data.data;
-            console.log("Damn" + res.data.data);
             this.setState({TeacherNotices: TeacherNotices});
         }).catch(err => err.message)
 
         await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
         then(res => {
             const  TeacherMaterials = res.data.data;
-            console.log("Bull" + TeacherMaterials);
             this.setState({TeacherMaterials: TeacherMaterials});
         }).catch(err => err.message)
+
+        console.log(this.state.TeacherMaterials);
     }
 
     handleNoticeDelete = (id) => {
@@ -95,6 +93,10 @@ class MathematicsTeachersView extends Component {
         }
         this.setState({open:false});
     };
+
+    termHandler = async (term) => {
+        this.setState({term:term})
+    }
 
     render() {
         return(
@@ -215,7 +217,8 @@ class MathematicsTeachersView extends Component {
 
                         <Button
                             ghost
-                            style={{width:"30%"}}>
+                            style={{width:"32%"}}
+                            onClick={this.termHandler.bind(this,"1")}>
                             Term 01
                         </Button>
                         <Divider type="vertical"
@@ -225,7 +228,8 @@ class MathematicsTeachersView extends Component {
                         />
                         <Button
                             ghost
-                            style={{width:"30%"}}>
+                            style={{width:"32%"}}
+                            onClick={this.termHandler.bind(this,"2")}>
                             Term 02
                         </Button>
                         <Divider type="vertical"
@@ -235,13 +239,14 @@ class MathematicsTeachersView extends Component {
                         />
                         <Button
                             ghost
-                            style={{width:"30%"}}>
+                            style={{width:"32%"}}
+                            onClick={this.termHandler.bind(this,"3")}>
                             Term 03
                         </Button>
                     </div>
 
                     {/***********************************Display Materials ********************************/}
-                    <Card title="Term 01"
+                    <Card title={"Term 0"+this.state.term}
                           style={{marginTop:"40px",
                               width:"97%",
                               border:"black",
@@ -250,7 +255,7 @@ class MathematicsTeachersView extends Component {
 
                         {this.state.TeacherMaterials.map((Materials) => (
                             <>
-                            {Materials.subjectChoose==='Mathematics' ?
+                            {Materials.term===this.state.term &&
                                 <>
                         <Card
                             type="inner"
@@ -315,7 +320,7 @@ class MathematicsTeachersView extends Component {
                             borderWidth:"1px"}}
                             />
                                 </>
-                                : null }
+                            }
                             </>
                         ))}
                     </Card>

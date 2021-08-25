@@ -6,7 +6,7 @@ class Footer extends Component{
     render() {
         return(
             <>
-            <div style={{marginLeft:'4%',marginTop:"50px",width:"94%"}}>
+            <div style={{marginLeft:'3%',marginTop:"50px",width:"94%"}}>
                 <div className='footer-container'>
                     <section className="footer-subscription">
                         <p className="footer-subscription-heading">
