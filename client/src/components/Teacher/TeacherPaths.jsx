@@ -8,6 +8,7 @@ import Classroom_timetable from "./ClassroomTimetableInsertForm/Classroom_timeta
 import ScienceTeachersView from "./SubjectMaterial/TeacherSubjectMaterialRetreive/ScienceTeachersView";
 import ScienceSubjectView from "./SubjectMaterial/StudentSubjectMaterialRetreive/ScienceSubjectView";
 import Exam_timetable from "./ExamTimetableInsertForm/Exam_timetable";
+import UpdateClassroomTimetable from "./ClassroomTimetableUpdateForm/UpdateClassroomTimetable";
 
 class TeacherPaths extends Component{
     render() {
@@ -23,9 +24,11 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/ScienceSubjectView" component={ScienceSubjectView} exact/>
 
                     {/*path for insert classroomTimetable form*/}
-                    <Route path="/teacher/classroom_timetable/timetableInsertForm" component={Classroom_timetable} exact/>
-                    // path for insert examTimetable form
-                    <Route path ="/teacher/exam_timetable/timetableInsertForm" component ={Exam_timetable} extract/>
+                    <Route path="/teacher/classroom_timetable/TimetableInsertForm" component={Classroom_timetable} exact/>
+                    {/* path for insert examTimetable form*/}
+                    <Route path ="/teacher/exam_timetable/TimetableInsertForm" component ={Exam_timetable} extract/>
+                    {/* path for update classroom Timetable form*/}
+                    <Route path ="/teacher/classroom_timetable/TimetableUpdateForm" component={UpdateClassroomTimetable} extract/>
                 </Switch>
             </Router>
         )
