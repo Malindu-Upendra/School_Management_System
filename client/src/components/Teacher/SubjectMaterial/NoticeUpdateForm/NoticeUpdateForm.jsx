@@ -2,60 +2,41 @@ import React, {Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
 import FormControl from "@material-ui/core/FormControl";
 import {InputLabel, Select} from "@material-ui/core";
-import axios from "axios";
-import MuiAlert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import BorderColorIcon from "@material-ui/icons/BorderColor";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import axios from "axios";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-class NoticeInsertForm extends Component{
-    // constructor(props) {
-    //     super(props);
-    // }
+class NoticeUpdateForm extends Component{
 
     state = {
+        // TeacherNotices:[],
         noticeHeading: '',
         noticeDetails: '',
         subjectSelect: '',
         open:false
     }
 
-    handleChange = (e) => {
-        const {name , value} = e.target;
-        this.setState({[name]:value});
-    }
-
-    handleSubmit = async (e) => {
-        e.preventDefault();
-        const  AddNotices ={
-            "noticeHeading": this.state.noticeHeading,
-            "noticeDetails": this.state.noticeDetails,
-            "subjectSelect": this.state.subjectSelect
-        };
-        console.log('Data send:', AddNotices)
-       await axios.post('http://localhost:5000/teacher/insertSubjectNotices',AddNotices)
-            .then(async response => {
-                if(response.data.success){
-                    this.setState({open:true});
-                    await setTimeout(() => {
-                        this.setState({open:false});
-                    }, 5000);
-                    await setTimeout(() => {
-                        window.location.reload(false);
-                    }, 2000);
-                }
-            })
-            .catch(error => {
-                console.log(error.message);
-                alert(error.message)
-            })
+    componentDidMount = () => {
+        const id = this.props.match.params.id;
+        console.log(id);
+        axios.get(`http://localhost:5000/teacher/getSpecificNotices/${id}`).then(res => {
+            if(res.data.success){
+                const data = res.data.data
+                this.setState({id:data._id})
+                this.setState({noticeHeading:data.noticeHeading})
+                this.setState({noticeDetails:data.noticeDetails})
+                this.setState({subjectSelect:data.subjectSelect})
+            }
+        })
     }
 
     handleClose = (event, reason) => {
@@ -65,6 +46,38 @@ class NoticeInsertForm extends Component{
         this.setState({open:false});
     };
 
+    handleChange = (e) => {
+        const {name , value} = e.target;
+        this.setState({[name]:value});
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const  AddNotices ={
+            id:this.state.id,
+            noticeHeading: this.state.noticeHeading,
+            noticeDetails: this.state.noticeDetails,
+            subjectSelect: this.state.subjectSelect
+        };
+        console.log('Data send:', AddNotices)
+        axios.put('http://localhost:5000/teacher/updateSubjectNotices',AddNotices)
+            .then(async response => {
+                if(response.data.success){
+                    this.setState({open:true});
+                    await setTimeout(() => {
+                        this.setState({open:false});
+                    }, 5000);
+                    await setTimeout(() => {
+                        window.location = "/teacher/subjectMaterial/MathematicsTeachersView"
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+                alert(error.message)
+            })
+    }
+
     render() {
         return(
             <>
@@ -73,7 +86,7 @@ class NoticeInsertForm extends Component{
                     boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
 
                     <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
-                        Notices
+                        Edit Notices
                     </Typography>
 
                     <Grid container spacing={3}>
@@ -137,7 +150,7 @@ class NoticeInsertForm extends Component{
                                 startIcon={<ArrowBackIcon />}
                                 onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
                             >
-                                cancel
+                                Cancel
                             </Button>
                         </Grid>
 
@@ -146,21 +159,23 @@ class NoticeInsertForm extends Component{
                                 variant="outlined"
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
-                                startIcon={<SaveIcon />}
+                                startIcon={<BorderColorIcon />}
                                 onClick={this.handleSubmit}
                             >
-                                Insert
+                                Update
                             </Button>
                         </Grid>
                     </Grid>
                     <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
                         <Alert onClose={this.handleClose} severity="success">
-                            Successfully Inserted!
+                            Successfully Updated!
                         </Alert>
                     </Snackbar>
                 </div>
             </>
         )
     }
+
 }
-export default NoticeInsertForm
+
+export default NoticeUpdateForm

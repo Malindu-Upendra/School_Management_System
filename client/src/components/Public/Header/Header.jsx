@@ -12,7 +12,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -93,7 +92,7 @@ export default function Header() {
         <>
             <Grid container justifyContent="space-between" alignItems="center">
                 <Grid item className={classes.gridLeftSpacing}>
-                    <img src="/Assets/SLIIT.png" alt="" className={classes.headerLogo} />
+                    <img src="/Assets/H2MD.png" alt="" className={classes.headerLogo} />
                 </Grid>
                 <Grid item className={classes.gridRightSpacing}>
 
