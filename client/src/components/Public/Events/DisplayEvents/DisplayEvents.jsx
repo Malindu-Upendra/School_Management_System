@@ -5,7 +5,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Row from 'react-bootstrap/Row'
 import {
     Accordion, AccordionDetails,
-    AccordionSummary, CardMedia
+    AccordionSummary
 } from "@material-ui/core";
 import {Container, FormControl, InputGroup} from "react-bootstrap";
 

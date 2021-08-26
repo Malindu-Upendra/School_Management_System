@@ -167,11 +167,11 @@ class StudentRetrieve extends Component{
                         type="info"
                         showIcon
                     />: null}
-                <div style={{ height: 600, width: '80%',margin:"auto",marginTop:"20px",boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
+                <div style={{ height: 530, width: '80%',margin:"auto",marginTop:"20px",boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
                     <DataGrid
                         rows={this.state.rows}
                         columns={this.state.columns}
-                        pageSize={10}
+                        pageSize={8}
                         onSelectionModelChange = {this.handleRowSelection}
                     />
                 </div>

@@ -13,6 +13,7 @@ import MaterialsUpdateForm from "./SubjectMaterial/MaterialsUpdateForm/Materials
 import UpdateExamTimetable from "./ExamTimetableUpdateForm/UpdateExamTimetable";
 import View_classroom from "./ClassroomTimetableTeacherView/View_classroom";
 import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/ClassroomTimetableStudentView";
+import Attendance from "./Attendance/Attendance";
 
 class TeacherPaths extends Component{
     render() {
@@ -30,6 +31,8 @@ class TeacherPaths extends Component{
 
                     {/*test hussain*/}
                     <Route path="/teacher/subjectMaterial/:subject" component={SubjectMaterialTeachersView} exact/>
+                    {/*Attendance Page*/}
+                    <Route path="/teacher/attendace" component={Attendance} exact/>
 
                     {/*path for insert classroomTimetable form*/}
                     <Route path="/teacher/classroom_timetable/TimetableInsertForm" component={Classroom_timetable} exact/>
