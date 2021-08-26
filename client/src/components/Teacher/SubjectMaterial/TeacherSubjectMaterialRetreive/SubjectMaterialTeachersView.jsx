@@ -186,7 +186,7 @@ class SubjectMaterialTeachersView extends Component {
                                     color="secondary"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
-                                    onClick={()=> window.location.href="/teacher/subjectMaterial/noticeInsertForm"}
+                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/noticeInsertForm/${this.state.subject}`}
                                     style={{marginLeft:"45%",width:"50%",backgroundColor: "#4080bf",color:"white"}}
                                 >
                                    Insert Notices
@@ -199,7 +199,7 @@ class SubjectMaterialTeachersView extends Component {
                                     color="default"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
-                                    onClick={()=> window.location.href="/teacher/subjectMaterial/subjectMaterialInsertForm"}
+                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}`}
                                     style={{marginLeft:"10px",width:"50%", backgroundColor: "#008080",color:"white"}}
                                 >
                                     Insert Subject Materials
