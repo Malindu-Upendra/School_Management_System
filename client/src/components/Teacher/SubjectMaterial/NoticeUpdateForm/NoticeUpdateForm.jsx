@@ -68,7 +68,7 @@ class NoticeUpdateForm extends Component{
                         this.setState({open:false});
                     }, 5000);
                     await setTimeout(() => {
-                        window.location = "/teacher/subjectMaterial/SubjectMaterialTeachersView"
+                        window.location = `/teacher/subjectMaterial/${this.state.subjectSelect}`
                     }, 2000);
                 }
             })
