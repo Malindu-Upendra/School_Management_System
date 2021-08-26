@@ -20,16 +20,16 @@ class DisplayTeacher extends Component {
     render() {
 
         return (
-            <div style={{width:"70%",marginLeft:"15%",marginTop:"100px",
-                border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
-                boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
-                <Typography variant="h6" style={{textAlign:"center", marginBottom:"50px"}} gutterBottom>
-                    Teacher Database
-                </Typography>
+            // <div style={{width:"80%",marginLeft:"10%",marginTop:"100px",
+            //     border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
+            //     boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
+            //     <Typography variant="h6" style={{textAlign:"center", marginBottom:"50px"}} gutterBottom>
+            //         Teacher Database
+            //     </Typography>
 
-                <table class="table" style={{textAlign:"center"}}>
+                <table class="table" style={{textAlign:"center", marginTop: "50px", width: "80%", marginLeft:"auto", marginRight:"auto", border: "1px solid teal"}}>
                     <thead class="thead-dark">
-                    <tr>
+                    <tr style={{backgroundColor:"teal"}}>
                         <th scope="col">Employee Number</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Sectional Head Post</th>
@@ -44,8 +44,8 @@ class DisplayTeacher extends Component {
                                     <td><Link to={`/admin/DeleteTeacher/${teacher._id}`} style={{width:300}}>{teacher.empNum}</Link></td>
                                     <td>{teacher.fullName}</td>
                                     <td>{String(teacher.sectionalHead)}</td>
-                                    <td>{teacher.selectedGrades.map((item) =>(
-                                        item+","
+                                    <td>{teacher.selectedGrades.map((item) => (
+                                        item + ","
                                     ))}</td>
                                     <td>{teacher.subject}</td>
                                 </tr>
@@ -53,7 +53,7 @@ class DisplayTeacher extends Component {
                     }
                     </tbody>
                 </table>
-            </div>
+            // </div>
         );
     }
 
