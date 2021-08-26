@@ -24,7 +24,7 @@ class AddTeacher extends Component{
         empNum:'',
         fullName:'',
         gender:'',
-        qualification:'',
+        email:'',
         section:'',
         subject:'',
         grade:0,
@@ -67,13 +67,13 @@ class AddTeacher extends Component{
     }
 
     handleSubmit = (event) => {
-        event.preventDefault();
+        //event.preventDefault();
 
         const teacher = {
             empNum:this.state.empNum,
             fullName : this.state.fullName,
             gender: this.state.gender,
-            qualification: this.state.qualification,
+            email: this.state.email,
             sectionalHead: this.state.checkedB,
             section: this.state.section,
             selectedGrades: this.state.selectedOptions,
@@ -84,14 +84,13 @@ class AddTeacher extends Component{
             .post("http://localhost:5000/admin/addTeacher", teacher)
             .then((response) => {
                 console.log(response.data);
+                alert("Successfully inserted teacher details");
             })
             .catch((error) => {
                 console.log(error);
             });
 
         console.log(teacher);
-
-        alert("Teacher Details Inserted Successfully");
     }
 
     render() {
@@ -139,11 +138,11 @@ class AddTeacher extends Component{
                         <TextField
                             required
                             id="address1"
-                            name="qualification"
-                            label="Qualification"
+                            name="email"
+                            label="Email"
                             onChange={this.handleChange}
                             fullWidth
-                            type="text"
+                            //type="text"
                         />
                     </Grid>
 
@@ -182,12 +181,14 @@ class AddTeacher extends Component{
                         </Grid>
                         : null}
                     <Form.Group style={{width:"95%", marginLeft:'2%', marginTop:'15px'}}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{width:"98%", marginBottom: "10px"}}>Select Grade</InputLabel>
                         <SelectGrade
                             style={{width:"100%"}}
                             options={this.state.Grade}
                             onChange={this.selectCategory}
                             className="basic-multi-select"
-                            isMulti/>
+                            isMulti
+                        />
                     </Form.Group>
 
                     <Grid item xs={12}>

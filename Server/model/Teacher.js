@@ -16,7 +16,7 @@ const teacherSchema = Schema({
     gender:{
         type: String,
     },
-    qualification:{
+    email:{
         type: String,
     },
     sectionalHead:{

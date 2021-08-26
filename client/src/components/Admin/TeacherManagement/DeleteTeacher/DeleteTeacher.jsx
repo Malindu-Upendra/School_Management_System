@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import axios from "axios";
+import {InputLabel} from "@material-ui/core";
 
 class AddTeacher extends Component{
 
@@ -52,7 +53,10 @@ class AddTeacher extends Component{
                     Teacher Details
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Employee Number</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="address1"
@@ -60,7 +64,10 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Name</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="fullName"
@@ -68,7 +75,10 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Gender</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="gender"
@@ -76,15 +86,21 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Email</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="fullName"
-                            value={this.state.teachers.qualification}
+                            value={this.state.teachers.email}
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Sectional Head</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="qualification"
@@ -92,15 +108,26 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Section</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
+                    {this.state.teachers.sectionalHead === true ?
                         <TextField
                             required
                             id="sectionalHead"
                             value={this.state.teachers.section}
                             fullWidth
-                        />
+                        /> :
+                        <TextField
+                            value = "Not Applicable"
+                            fullWidth
+                        /> }
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Grades</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="section"
@@ -108,7 +135,10 @@ class AddTeacher extends Component{
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
+                        <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Subject</InputLabel>
+                    </Grid>
+                    <Grid item xs={8}>
                         <TextField
                             required
                             id="subject"
