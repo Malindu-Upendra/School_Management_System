@@ -216,7 +216,7 @@ class SubjectMaterialInsertionForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
+                                onClick={()=> window.location.href="/teacher/subjectMaterial/SubjectMaterialTeachersView"}
                             >
                                 cancel
                             </Button>

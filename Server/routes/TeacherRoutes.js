@@ -19,9 +19,11 @@ router.post('/insertSubjectNotices',async (req,res) => {
     }
 })
 //retrieve the subject notices
-router.get('/getSubjectNotices',async (req,res) => {
+router.get('/getSubjectNotices/:subject',async (req,res) => {
+   const subject = req.params.subject;
+
     try {
-        const subjectNotices = await SubjectNotice.find();
+        const subjectNotices = await SubjectNotice.find({subjectSelect:subject});
         res.send({data:subjectNotices,success:true})
     }catch (e) {
         console.log(e)
@@ -91,9 +93,11 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
 })
 
 //retrieve the subject Materials
-router.get('/getSubjectMaterials',async (req,res) => {
+router.get('/getSubjectMaterials/:subject',async (req,res) => {
+    const subject = req.params.subject;
+
     try {
-        const subjectMaterials = await SubjectMaterial.find();
+        const subjectMaterials = await SubjectMaterial.find({subjectChoose:subject});
         res.send({data:subjectMaterials,success:true})
     }catch (e) {
         console.log(e)
