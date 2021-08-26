@@ -2,22 +2,24 @@ import React , {Component} from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-
 class StudentGradeTable extends Component{
 
 render() {
     return(
-
-        <div style={{width:"70%",marginLeft:"15%",marginTop:"100px",
-            border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
-            boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
-            <Typography variant="h6" style={{textAlign:"center", marginBottom:"50px"}} gutterBottom>
-                Student Database
+        <>
+            <Typography variant="h6" style={{textAlign:"center", marginTop: "50px"}} gutterBottom>
+                Student List
             </Typography>
-
-        <table className="table">
+        <table className="table" style={{
+            textAlign: "center",
+            marginTop: "50px",
+            width: "80%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            border: "1px solid teal"
+        }}>
             <thead className="thead-dark">
-            <tr>
+            <tr style={{backgroundColor: "teal"}}>
                 <th scope="col">Student No</th>
                 <th scope="col">Student Name</th>
                 <th scope="col">Student Result</th>
@@ -33,8 +35,7 @@ render() {
             </tr>
             </tbody>
         </table>
-
-        </div>
+        </>
     )
 }
 
