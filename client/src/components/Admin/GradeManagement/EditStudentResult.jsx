@@ -50,14 +50,13 @@ import {InputLabel} from "@material-ui/core";
                 border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
                 boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
                 <Typography variant="h6" style={{textAlign:"center", marginBottom:"35px"}} gutterBottom>
-                    Edit Results
+                    Edit Result
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={3}>
                         <InputLabel htmlFor="outlined-age-native-simple" style={{marginTop: 12, fontSize: "15px", fontWeight:"bold"}}>Student ID</InputLabel>
                     </Grid>
                     <Grid item xs={9}>
-
                         <TextField
                             required
                             id="address1"

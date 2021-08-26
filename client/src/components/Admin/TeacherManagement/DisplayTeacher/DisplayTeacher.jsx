@@ -23,11 +23,12 @@ class DisplayTeacher extends Component {
             // <div style={{width:"80%",marginLeft:"10%",marginTop:"100px",
             //     border:"#a3a375", borderWidth:"3px", borderStyle:"solid", padding:"3%",
             //     boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
-            //     <Typography variant="h6" style={{textAlign:"center", marginBottom:"50px"}} gutterBottom>
-            //         Teacher Database
-            //     </Typography>
 
-                <table class="table" style={{textAlign:"center", marginTop: "50px", width: "80%", marginLeft:"auto", marginRight:"auto", border: "1px solid teal"}}>
+            <>
+            <Typography variant="h6" style={{textAlign:"center", marginTop: "50px"}} gutterBottom>
+                Teacher Database
+            </Typography>
+                <table class="table" style={{textAlign:"center", marginTop: "30px", marginBottom: "200px", width: "80%", marginLeft:"auto", marginRight:"auto", border: "1px solid teal"}}>
                     <thead class="thead-dark">
                     <tr style={{backgroundColor:"teal"}}>
                         <th scope="col">Employee Number</th>
@@ -53,7 +54,7 @@ class DisplayTeacher extends Component {
                     }
                     </tbody>
                 </table>
-            // </div>
+             </>
         );
     }
 

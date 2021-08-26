@@ -1,10 +1,15 @@
 import React , {Component} from "react";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 class StudentGradeTable extends Component{
 
 render() {
     return(
+        <>
+            <Typography variant="h6" style={{textAlign:"center", marginTop: "50px"}} gutterBottom>
+                Student List
+            </Typography>
         <table className="table" style={{
             textAlign: "center",
             marginTop: "50px",
@@ -30,7 +35,7 @@ render() {
             </tr>
             </tbody>
         </table>
-
+        </>
     )
 }
 
