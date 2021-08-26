@@ -11,7 +11,6 @@ import Exam_timetable from "./ExamTimetableInsertForm/Exam_timetable";
 import UpdateClassroomTimetable from "./ClassroomTimetableUpdateForm/UpdateClassroomTimetable";
 import NoticeUpdateForm from "./SubjectMaterial/NoticeUpdateForm/NoticeUpdateForm";
 import MaterialsUpdateForm from "./SubjectMaterial/MaterialsUpdateForm/MaterialsUpdateForm";
-import Test from "./SubjectMaterial/TeacherSubjectMaterialRetreive/Test";
 
 class TeacherPaths extends Component{
     render() {

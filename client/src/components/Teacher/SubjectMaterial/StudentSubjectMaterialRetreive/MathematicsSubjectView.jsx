@@ -14,7 +14,8 @@ class MathematicsSubjectView extends Component{
     }
     state = {
         Notices:[],
-        Materials:[]
+        Materials:[],
+        term:'1'
     }
 
     componentDidMount = async ()=> {
@@ -31,6 +32,10 @@ class MathematicsSubjectView extends Component{
             console.log("Bull" + Materials);
             this.setState({Materials: Materials});
         }).catch(err => err.message)
+    }
+
+    termHandler = async (term) => {
+        this.setState({term:term})
     }
 
     render() {
@@ -97,6 +102,7 @@ class MathematicsSubjectView extends Component{
 
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"1")}
                             style={{width:"30%"}}>
                             Term 01
                         </Button>
@@ -107,6 +113,7 @@ class MathematicsSubjectView extends Component{
                         />
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"2")}
                             style={{width:"30%"}}>
                             Term 02
                         </Button>
@@ -117,12 +124,13 @@ class MathematicsSubjectView extends Component{
                         />
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"3")}
                             style={{width:"30%"}}>
                             Term 03
                         </Button>
                     </div>
                     {/***********************************Display Materials ********************************/}
-                    <Card title="Term 01"
+                    <Card title={"Term 0"+this.state.term}
                           style={{marginTop:"30px",
                               width:"97%",
                               border:"black",
@@ -130,7 +138,7 @@ class MathematicsSubjectView extends Component{
                               borderWidth:"1px"}}>
                         {this.state.Materials.map((Materials) => (
                             <>
-                            {Materials.subjectChoose==='Mathematics' ?
+                            {Materials.term===this.state.term && Materials.subjectChoose==='Mathematics' &&
                                 <>
                         <Card
                             type="inner"
@@ -165,7 +173,7 @@ class MathematicsSubjectView extends Component{
                             borderWidth:"1px"}}
                         />
                                 </>
-                                : null }
+                            }
                             </>
                         ))}
                     </Card>
