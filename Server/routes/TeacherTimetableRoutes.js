@@ -26,4 +26,16 @@ router.get('/allctables',async (req,res)=>{
     }
 
 })
+
+router.delete('/deletecTable/:id',async(req,res)=>{
+    const id = req.params.id;
+    try{
+        await Classroom.findByIdAndRemove(id);
+        res.send({success:true,message:"Successfully Deleted"});
+    }catch (e){
+        console.log(e)
+    }
+
+})
+
 module.exports= router;
