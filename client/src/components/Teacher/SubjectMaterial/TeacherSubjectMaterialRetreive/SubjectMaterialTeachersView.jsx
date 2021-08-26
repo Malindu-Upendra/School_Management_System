@@ -17,22 +17,26 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-class MathematicsTeachersView extends Component {
+class SubjectMaterialTeachersView extends Component {
     state = {
         TeacherNotices:[],
         TeacherMaterials:[],
         open:false,
-        term:'1'
+        term:'1',
+        subject:''
     }
 
     componentDidMount = async () => {
-        await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
+        const subject = this.props.match.params.subject;
+        this.setState({subject:subject})
+
+        await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}`).
         then(res => {
             const  TeacherNotices = res.data.data;
             this.setState({TeacherNotices: TeacherNotices});
         }).catch(err => err.message)
 
-        await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        await axios.get(`http://localhost:5000/teacher/getSubjectMaterials/${subject}`).
         then(res => {
             const  TeacherMaterials = res.data.data;
             this.setState({TeacherMaterials: TeacherMaterials});
@@ -107,7 +111,7 @@ class MathematicsTeachersView extends Component {
                         <Row>
                             <Col>
                                 <Typography variant="h6" style={{textAlign:"left"}} gutterBottom>
-                                    Welcome to Mathematics!
+                                    Welcome to {this.state.subject}
                                 </Typography>
                             </Col>
 
@@ -335,4 +339,4 @@ class MathematicsTeachersView extends Component {
     }
 }
 
-export default MathematicsTeachersView;
+export default SubjectMaterialTeachersView;
