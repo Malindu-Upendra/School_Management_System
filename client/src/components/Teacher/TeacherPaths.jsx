@@ -10,6 +10,7 @@ import Exam_timetable from "./ExamTimetableInsertForm/Exam_timetable";
 import UpdateClassroomTimetable from "./ClassroomTimetableUpdateForm/UpdateClassroomTimetable";
 import NoticeUpdateForm from "./SubjectMaterial/NoticeUpdateForm/NoticeUpdateForm";
 import MaterialsUpdateForm from "./SubjectMaterial/MaterialsUpdateForm/MaterialsUpdateForm";
+import UpdateExamTimetable from "./ExamTimetableUpdateForm/UpdateExamTimetable";
 
 class TeacherPaths extends Component{
     render() {
@@ -34,6 +35,8 @@ class TeacherPaths extends Component{
                     <Route path ="/teacher/exam_timetable/TimetableInsertForm" component ={Exam_timetable} extract/>
                     {/* path for update classroom Timetable form*/}
                     <Route path ="/teacher/classroom_timetable/TimetableUpdateForm" component={UpdateClassroomTimetable} extract/>
+                    {/*path for Update exam Timetable form*/}
+                    <Route path ="/teacher/exam_timetable/TimetableUpdateForm" component={UpdateExamTimetable} exact/>
                 </Switch>
             </Router>
         )
