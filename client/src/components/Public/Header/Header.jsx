@@ -146,27 +146,27 @@ export default function Header() {
                             >
                                 <MenuItem
                                     style={{background:"#006666",color:"white"}}
-                                    onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
+                                    onClick={()=> window.location.href="/test/Mathematics"}
                                 >
                                     Mathematics
                                 </MenuItem>
                                 <Divider dark/>
                                 <MenuItem
                                     style={{background:"#006666",color:"white"}}
-                                    onClick={()=> window.location.href="/teacher/subjectMaterial/ScienceTeachersView"}
+                                    onClick={()=> window.location.href="/test/Science"}
                                 >
                                     Science
                                 </MenuItem>
                                 <Divider dark/>
                                 <MenuItem
                                     style={{background:"#006666",color:"white"}}
-                                    onClick={handleClose}>
+                                    onClick={()=> window.location.href="/test/English"}>
                                     English
                                 </MenuItem>
                                 <Divider dark/>
                                 <MenuItem
                                     style={{background:"#006666",color:"white"}}
-                                    onClick={handleClose}>
+                                    onClick={()=> window.location.href="/test/History"}>
                                     History
                                 </MenuItem>
                                 <Divider dark/>

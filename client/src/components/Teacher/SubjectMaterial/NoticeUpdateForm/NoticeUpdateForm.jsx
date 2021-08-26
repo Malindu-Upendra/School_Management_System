@@ -68,7 +68,7 @@ class NoticeUpdateForm extends Component{
                         this.setState({open:false});
                     }, 5000);
                     await setTimeout(() => {
-                        window.location = "/teacher/subjectMaterial/MathematicsTeachersView"
+                        window.location = "/teacher/subjectMaterial/SubjectMaterialTeachersView"
                     }, 2000);
                 }
             })
@@ -148,7 +148,7 @@ class NoticeUpdateForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsTeachersView"}
+                                onClick={()=> window.location.href="/teacher/subjectMaterial/SubjectMaterialTeachersView"}
                             >
                                 Cancel
                             </Button>
