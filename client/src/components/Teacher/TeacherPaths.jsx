@@ -26,7 +26,7 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
 
                     {/*test hussain*/}
-                    <Route path="/test/:subject" component={SubjectMaterialTeachersView} exact/>
+                    <Route path="/teacher/subjectMaterial/:subject" component={SubjectMaterialTeachersView} exact/>
 
                     {/*path for insert classroomTimetable form*/}
                     <Route path="/teacher/classroom_timetable/TimetableInsertForm" component={Classroom_timetable} exact/>

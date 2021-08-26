@@ -148,7 +148,7 @@ class NoticeUpdateForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href="/teacher/subjectMaterial/SubjectMaterialTeachersView"}
+                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectSelect}`}
                             >
                                 Cancel
                             </Button>
