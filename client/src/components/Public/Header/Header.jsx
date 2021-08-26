@@ -130,7 +130,9 @@ export default function Header() {
                             <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Events</Button>
+                            <Button className={classes.menuBtn}
+                             onClick={()=> window.location.href="/displayEvent"}
+                            >Events</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
@@ -182,7 +184,8 @@ export default function Header() {
                 <Grid item>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Profile</Button>
+                            <Button className={classes.menuBtn}
+                            onClick={()=> window.location.href="/profile"}>Profile</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn}>
