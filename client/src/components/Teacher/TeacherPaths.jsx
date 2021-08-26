@@ -12,6 +12,7 @@ import NoticeUpdateForm from "./SubjectMaterial/NoticeUpdateForm/NoticeUpdateFor
 import MaterialsUpdateForm from "./SubjectMaterial/MaterialsUpdateForm/MaterialsUpdateForm";
 import UpdateExamTimetable from "./ExamTimetableUpdateForm/UpdateExamTimetable";
 import View_classroom from "./ClassroomTimetableTeacherView/View_classroom";
+import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/ClassroomTimetableStudentView";
 
 class TeacherPaths extends Component{
     render() {
@@ -40,6 +41,8 @@ class TeacherPaths extends Component{
                     <Route path ="/teacher/exam_timetable/TimetableUpdateForm" component={UpdateExamTimetable} exact/>
                     {/*path for classroom timetable teachers view*/}
                     <Route path ="/teacher/classroom_timetable/TeachersView" component={View_classroom} exact/>
+                    {/*path for classroom timetable teachers view*/}
+                    <Route path ="/student/classroom_timetable/StudentsView" component={ClassroomTimetableStudentView} exact/>
                 </Switch>
             </Router>
         )
