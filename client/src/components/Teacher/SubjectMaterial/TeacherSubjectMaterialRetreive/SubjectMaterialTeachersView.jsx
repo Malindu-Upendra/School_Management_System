@@ -132,7 +132,7 @@ class SubjectMaterialTeachersView extends Component {
                     {/***********************************Notice box ********************************/}<>
                     {this.state.TeacherNotices.map((Notices) => (
                         <>
-                        {Notices.subjectSelect==='Mathematics' ?
+                        {/*{Notices.subjectSelect==='Mathematics' ?*/}
                     <div style={{width:"80%",marginLeft:"10%",marginTop:"51px",
                         border:"#ff3333", borderWidth:"3px", borderStyle:"solid", padding:"2%",
                         boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
@@ -173,7 +173,7 @@ class SubjectMaterialTeachersView extends Component {
                             </Col>
                         </Row>
                     </div>
-                            : null }
+                            {/*: null }*/}
                         </>
                     ))}
                 </>

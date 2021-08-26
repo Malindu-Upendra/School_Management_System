@@ -9,27 +9,34 @@ import PictureAsPdfIcon from "@material-ui/icons/InsertDriveFile";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 
 
-
 class ScienceSubjectView extends Component{
     state = {
         Notices:[],
-        Materials:[]
+        Materials:[],
+        term:'1',
+        subject:''
     }
 
     componentDidMount = async ()=> {
-        await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
+        const subject = this.props.match.params.subject;
+        this.setState({subject:subject})
+        await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}`).
         then(res => {
             const  Notices = res.data.data;
             console.log("Notices " + Notices);
             this.setState({Notices: Notices});
         }).catch(err => err.message)
 
-        await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        await axios.get(`http://localhost:5000/teacher/getSubjectMaterials/${subject}`).
         then(res => {
             const  Materials = res.data.data;
             console.log("Bull" + Materials);
             this.setState({Materials: Materials});
         }).catch(err => err.message)
+    }
+
+    termHandler = async (term) => {
+        this.setState({term:term})
     }
 
     render() {
@@ -96,6 +103,7 @@ class ScienceSubjectView extends Component{
 
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"1")}
                             style={{width:"30%"}}>
                             Term 01
                         </Button>
@@ -106,6 +114,7 @@ class ScienceSubjectView extends Component{
                         />
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"2")}
                             style={{width:"30%"}}>
                             Term 02
                         </Button>
@@ -116,12 +125,13 @@ class ScienceSubjectView extends Component{
                         />
                         <Button
                             ghost
+                            onClick={this.termHandler.bind(this,"3")}
                             style={{width:"30%"}}>
                             Term 03
                         </Button>
                     </div>
                     {/***********************************Display Materials ********************************/}
-                    <Card title="Term 01"
+                    <Card title={"Term 0"+this.state.term}
                           style={{marginTop:"31px",
                               width:"97%",
                               border:"black",
@@ -129,7 +139,7 @@ class ScienceSubjectView extends Component{
                               borderWidth:"1px"}}>
                         {this.state.Materials.map((Materials) => (
                             <>
-                                {Materials.subjectChoose==='Science' ?
+                                {Materials.term===this.state.term && Materials.subjectChoose==='Science' &&
                                     <>
                                         <Card
                                             type="inner"
@@ -164,7 +174,7 @@ class ScienceSubjectView extends Component{
                                             borderWidth:"1px"}}
                                         />
                                     </>
-                                    : null }
+                                }
                             </>
                         ))}
                     </Card>
