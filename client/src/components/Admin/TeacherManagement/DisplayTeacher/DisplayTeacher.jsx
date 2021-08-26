@@ -44,7 +44,9 @@ class DisplayTeacher extends Component {
                                     <td><Link to={`/admin/DeleteTeacher/${teacher._id}`} style={{width:300}}>{teacher.empNum}</Link></td>
                                     <td>{teacher.fullName}</td>
                                     <td>{String(teacher.sectionalHead)}</td>
-                                    <td>{teacher.selectedGrades}</td>
+                                    <td>{teacher.selectedGrades.map((item) =>(
+                                        item+","
+                                    ))}</td>
                                     <td>{teacher.subject}</td>
                                 </tr>
                         )

@@ -90,6 +90,8 @@ class AddTeacher extends Component{
             });
 
         console.log(teacher);
+
+        alert("Teacher Details Inserted Successfully");
     }
 
     render() {

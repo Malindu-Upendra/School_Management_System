@@ -5,6 +5,8 @@ import StudentRetrieve from "./StudentRetrieve/StudentRetrieve";
 import AddTeacher from "./TeacherManagement/AddTeacher/AddTeacher";
 import DisplayTeacher from "./TeacherManagement/DisplayTeacher/DisplayTeacher";
 import DeleteTeacher from "./TeacherManagement/DeleteTeacher/DeleteTeacher";
+import StudentGradeTable from "./GradeManagement/StudentGradeTable";
+
 
 class AdminPaths extends Component{
 
@@ -18,6 +20,7 @@ class AdminPaths extends Component{
                     <Route path="/admin/addTeacher" component={AddTeacher} exact/>
                     <Route path="/admin/DisplayTeacher" component={DisplayTeacher} exact/>
                     <Route path="/admin/DeleteTeacher/:id" component={DeleteTeacher} exact/>
+                    <Route path="/admin/StudentGradeTable" component={StudentGradeTable} exact/>
                 </Switch>
             </Router>
 
