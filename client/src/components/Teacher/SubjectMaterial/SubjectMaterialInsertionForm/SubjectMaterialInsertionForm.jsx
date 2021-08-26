@@ -27,7 +27,13 @@ class SubjectMaterialInsertionForm extends Component{
         unitName: '',
         lectureLink: '',
         lessonUpload: '',
-        open:false
+        open:false,
+        subject:''
+    }
+
+    componentDidMount = () => {
+        const subject = this.props.match.params.subject;
+        this.setState({subject:subject})
     }
 
     handleChange = (e) => {
@@ -216,7 +222,7 @@ class SubjectMaterialInsertionForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectChoose}`}
+                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subject}`}
                             >
                                 cancel
                             </Button>

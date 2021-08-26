@@ -4,6 +4,7 @@ import {Modal, Button, Space, Alert, Result} from 'antd';
 import Search from "antd/es/input/Search";
 import axios from "axios";
 import {InputGroup,FormControl} from "react-bootstrap";
+import Typography from "@material-ui/core/Typography";
 
 class StudentRetrieve extends Component{
 
@@ -104,7 +105,7 @@ class StudentRetrieve extends Component{
             }, 3500);
             setTimeout(() => {
                 window.location.reload(false);
-            },1000)
+            },2000)
         }})
     };
 
@@ -145,6 +146,9 @@ class StudentRetrieve extends Component{
         return(
             <div>
                 <div style={{marginLeft:"20%",width:"60%",marginTop:"50px"}}>
+                    <Typography variant="h6" style={{textAlign:"center"}} gutterBottom>
+                        Students In The System
+                    </Typography>
                     <Space direction="vertical" style={{width:"100%"}}>
                         <Search placeholder="Search by Registration Number" onSearch={this.onSearch} style={{width:"100%"}} enterButton />
                     </Space>

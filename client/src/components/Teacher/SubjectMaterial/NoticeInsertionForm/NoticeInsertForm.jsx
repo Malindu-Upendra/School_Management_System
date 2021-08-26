@@ -24,7 +24,13 @@ class NoticeInsertForm extends Component{
         noticeHeading: '',
         noticeDetails: '',
         subjectSelect: '',
-        open:false
+        open:false,
+        subject:''
+    }
+
+    componentDidMount = () => {
+        const subject = this.props.match.params.subject;
+        this.setState({subject:subject})
     }
 
     handleChange = (e) => {
@@ -135,7 +141,7 @@ class NoticeInsertForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectSelect}`}
+                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subject}`}
                             >
                                 cancel
                             </Button>
