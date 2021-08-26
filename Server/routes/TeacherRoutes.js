@@ -21,7 +21,6 @@ router.post('/insertSubjectNotices',async (req,res) => {
 //retrieve the subject notices
 router.get('/getSubjectNotices/:subject',async (req,res) => {
    const subject = req.params.subject;
-
     try {
         const subjectNotices = await SubjectNotice.find({subjectSelect:subject});
         res.send({data:subjectNotices,success:true})

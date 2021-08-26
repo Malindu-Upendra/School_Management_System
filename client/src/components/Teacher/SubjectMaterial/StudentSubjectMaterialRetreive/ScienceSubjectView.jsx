@@ -13,18 +13,21 @@ class ScienceSubjectView extends Component{
     state = {
         Notices:[],
         Materials:[],
-        term:'1'
+        term:'1',
+        subject:''
     }
 
     componentDidMount = async ()=> {
-        await  axios.get('http://localhost:5000/teacher/getSubjectNotices').
+        const subject = this.props.match.params.subject;
+        this.setState({subject:subject})
+        await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}`).
         then(res => {
             const  Notices = res.data.data;
             console.log("Notices " + Notices);
             this.setState({Notices: Notices});
         }).catch(err => err.message)
 
-        await axios.get('http://localhost:5000/teacher/getSubjectMaterials').
+        await axios.get(`http://localhost:5000/teacher/getSubjectMaterials/${subject}`).
         then(res => {
             const  Materials = res.data.data;
             console.log("Bull" + Materials);
