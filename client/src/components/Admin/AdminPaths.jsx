@@ -7,7 +7,8 @@ import DisplayTeacher from "./TeacherManagement/DisplayTeacher/DisplayTeacher";
 import DeleteTeacher from "./TeacherManagement/DeleteTeacher/DeleteTeacher";
 import StudentGradeTable from "./GradeManagement/StudentGradeTable";
 import EditStudentResult from "./GradeManagement/EditStudentResult";
-
+import GradeInsertTable from "./GradeManagement/GradeInsertTable";
+import InsertStudentResult from "./GradeManagement/InsertStudentResult";
 
 class AdminPaths extends Component{
 
@@ -23,6 +24,8 @@ class AdminPaths extends Component{
                     <Route path="/admin/DeleteTeacher/:id" component={DeleteTeacher} exact/>
                     <Route path="/admin/StudentGradeTable" component={StudentGradeTable} exact/>
                     <Route path="/admin/EditStudentResult" component={EditStudentResult} exact/>
+                    <Route path="/admin/GradeInsertTable" component={GradeInsertTable} exact/>
+                    <Route path="/admin/InsertStudentResult" component={InsertStudentResult} exact/>
                 </Switch>
             </Router>
 
