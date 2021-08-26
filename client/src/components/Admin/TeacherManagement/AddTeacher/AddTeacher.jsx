@@ -85,6 +85,7 @@ class AddTeacher extends Component{
             .then((response) => {
                 console.log(response.data);
                 alert("Successfully inserted teacher details");
+                window.location.href='/admin/DisplayTeacher';
             })
             .catch((error) => {
                 console.log(error);
@@ -112,6 +113,7 @@ class AddTeacher extends Component{
                             label="Employee Number"
                             onChange={this.handleChange}
                             fullWidth
+                            required
                         />
                     </Grid>
 
@@ -123,6 +125,7 @@ class AddTeacher extends Component{
                             label="Full name"
                             onChange={this.handleChange}
                             fullWidth
+                            required
                         />
                     </Grid>
 
@@ -143,6 +146,7 @@ class AddTeacher extends Component{
                             onChange={this.handleChange}
                             fullWidth
                             //type="text"
+
                         />
                     </Grid>
 
