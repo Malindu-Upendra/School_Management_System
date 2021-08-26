@@ -105,6 +105,7 @@ export class Classroom_timetable extends Component {
                             id="grade"
                             name="grade"
                             label="Grade"
+                            placeholder="Grade-06"
                             fullWidth
                             variant="outlined"
                             autoComplete="Grade"
