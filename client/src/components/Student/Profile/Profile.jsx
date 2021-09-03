@@ -16,10 +16,10 @@ class Profile extends Component{
         return(
             <div style={{marginTop:"40px"}}>
                 <h3 style={{textAlign:"center",marginBottom:"30px"}}>Student Profile</h3>
-                <Container style={{boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
+                <Container style={{boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)",backgroundColor:'white'}}>
                     <Row style={{margin:"auto"}} xs={1} md={2}>
                         <Zoom in={this.state.transition}>
-                            <div className="container" style={{height:"585px",overflowY:"scroll",border:'1px solid'}}>
+                            <div className="container" style={{height:"623px",overflowY:"scroll",border:'1px solid'}}>
                                 <Form >
                                     <h4 style={{textAlign:"center"}}>Grades</h4>
                                     <ButtonGroup aria-label="Basic example" style={{width:"100%"}}>
@@ -73,6 +73,7 @@ class Profile extends Component{
                         </Zoom>
                         <Zoom in={this.state.transition} style={{ transitionDelay: this.state.transition ? '500ms' : '0ms' }}>
                             <Form style={{border:'1px solid'}}>
+                                <h4 style={{textAlign:"center"}}>Details</h4>
                                 <Form.Group>
                                     <Form.Label>Administration Number</Form.Label>
                                     <Form.Control type="email" placeholder="Enter email" />
