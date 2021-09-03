@@ -176,11 +176,12 @@ export default function Header() {
                         </Grid>
 
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Time Table</Button>
+                            <Button className={classes.menuBtn}
+                                    onClick={()=> window.location.href="/admin/studentRetrieve"}>View Students</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn}
-                                    onClick={()=> window.location.href="/admin/studentRetrieve"}>Students</Button>
+                                    onClick={()=> window.location.href="/admin/studentRegister"}>Add Students</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn}
