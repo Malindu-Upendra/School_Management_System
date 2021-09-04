@@ -20,9 +20,9 @@ router.post('/login',async (req, res) => {
 
         if(password !== oldUser.password) {
             console.log("from routes 3 Invalid credentials")
-            return res.send({message: "Invalid credentials",success:false});
+            return res.send({message: "Invalid Password",success:false});
         }
-        const token = jwt.sign({ position: oldUser.role, id: oldUser._id }, secret, { expiresIn: "1h" });
+        const token = jwt.sign({ position: oldUser.role,name:oldUser.name, id: oldUser._id }, secret, { expiresIn: "1h" });
 
         res.status(200).json({token , success:true});
     } catch (err) {
@@ -30,5 +30,17 @@ router.post('/login',async (req, res) => {
     }
 
 });
+
+router.post('/insert',async (req,res) => {
+
+    const body = req.body;
+    try {
+        const user = new UserModel(body);
+        const result = await user.save()
+        res.send({data:result,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+})
 
 module.exports = router;
