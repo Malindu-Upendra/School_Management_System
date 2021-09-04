@@ -17,8 +17,9 @@ class AdminPaths extends Component{
 
             <Router>
                 <Switch>
+                    {/*/admin/studentRetrieve*/}
+                    <Route path="/" component={StudentRetrieve} exact/>
                     <Route path="/admin/studentRegister" component={StudentRegistrationForm} exact/>
-                    <Route path="/admin/studentRetrieve" component={StudentRetrieve} exact/>
                     <Route path="/admin/addTeacher" component={AddTeacher} exact/>
                     <Route path="/admin/DisplayTeacher" component={DisplayTeacher} exact/>
                     <Route path="/admin/DeleteTeacher/:id" component={DeleteTeacher} exact/>

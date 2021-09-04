@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AddEvent from "./Events/AddEvent/AddEvent";
-import DisplayEvents from "./Events/DisplayEvents/DisplayEvents";
-import Profile from "../Student/Profile/Profile";
+import Profile from "./Profile/Profile";
+import AddEvent from "../Public/Events/AddEvent/AddEvent";
+import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
 
-class PublicPaths extends Component{
+class StudentPaths extends Component{
 
     render() {
         return(
 
             <Router>
                 <Switch>
+                    <Route path="/profile" component={Profile} exact/>
                     <Route path="/addEvent" component={AddEvent} exact/>
                     <Route path="/displayEvent" component={DisplayEvents} exact/>
                 </Switch>
@@ -20,5 +21,5 @@ class PublicPaths extends Component{
     }
 }
 
-export default PublicPaths;
+export default StudentPaths;
 
