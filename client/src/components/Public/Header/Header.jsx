@@ -202,6 +202,9 @@ export default function Header() {
                 <Grid item xs={10}>
                     <>
                     {user === 'Admin' ?
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- start of admins part in header----------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------
                         <>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
@@ -264,7 +267,13 @@ export default function Header() {
                         </Grid>
                     </Grid>
                     </>
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- end of admins part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
                         : user === 'student' ?
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- start of student's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
                         <>
                         <Grid container>
                             <Grid item className={classes.menuItem}>
@@ -282,7 +291,82 @@ export default function Header() {
                             </Grid>
                         </Grid>
                         </>
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- end of student's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+                        : user === 'teacher' ?
+    //--------------------------------------------------------------------------------------------------------------
+    //----------------------------------------start of teacher's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+                                <>
+                                    <Grid container>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
+                                        </Grid>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
+                                                Subject Material
+                                                <KeyboardArrowDownIcon />
+                                            </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={anchorEl}
+                                                keepMounted
+                                                open={Boolean(anchorEl)}
+                                                onClose={handleClose}
+                                            >
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsStudentView/Mathematics"}
+                                                >
+                                                    Mathematics
+                                                </MenuItem>
+                                                <Divider dark/>
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href="/teacher/subjectMaterial/ScienceSubjectView/Science"}
+                                                >
+                                                    Science
+                                                </MenuItem>
+                                            </Menu>
+                                        </Grid>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClickOther}>
+                                                Time Table
+                                                <KeyboardArrowDownIcon />
+                                            </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={anchorEltwo}
+                                                keepMounted
+                                                open={Boolean(anchorEltwo)}
+                                                onClose={handleCloseOther}
+                                            >
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href="/teacher/classroom_timetable/TeachersView"}
+                                                >
+                                                    View Classroom TimeTable
+                                                </MenuItem>
+                                                <Divider dark/>
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href="/teacher/classroom_timetable/TimetableInsertForm"}
+                                                >
+                                                    Add Classroom TimeTable
+                                                </MenuItem>
+
+                                            </Menu>
+                                        </Grid>
+                                    </Grid>
+                                </>
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- end of teacher's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
                         :
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- start of guest's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
                             <>
                             <Grid container>
                                 <Grid item className={classes.menuItem}>
@@ -300,6 +384,9 @@ export default function Header() {
                                 </Grid>
                             </Grid>
                             </>
+    //--------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- start of guest's part in header----------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
                             }
                             </>
                     </Grid>
@@ -328,9 +415,23 @@ export default function Header() {
                                         </Button>
                                     </Grid>
                                 </>
-                                :
+                            :
+                                user === 'teacher' ?
+                                    <>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button className={classes.menuBtn}
+                                                    onClick={()=> window.location.href=""}>Profile</Button>
+                                        </Grid>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button onClick={handleLogout} className={classes.menuBtn}>
+                                                <i className="fas fa-sign-out-alt"></i>
+                                                Logout
+                                            </Button>
+                                        </Grid>
+                                    </>
+                            :
                             <Grid item className={classes.menuItem}>
-                                <Button onClick={handleLogout} className={classes.menuBtn}>
+                                <Button className={classes.menuBtn}>
                                     LogIn
                                     </Button>
                             </Grid>

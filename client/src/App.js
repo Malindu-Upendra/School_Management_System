@@ -34,7 +34,7 @@ class App extends Component{
             <Header/>
 
             {this.state.user === 'Admin' && <AdminPaths/>}
-            {this.state.user === 'Teacher' && <TeacherPaths/>}
+            {this.state.user === 'teacher' && <TeacherPaths/>}
             {this.state.user === 'student' && <StudentPaths/>}
             {this.state.user === 'guest' && <PublicPaths/>}
 
