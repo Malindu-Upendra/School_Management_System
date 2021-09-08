@@ -116,7 +116,7 @@ class StudentRegistrationForm extends Component{
                     this.setState({open:false});
                 }, 3000);
                 await setTimeout(() => {
-                window.location = "/admin/studentRetrieve"
+                window.location = "/"
                 }, 2000);
             }
         })

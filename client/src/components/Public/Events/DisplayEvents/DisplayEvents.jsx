@@ -11,16 +11,22 @@ import {Container, FormControl, InputGroup} from "react-bootstrap";
 
 class DisplayEvents extends Component{
 
+    state = {
+        login:false
+    }
+
     render() {
         return(
             <div style={{marginLeft:"10%",width:"80%",marginTop:"50px"}}>
                 <Typography variant="h4" style={{marginLeft:"46%",width:"40%"}} gutterBottom>
                     Events
                 </Typography>
+
+                { this.state.login &&
                      <Button variant="contained" style={{margin:"auto",backgroundColor:"#80ff80",width:"100%",marginBottom:"50px"}} href={"/addEvent"}>
                         Add Event
                      </Button>
-
+                }
                     {/*---------------------*/}
 
                 <div>
@@ -115,9 +121,15 @@ class DisplayEvents extends Component{
 
                     {/*---------------------*/}
 
-                    <Button variant="contained" style={{margin:"auto",backgroundColor:"#80ff80",width:"100%",marginTop:"50px"}} href={"/addEvent"}>
-                        Add Event
-                     </Button>
+                {this.state.login &&
+
+                <Button variant="contained"
+                        style={{margin: "auto", backgroundColor: "#80ff80", width: "100%", marginTop: "50px"}}
+                        href={"/addEvent"}
+                        disabled={this.state.login}>
+                    Add Event
+                </Button>
+                }
             </div>
         )
     }

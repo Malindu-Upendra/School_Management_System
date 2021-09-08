@@ -28,15 +28,16 @@ class SubjectMaterialTeachersView extends Component {
 
     componentDidMount = async () => {
         const subject = this.props.match.params.subject;
+        const grade = this.props.match.params.grade;
         this.setState({subject:subject})
 
-        await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}`).
+        await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}/${grade}`).
         then(res => {
             const  TeacherNotices = res.data.data;
             this.setState({TeacherNotices: TeacherNotices});
         }).catch(err => err.message)
 
-        await axios.get(`http://localhost:5000/teacher/getSubjectMaterials/${subject}`).
+        await axios.get(`http://localhost:5000/teacher/getSubjectMaterials/${subject}/${grade}`).
         then(res => {
             const  TeacherMaterials = res.data.data;
             this.setState({TeacherMaterials: TeacherMaterials});

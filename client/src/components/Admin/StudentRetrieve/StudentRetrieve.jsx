@@ -57,7 +57,7 @@ class StudentRetrieve extends Component{
                         id:index+1,
                         regNum:student.administrationNum,
                         Name:student.name,
-                        Grade:student.grade
+                        Grade:parseInt(student.grade)
                     }
 
                     person.push(s);
