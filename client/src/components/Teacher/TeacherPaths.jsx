@@ -30,7 +30,7 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
 
                     {/*test hussain*/}
-                    <Route path="/teacher/subjectMaterial/:subject" component={SubjectMaterialTeachersView} exact/>
+                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
                     {/*Attendance Page*/}
                     <Route path="/teacher/attendace" component={Attendance} exact/>
 

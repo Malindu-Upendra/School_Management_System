@@ -4,7 +4,8 @@ const SubjectMaterial = require('../model/SubjectMaterials')
 const cloudinary = require('../utils/cloudinary.js');
 const upload = require('../utils/multer.js');
 const router = express.Router();
-
+const Grade5 = require('../model/Grade_5');
+const Teacher = require('../model/Teacher')
 
 //***********Crud for Subject Notices**********************************
 //insert the subject notices
@@ -19,8 +20,11 @@ router.post('/insertSubjectNotices',async (req,res) => {
     }
 })
 //retrieve the subject notices
-router.get('/getSubjectNotices/:subject',async (req,res) => {
+router.get('/getSubjectNotices/:subject/:grade',async (req,res) => {
    const subject = req.params.subject;
+    const grade = req.params.grade;
+
+    console.log(grade)
     try {
         const subjectNotices = await SubjectNotice.find({subjectSelect:subject});
         res.send({data:subjectNotices,success:true})
@@ -92,8 +96,11 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
 })
 
 //retrieve the subject Materials
-router.get('/getSubjectMaterials/:subject',async (req,res) => {
+router.get('/getSubjectMaterials/:subject/:grade',async (req,res) => {
     const subject = req.params.subject;
+    const grade = req.params.grade;
+
+    console.log(grade)
 
     try {
         const subjectMaterials = await SubjectMaterial.find({subjectChoose:subject});
@@ -158,5 +165,47 @@ router.put('/updateMaterials',upload.single("lessonUpload"),async (req,res) => {
         console.log(e);
     }
 })
+
+router.get('/getSpecificTeacher/:empNum',async (req,res) => {
+
+    const empNum = req.params.empNum;
+
+    try{
+        const result = await Teacher.findOne({empNum:empNum});
+        res.send({data:result,success:true});
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+//test grade inserting
+//---------------------------------- mahir's part -------------------------------------------
+
+
+router.get('/getStudent',async (req,res)=>{
+
+    try{
+        const result = await Grade1.find()
+        res.send({data:result});
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getS',async (req,res)=>{
+
+    const subject = 'MatheMatics'
+
+    try{
+        const result = await Grade5.find().select(`term1.${subject}`)
+        res.send({data:result});
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+//---------------------------------- end of mahir's part -------------------------------------------
 
 module.exports = router;

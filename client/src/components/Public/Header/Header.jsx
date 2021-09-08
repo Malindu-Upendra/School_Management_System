@@ -64,6 +64,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
         textAlign: 'right',
     },
+    menuItem:{
+        width:'auto'
+    },
     menuContianer: {
         marginLeft: theme.spacing(5),
         marginRight: theme.spacing(5),
@@ -89,17 +92,29 @@ export default function Header() {
     const [username,setUsername] = React.useState(null);
     const [password,setPassword] = React.useState(null);
     const [name,setName] = React.useState(null);
+    const [subject,setSubject] = React.useState(null);
+    const [selectedGrades,setSelectedGrades] = React.useState([])
 
     useEffect (() => {
         if(sessionStorage.token) {
             setUser(decode(sessionStorage.token).position);
             setName(decode(sessionStorage.token).name);
+            setUsername(decode(sessionStorage.token).username)
         }else {
             setUser('guest')
         }
 
-        console.log(user);
-    });
+            if (user === 'teacher') {
+                 axios.get(`http://localhost:5000/teacher/getSpecificTeacher/${username}`).then(res => {
+                    if (res.data.success) {
+                        setSelectedGrades(res.data.data.selectedGrades);
+                        setSubject(res.data.data.subject)
+                        console.log(selectedGrades)
+                    }
+                })
+            }
+
+    },[user,username,selectedGrades]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -142,7 +157,7 @@ export default function Header() {
                 }
 
                 if(user === 'Admin'){
-                    window.location = '/admin/studentRetrieve'
+                    window.location = '/'
                 }
 
             }else{
@@ -194,7 +209,8 @@ export default function Header() {
                         </Typography>
                     </form>
                         : <>
-                            <Typography variant="h3"><PersonSharpIcon style={{ fontSize: 50, marginBottom:10 }}/>{name}</Typography></> }
+                            <Typography variant="h3"><PersonSharpIcon style={{ fontSize: 50, marginBottom:8 }}/>{name}</Typography>
+                            <Typography variant="h6" style={{ marginTop:-18, float:"right" }}>{user}</Typography></> }
                 </Grid>
             </Grid>
 
@@ -203,8 +219,8 @@ export default function Header() {
                     <>
                     {user === 'Admin' ?
     //--------------------------------------------------------------------------------------------------------------
-    //---------------------------------------- start of admins part in header----------------------------------------------
-    // --------------------------------------------------------------------------------------------------------------
+    //---------------------------------------- start of admins part in header---------------------------------------
+    // -------------------------------------------------------------------------------------------------------------
                         <>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
@@ -268,11 +284,11 @@ export default function Header() {
                     </Grid>
                     </>
     //--------------------------------------------------------------------------------------------------------------
-    //---------------------------------------- end of admins part in header----------------------------------------------
+    //---------------------------------------- end of admins part in header ----------------------------------------
     //--------------------------------------------------------------------------------------------------------------
                         : user === 'student' ?
     //--------------------------------------------------------------------------------------------------------------
-    //---------------------------------------- start of student's part in header----------------------------------------------
+    //---------------------------------------- start of student's part in header -----------------------------------
     //--------------------------------------------------------------------------------------------------------------
                         <>
                         <Grid container>
@@ -314,20 +330,19 @@ export default function Header() {
                                                 keepMounted
                                                 open={Boolean(anchorEl)}
                                                 onClose={handleClose}
+                                                style={{width:"300px"}}
                                             >
+                                                {selectedGrades.map((item) => (
+                                                    <div>
                                                 <MenuItem
-                                                    style={{background:"#006666",color:"white"}}
-                                                    onClick={()=> window.location.href="/teacher/subjectMaterial/MathematicsStudentView/Mathematics"}
+                                                    style={{background:"#006666",color:"white",width:"200px"}}
+                                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/${subject}/${item}`}
                                                 >
-                                                    Mathematics
+                                                    Grade {item}
                                                 </MenuItem>
                                                 <Divider dark/>
-                                                <MenuItem
-                                                    style={{background:"#006666",color:"white"}}
-                                                    onClick={()=> window.location.href="/teacher/subjectMaterial/ScienceSubjectView/Science"}
-                                                >
-                                                    Science
-                                                </MenuItem>
+                                                    </div>
+                                                    ))}
                                             </Menu>
                                         </Grid>
                                         <Grid item className={classes.menuItem}>
@@ -354,6 +369,18 @@ export default function Header() {
                                                     onClick={()=> window.location.href="/teacher/classroom_timetable/TimetableInsertForm"}
                                                 >
                                                     Add Classroom TimeTable
+                                                </MenuItem>
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href=""}
+                                                >
+                                                    View Exam TimeTable
+                                                </MenuItem>
+                                                <MenuItem
+                                                    style={{background:"#006666",color:"white"}}
+                                                    onClick={()=> window.location.href="/teacher/exam_timetable/TimetableInsertForm"}
+                                                >
+                                                    Add Exam TimeTable
                                                 </MenuItem>
 
                                             </Menu>

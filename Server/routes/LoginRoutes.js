@@ -22,7 +22,7 @@ router.post('/login',async (req, res) => {
             console.log("from routes 3 Invalid credentials")
             return res.send({message: "Invalid Password",success:false});
         }
-        const token = jwt.sign({ position: oldUser.role,name:oldUser.name, id: oldUser._id }, secret, { expiresIn: "1h" });
+        const token = jwt.sign({ position: oldUser.role,name:oldUser.name, username: oldUser.username }, secret, { expiresIn: "1h" });
 
         res.status(200).json({token , success:true});
     } catch (err) {
