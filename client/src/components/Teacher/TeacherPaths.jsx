@@ -14,6 +14,8 @@ import UpdateExamTimetable from "./ExamTimetableUpdateForm/UpdateExamTimetable";
 import View_classroom from "./ClassroomTimetableTeacherView/View_classroom";
 import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/ClassroomTimetableStudentView";
 import Attendance from "./Attendance/Attendance";
+import AddEvent from "../Public/Events/AddEvent/AddEvent";
+import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
 
 class TeacherPaths extends Component{
     render() {
@@ -28,6 +30,10 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/ScienceSubjectView/:subject" component={ScienceSubjectView} exact/>
                     <Route path="/teacher/subjectMaterial/noticeUpdateForm/:id" component={NoticeUpdateForm} exact/>
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
+
+                    {/*Adding Event for Teacher*/}
+                    <Route path="/addEvent" component={AddEvent} exact/>
+                    <Route path="/displayEvent" component={DisplayEvents} exact/>
 
                     {/*test hussain*/}
                     <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>

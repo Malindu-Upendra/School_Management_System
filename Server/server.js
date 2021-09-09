@@ -6,7 +6,8 @@ const admin = require('./routes/AdminRoutes');
 const teacher = require('./routes/TeacherRoutes');
 const timetable = require('./routes/TeacherTimetableRoutes');
 const user = require('./routes/LoginRoutes')
-
+const student = require('./routes/StudentRoutes')
+const public = require('./routes/PublicRoutes')
 
 const app = express();
 app.use(cors());
@@ -23,6 +24,8 @@ catch((err) => console.log(err.message));
 app.use('/admin',admin);
 app.use('/teacher',teacher);
 app.use('/classroom',timetable);
+app.use('/student',student);
+app.use('/public',public);
 app.use('/login',user);
 
 
