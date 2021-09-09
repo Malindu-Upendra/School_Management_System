@@ -9,6 +9,12 @@ import SaveIcon from "@material-ui/icons/Save";
 import Snackbar from "@material-ui/core/Snackbar";
 import {Alert} from "@material-ui/lab";
 import {Input, TextareaAutosize} from "@material-ui/core";
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import axios from "axios";
+import decode from "jwt-decode";
 
 class AddEvent extends Component{
 
@@ -21,16 +27,94 @@ class AddEvent extends Component{
         flyer:'',
         name:'',
         email:'',
-        phoneNumber:'',
-        minimumDate:''
+        phoneNumber:0,
+        userID:'',
+        minimumDate:'',
+        previewImage:'',
+        open:false,
+        openModal:false
+    }
+
+    handleChange = (event) => {
+        const {name,value} = event.target;
+        this.setState({[name]:value});
+    }
+
+    handleDateChange = (date) => {
+        this.setState({selectedDate:(date.getMonth()+1)+ "/" +date.getDate()+ "/" +date.getFullYear()})
     }
 
     componentDidMount = () => {
+
+        if(sessionStorage.token) {
+            this.setState({userID:decode(sessionStorage.token).username});
+            this.setState({login:true})
+        }else {
+            this.setState({user:'guest'})
+            this.setState({login:false})
+        }
 
         this.setState({minimumDate: new Date()})
         this.setState({selectedDate: new Date()})
 
     }
+
+    handleImage = (e) => {
+        this.setState({flyer:e.target.files[0]});
+        this.handlePreviewImage(e.target.files[0])
+    }
+
+    handlePreviewImage = (image) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onloadend = () => {
+            this.setState({previewImage:reader.result});
+        }
+    }
+
+    handleOpen = () => {
+        this.setState({openModal:true})
+    }
+
+    handleClose = () => {
+        this.setState({openModal:false})
+    }
+
+    onSubmit = async (event) => {
+        event.preventDefault();
+
+        let Event = new FormData();
+        Event.append("eventName", this.state.eventName);
+        Event.append("description", this.state.description);
+        Event.append("venue", this.state.venue);
+        Event.append("link", this.state.link);
+        Event.append("selectedDate", this.state.selectedDate);
+        Event.append("flyer", this.state.flyer);
+        Event.append("name", this.state.name);
+        Event.append("email", this.state.email);
+        Event.append("phoneNumber", this.state.phoneNumber);
+        Event.append("userID", this.state.userID);
+
+        await axios.post('http://localhost:5000/student/addEvent',Event).then(async res => {
+            if(res.data.success){
+                this.setState({open:true});
+                await setTimeout(() => {
+                    this.setState({open:false});
+                }, 3000);
+                await setTimeout(() => {
+                    window.location = "/displayEvent"
+                }, 2000);
+            }
+        })
+    }
+
+    handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        this.setState({open:false});
+    };
 
     render() {
         return(
@@ -59,6 +143,7 @@ class AddEvent extends Component{
                             aria-label="maximum height"
                             placeholder="Description"
                             name="description"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -105,9 +190,21 @@ class AddEvent extends Component{
                             id="lastName"
                             name="flyer"
                             type="file"
+                            accept="images*/"
+                            onChange={this.handleImage}
                             fullWidth
-                            onChange={this.handleChange}
                         />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            variant="contained"
+                            color="default"
+                            startIcon={<CloudUploadIcon />}
+                            onClick={this.handleOpen}
+                            fullWidth
+                        >
+                            Click to see the Preview
+                        </Button>
                     </Grid>
                     <Grid item xs={12}>
                             <h4 style={{textAlign:"center"}}>Contact Person's Details</h4>
@@ -120,6 +217,7 @@ class AddEvent extends Component{
                             label="Name"
                             fullWidth
                             type="text"
+                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -130,7 +228,6 @@ class AddEvent extends Component{
                             label="Email"
                             type="text"
                             fullWidth
-                            autoComplete="Email"
                             onChange={this.handleChange}
                         />
                     </Grid>
@@ -142,7 +239,6 @@ class AddEvent extends Component{
                             label="Phone Number"
                             type="number"
                             fullWidth
-                            autoComplete="Email"
                             onChange={this.handleChange}
                         />
                     </Grid>
@@ -153,17 +249,37 @@ class AddEvent extends Component{
                             size="large"
                             style={{marginTop:"15px",width:"100%"}}
                             startIcon={<SaveIcon />}
-                            onClick={this.submitDetails}
+                            onClick={this.onSubmit}
                         >
                             Save
                         </Button>
                     </Grid>
                 </Grid>
-                <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
-                    <Alert onClose={this.handleClose} severity="success">
-                        Successfully Inserted!
+                <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleCloseSnackbar}>
+                    <Alert onClose={this.handleCloseSnackbar} severity="success">
+                        Successfully Uploaded!
                     </Alert>
                 </Snackbar>
+                <Grid item xs={12}>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={this.state.openModal}
+                    onClose={this.handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                    style={{width:'90%',margin:'auto'}}
+                >
+                    <Fade in={this.state.openModal}>
+                        <div>
+                            <img style={{width:'100%'}} src={this.state.previewImage}/>
+                        </div>
+                    </Fade>
+                </Modal>
+                </Grid>
             </div>
         )
     }
