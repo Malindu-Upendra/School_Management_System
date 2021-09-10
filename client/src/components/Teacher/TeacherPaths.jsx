@@ -23,8 +23,8 @@ class TeacherPaths extends Component{
             <Router>
                 <Switch>
                     {/*paths of Subject Materials function*/}
-                    <Route path="/teacher/subjectMaterial/noticeInsertForm/:subject" component={NoticeInsertForm} exact/>
-                    <Route path="/teacher/subjectMaterial/subjectMaterialInsertForm/:subject" component={SubjectMaterialInsertionForm} exact/>
+                    <Route path="/teacher/subjectMaterial/noticeInsertForm/:subject/:grade" component={NoticeInsertForm} exact/>
+                    <Route path="/teacher/subjectMaterial/subjectMaterialInsertForm/:subject/:grade" component={SubjectMaterialInsertionForm} exact/>
                     <Route path="/teacher/subjectMaterial/MathematicsStudentView/:subject" component={MathematicsSubjectView} exact/>
                     <Route path="/teacher/subjectMaterial/SubjectMaterialTeachersView" component={SubjectMaterialTeachersView} exact/>
                     <Route path="/teacher/subjectMaterial/ScienceSubjectView/:subject" component={ScienceSubjectView} exact/>

@@ -23,10 +23,8 @@ router.post('/insertSubjectNotices',async (req,res) => {
 router.get('/getSubjectNotices/:subject/:grade',async (req,res) => {
    const subject = req.params.subject;
     const grade = req.params.grade;
-
-    console.log(grade)
     try {
-        const subjectNotices = await SubjectNotice.find({subjectSelect:subject});
+        const subjectNotices = await SubjectNotice.find({subjectSelect:subject,grade:grade});
         res.send({data:subjectNotices,success:true})
     }catch (e) {
         console.log(e)
@@ -77,7 +75,6 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
     try {
         // Upload image to cloudinary
         const result = await cloudinary.uploader.upload(req.file.path,{ public_id: req.file.originalname,resource_type: "raw" });
-        console.log(result);
         let subjectMaterial = new SubjectMaterial({
             term: req.body.term,
             week: req.body.week,
@@ -86,6 +83,7 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
             lectureLink: req.body.lectureLink,
             lessonUpload: result.url,
             cloudinaryID: result.public_id,
+            grade:req.body.grade
         });
         // to Save these
         await subjectMaterial.save();
@@ -98,12 +96,10 @@ router.post('/insertSubjectMaterials',upload.single("lessonUpload"),async (req,r
 //retrieve the subject Materials
 router.get('/getSubjectMaterials/:subject/:grade',async (req,res) => {
     const subject = req.params.subject;
-    const grade = req.params.grade;
-
-    console.log(grade)
+    const g = parseInt(req.params.grade);
 
     try {
-        const subjectMaterials = await SubjectMaterial.find({subjectChoose:subject});
+        const subjectMaterials = await SubjectMaterial.find({subjectChoose:subject,grade:g});
         res.send({data:subjectMaterials,success:true})
     }catch (e) {
         console.log(e)
