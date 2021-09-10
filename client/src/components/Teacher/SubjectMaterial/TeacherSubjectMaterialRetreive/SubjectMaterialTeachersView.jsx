@@ -23,12 +23,14 @@ class SubjectMaterialTeachersView extends Component {
         TeacherMaterials:[],
         open:false,
         term:'1',
-        subject:''
+        subject:'',
+        grade:0
     }
 
     componentDidMount = async () => {
         const subject = this.props.match.params.subject;
         const grade = this.props.match.params.grade;
+        this.setState({grade:grade})
         this.setState({subject:subject})
 
         await  axios.get(`http://localhost:5000/teacher/getSubjectNotices/${subject}/${grade}`).
@@ -187,7 +189,7 @@ class SubjectMaterialTeachersView extends Component {
                                     color="secondary"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
-                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/noticeInsertForm/${this.state.subject}`}
+                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/noticeInsertForm/${this.state.subject}/${this.state.grade}`}
                                     style={{marginLeft:"45%",width:"50%",backgroundColor: "#4080bf",color:"white"}}
                                 >
                                    Insert Notices
@@ -200,7 +202,7 @@ class SubjectMaterialTeachersView extends Component {
                                     color="default"
                                     // className={classes.button}
                                     startIcon={<AddCircleOutlineIcon />}
-                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}`}
+                                    onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}/${this.state.grade}`}
                                     style={{marginLeft:"10px",width:"50%", backgroundColor: "#008080",color:"white"}}
                                 >
                                     Insert Subject Materials

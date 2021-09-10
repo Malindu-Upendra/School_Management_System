@@ -109,7 +109,6 @@ export default function Header() {
                     if (res.data.success) {
                         setSelectedGrades(res.data.data.selectedGrades);
                         setSubject(res.data.data.subject)
-                        console.log(selectedGrades)
                     }
                 })
             }
