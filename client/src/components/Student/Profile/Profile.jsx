@@ -5,11 +5,56 @@ import Row from 'react-bootstrap/Row'
 import Form from 'react-bootstrap/Form'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Zoom from '@material-ui/core/Zoom';
+import axios from "axios";
+import decode from "jwt-decode";
 
 class Profile extends Component{
 
-    state ={
-        transition : true
+    state = {
+        transition : true,
+        attendanceDate:'',
+        userID:'',
+        studentDetails:'',
+        decision:false
+    }
+
+    componentDidMount = async () => {
+        if(sessionStorage.token) {
+            await this.setState({userID:decode(sessionStorage.token).username});
+
+            await axios.get(`http://localhost:5000/student/getStudentDetails/${this.state.userID}`).then(res => {
+                    if(res.data.success){
+                        this.setState({studentDetails:res.data.data})
+                    }
+            })
+
+            await axios.get(`http://localhost:5000/student/getAttendance/${this.state.userID}`).then(res => {
+                this.setState({decision:res.data.result})
+            })
+        }
+
+        console.log(this.state.decision)
+    }
+
+    markAttendance = async (event) => {
+        event.preventDefault();
+
+        const date = new Date();
+        await this.setState({attendanceDate:date.getMonth()+ "/" +date.getDate()+ "/" +date.getFullYear()})
+
+        const attendance = {
+            username:this.state.studentDetails.administrationNum,
+            name:this.state.studentDetails.name,
+            attendanceDate:this.state.attendanceDate,
+            grade:this.state.studentDetails.grade
+        }
+
+        axios.post('http://localhost:5000/student/markAttendance',attendance).then(res => {
+            if(res.data.success){
+                alert("successfully attendance marked");
+                window.location.reload(false);
+            }
+        })
     }
 
     render() {
@@ -76,38 +121,44 @@ class Profile extends Component{
                                 <h4 style={{textAlign:"center"}}>Details</h4>
                                 <Form.Group>
                                     <Form.Label>Administration Number</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.administrationNum}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Name</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.name}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.email}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.password}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Grade</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.grade}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Age</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.age}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" />
+                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.birthday}/>
                                 </Form.Group>
                             </Form>
                         </Zoom>
                     </Row>
+                    {this.state.decision ?
+                        <div style={{width:"100%",height:"200px",marginTop:"30px",backgroundColor:'#0086b3'}}>
+                            <h3 style={{padding:'60px',textAlign:'center'}}>Your Attendance Marked For The Day. Thank You!</h3>
+                        </div>
+                        :
                     <Row>
-                        <Button style={{width:"100%",height:"200px",marginTop:"30px"}} variant="outline-success"><h3>Mark Attendance</h3></Button>
+                        <Button style={{width:"100%",height:"200px",marginTop:"30px"}} onClick={this.markAttendance} variant="outline-success"><h3>Mark Attendance</h3></Button>
                     </Row>
+                    }
                 </Container>
             </div>
         )

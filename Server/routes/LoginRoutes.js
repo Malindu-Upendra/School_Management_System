@@ -9,7 +9,6 @@ router.post('/login',async (req, res) => {
     const d = req.body;
     const user = new UserModel(d)
 
-    console.log("from routes 1 " + user);
     const username = user.username;
     const password = user.password;
 
@@ -19,7 +18,6 @@ router.post('/login',async (req, res) => {
         if (!oldUser) return res.send({ message: "User doesn't exist" ,success:false});
 
         if(password !== oldUser.password) {
-            console.log("from routes 3 Invalid credentials")
             return res.send({message: "Invalid Password",success:false});
         }
         const token = jwt.sign({ position: oldUser.role,name:oldUser.name, username: oldUser.username }, secret, { expiresIn: "1h" });

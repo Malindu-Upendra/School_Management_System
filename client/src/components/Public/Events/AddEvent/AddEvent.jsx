@@ -15,6 +15,9 @@ import Fade from '@material-ui/core/Fade';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import axios from "axios";
 import decode from "jwt-decode";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import Loader from "react-loader-spinner";
+import NotListedLocationTwoToneIcon from "@material-ui/icons/NotListedLocationTwoTone";
 
 class AddEvent extends Component{
 
@@ -32,7 +35,8 @@ class AddEvent extends Component{
         minimumDate:'',
         previewImage:'',
         open:false,
-        openModal:false
+        openModal:false,
+        openWait:false
     }
 
     handleChange = (event) => {
@@ -45,6 +49,7 @@ class AddEvent extends Component{
     }
 
     componentDidMount = () => {
+        this.setState({open:false});
 
         if(sessionStorage.token) {
             this.setState({userID:decode(sessionStorage.token).username});
@@ -82,6 +87,7 @@ class AddEvent extends Component{
 
     onSubmit = async (event) => {
         event.preventDefault();
+        this.setState({openWait:true})
 
         let Event = new FormData();
         Event.append("eventName", this.state.eventName);
@@ -97,13 +103,15 @@ class AddEvent extends Component{
 
         await axios.post('http://localhost:5000/student/addEvent',Event).then(async res => {
             if(res.data.success){
-                this.setState({open:true});
-                await setTimeout(() => {
-                    this.setState({open:false});
-                }, 3000);
+                await setTimeout(async () => {
+                this.setState({openWait:false})
+                    await setTimeout(() => {
+                        this.setState({open:true});
+                    }, 500);
+                }, 2000);
                 await setTimeout(() => {
                     window.location = "/displayEvent"
-                }, 2000);
+                }, 7000);
             }
         })
     }
@@ -271,15 +279,42 @@ class AddEvent extends Component{
                     BackdropProps={{
                         timeout: 500,
                     }}
-                    style={{width:'90%',margin:'auto'}}
+                    style={{width:'90%',display: 'flex', alignItems: 'center', justifyContent: 'center',margin:'auto'}}
                 >
                     <Fade in={this.state.openModal}>
                         <div>
-                            <img style={{width:'100%'}} src={this.state.previewImage}/>
+                            <img style={{width:'100%',height:'auto'}} src={this.state.previewImage}/>
                         </div>
                     </Fade>
                 </Modal>
                 </Grid>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={this.state.openWait}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                    style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                >
+                    <Fade in={this.state.openWait}>
+                        <div style={{height:'500px',width:'500px'}}>
+                                    <div style={{textAlign:'center'}}>
+                                        <Loader
+                                            visible={this.state.decision}
+                                            type="Rings"
+                                            color="#80ff80"
+                                            height={350}
+                                            width={350}
+                                            timeout={300000} //3 secs
+                                        />
+                                        <h4 style={{color:'white'}}>Uploading... Please Wait</h4>
+                                    </div>
+                        </div>
+                    </Fade>
+                </Modal>
             </div>
         )
     }
