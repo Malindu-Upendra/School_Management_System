@@ -149,7 +149,6 @@ class StudentRegistrationForm extends Component{
                             fullWidth
                             value={this.state.AdministrationNumber}
                             autoComplete="shipping address-line1"
-                            onChange={this.handleChange}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>

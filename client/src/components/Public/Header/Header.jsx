@@ -280,6 +280,13 @@ export default function Header() {
 
                             </Menu>
                         </Grid>
+                        <Grid item className={classes.menuItem}>
+                            <Button
+                                style={{background:"#006666"}}
+                                className={classes.menuBtn}
+                                onClick={()=> window.location.href="/admin/attendance"}
+                            >Attendance</Button>
+                        </Grid>
                     </Grid>
                     </>
     //--------------------------------------------------------------------------------------------------------------

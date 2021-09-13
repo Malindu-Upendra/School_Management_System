@@ -9,6 +9,7 @@ import StudentGradeTable from "./GradeManagement/StudentGradeTable";
 import EditStudentResult from "./GradeManagement/EditStudentResult";
 import GradeInsertTable from "./GradeManagement/GradeInsertTable";
 import InsertStudentResult from "./GradeManagement/InsertStudentResult";
+import Attendance from "../Teacher/Attendance/Attendance";
 
 class AdminPaths extends Component{
 
@@ -27,6 +28,7 @@ class AdminPaths extends Component{
                     <Route path="/admin/EditStudentResult" component={EditStudentResult} exact/>
                     <Route path="/admin/GradeInsertTable" component={GradeInsertTable} exact/>
                     <Route path="/admin/InsertStudentResult" component={InsertStudentResult} exact/>
+                    <Route path="/admin/attendance" component={Attendance} exact/>
                 </Switch>
             </Router>
 
