@@ -410,11 +410,11 @@ export default function Header() {
                                             onClick={()=> window.location.href="/displayEvent"}
                                     >Events</Button>
                                 </Grid>
-                                <Grid item className={classes.menuItem}>
-                                    <Button className={classes.menuBtn}
-                                            onClick={()=> window.location.href="/displayEvent"}
-                                    >Timetable</Button>
-                                </Grid>
+                                {/*<Grid item className={classes.menuItem}>*/}
+                                {/*    <Button className={classes.menuBtn}*/}
+                                {/*            onClick={()=> window.location.href="/report"}*/}
+                                {/*    >Report</Button>*/}
+                                {/*</Grid>*/}
                             </Grid>
                             </>
     //--------------------------------------------------------------------------------------------------------------
