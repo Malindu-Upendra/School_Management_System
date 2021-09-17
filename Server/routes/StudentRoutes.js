@@ -52,8 +52,6 @@ router.post('/markAttendance',async (req,res) => {
 
     const details = req.body;
 
-    console.log(details)
-
     try{
 
         const attendance = new Attendance(details);
@@ -70,7 +68,7 @@ router.get('/getAttendance/:username',async (req,res) => {
     const username = req.params.username;
 
     const date = new Date();
-    const currentD = date.getMonth()+ "/" +date.getDate()+ "/" +date.getFullYear()
+    const currentD = date.getDate()+ "/" +(date.getMonth()+1)+ "/" +date.getFullYear()
 
     try{
        const result = await Attendance.findOne({username:username,attendanceDate:currentD});
@@ -82,6 +80,34 @@ router.get('/getAttendance/:username',async (req,res) => {
        }
     }catch (e) {
         console.log(e);
+    }
+
+})
+
+router.get('/getDates',async (req,res) => {
+
+    try {
+        const result = await Attendance.aggregate([{
+            $group:{
+                _id: {attendanceDate:"$attendanceDate"}
+            }
+        }])
+
+        res.send({data:result,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getAllDetailsOfAttendance',async (req,res) => {
+
+    try {
+        const result = await Attendance.find()
+
+        res.send({data:result,success:true})
+    }catch (e) {
+        console.log(e)
     }
 
 })

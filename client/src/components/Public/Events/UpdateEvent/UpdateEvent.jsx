@@ -1,21 +1,17 @@
 import React, {Component} from "react";
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import {Input, TextareaAutosize} from "@material-ui/core";
 import {KeyboardDatePicker, MuiPickersUtilsProvider} from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import Button from "@material-ui/core/Button";
-import SaveIcon from "@material-ui/icons/Save";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import axios from "axios";
 import {FormControl, InputGroup} from "react-bootstrap";
-import Row from "react-bootstrap/Row";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import {Alert} from "@material-ui/lab";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -315,7 +311,7 @@ class UpdateEvent extends Component{
             </Grid>
         <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleCloseSnackbar}>
             <Alert onClose={this.handleCloseSnackbar} severity="success">
-                Successfully Uploaded!
+                Successfully Updated!
             </Alert>
         </Snackbar>
             </>

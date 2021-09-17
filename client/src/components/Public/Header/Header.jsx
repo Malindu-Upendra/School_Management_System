@@ -167,7 +167,7 @@ export default function Header() {
     }
 
     const handleLogout = () => {
-        window.location.reload(false);
+        window.location = "/";
         sessionStorage.clear();
         setUser('guest');
     }
@@ -223,7 +223,7 @@ export default function Header() {
                         <>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
-                            <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
+                            <Button className={classes.menuBtn}>Home</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
@@ -282,7 +282,6 @@ export default function Header() {
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button
-                                style={{background:"#006666"}}
                                 className={classes.menuBtn}
                                 onClick={()=> window.location.href="/admin/attendance"}
                             >Attendance</Button>
@@ -299,7 +298,7 @@ export default function Header() {
                         <>
                         <Grid container>
                             <Grid item className={classes.menuItem}>
-                                <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
+                                <Button className={classes.menuBtn}>Home</Button>
                             </Grid>
                             <Grid item className={classes.menuItem}>
                                 <Button className={classes.menuBtn}

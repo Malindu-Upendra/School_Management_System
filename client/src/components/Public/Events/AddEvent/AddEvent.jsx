@@ -15,9 +15,7 @@ import Fade from '@material-ui/core/Fade';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import axios from "axios";
 import decode from "jwt-decode";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import Loader from "react-loader-spinner";
-import NotListedLocationTwoToneIcon from "@material-ui/icons/NotListedLocationTwoTone";
 
 class AddEvent extends Component{
 
