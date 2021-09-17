@@ -40,7 +40,7 @@ class Profile extends Component{
         event.preventDefault();
 
         const date = new Date();
-        await this.setState({attendanceDate:date.getMonth()+ "/" +date.getDate()+ "/" +date.getFullYear()})
+        await this.setState({attendanceDate:date.getDate()+ "/" +(date.getMonth()+1)+ "/" +date.getFullYear()})
 
         const attendance = {
             username:this.state.studentDetails.administrationNum,
@@ -121,31 +121,31 @@ class Profile extends Component{
                                 <h4 style={{textAlign:"center"}}>Details</h4>
                                 <Form.Group>
                                     <Form.Label>Administration Number</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.administrationNum}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.administrationNum}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Name</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.name}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.name}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.email}/>
+                                    <Form.Control type="email" value={this.state.studentDetails.email}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.password}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.password}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Grade</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.grade}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.grade}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Age</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.age}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.age}/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" value={this.state.studentDetails.birthday}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.birthday}/>
                                 </Form.Group>
                             </Form>
                         </Zoom>
