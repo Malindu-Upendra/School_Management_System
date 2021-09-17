@@ -17,6 +17,7 @@ import Attendance from "./Attendance/Attendance";
 import AddEvent from "../Public/Events/AddEvent/AddEvent";
 import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
 
+
 class TeacherPaths extends Component{
     render() {
         return(

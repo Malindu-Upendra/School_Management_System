@@ -25,8 +25,9 @@ class MaterialsUpdateForm extends Component{
         lectureLink: '',
         lessonUpload: '',
         cloudinaryID: '',
-        previewUpload: '',
-        open:false
+        //previewUpload: '',
+        open:false,
+        id:''
     }
 
     componentDidMount = () => {
@@ -41,25 +42,15 @@ class MaterialsUpdateForm extends Component{
                 this.setState({subjectChoose:data.subjectChoose})
                 this.setState({unitName:data.unitName})
                 this.setState({lectureLink:data.lectureLink})
-                this.setState({lessonUpload:data.lessonUpload})
-                this.setState({previewUpload:data.lessonUpload})
+                // this.setState({previewUpload:data.lessonUpload})
                 this.setState({cloudinaryID:data.cloudinaryID})
             }
         })
     }
 
-    handlePreviewUpload = (lessonUpload) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(lessonUpload);
-        reader.onloadend = () => {
-            this.setState({previewUpload:reader.result});
-        }
-    }
-
-    handleLessonUpload = (e) => {
-        this.setState({lessonUpload:e.target.files[0]})
-        this.handlePreviewUpload(e.target.files[0])
-        console.log(e.target.files[0])
+    handleLessonUpload = async (e) => {
+        await this.setState({lessonUpload:e.target.files[0]})
+        console.log(this.state.lessonUpload)
     }
 
     handleClose = (event, reason) => {
@@ -77,6 +68,7 @@ class MaterialsUpdateForm extends Component{
     handleSubmit = async (e) => {
         e.preventDefault();
         let  UpdateSubjectMaterials = new FormData();
+        UpdateSubjectMaterials.append("id", this.state.id);
         UpdateSubjectMaterials.append("term", this.state.term);
         UpdateSubjectMaterials.append("week", this.state.week);
         UpdateSubjectMaterials.append("subjectChoose", this.state.subjectChoose);
@@ -182,9 +174,6 @@ class MaterialsUpdateForm extends Component{
                                 >
                                     <option aria-label="None" value="" />
                                     <option value={"Mathematics"}>Mathematics</option>
-                                    <option value={"Science"}>Science</option>
-                                    <option value={"English"}>English</option>
-                                    <option value={"History"}>History</option>
                                 </Select>
                             </FormControl>
                         </Grid>
@@ -212,8 +201,22 @@ class MaterialsUpdateForm extends Component{
                                 onChange={this.handleChange}
                                 label="Lecture Link"
                                 placeholder="insert the lecture link here"
-                                variant="outlined"
+                                // variant="outlined"
                                 multiline
+                                fullWidth
+                                autoComplete=""
+                            />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="lessonName"
+                                name="cloudinaryID"
+                                value={this.state.cloudinaryID}
+                                label="Uploaded Lesson Materials"
+                                placeholder="lesson name "
+                                // variant="outlined"
                                 fullWidth
                                 autoComplete=""
                             />
@@ -221,7 +224,7 @@ class MaterialsUpdateForm extends Component{
 
                         <Grid item xs={12} sm={4}>
                             <Typography variant="subtitle1" display="block" gutterBottom>
-                                Upload Lesson Materials
+                                Update Lesson Materials
                             </Typography>
                         </Grid>
 
