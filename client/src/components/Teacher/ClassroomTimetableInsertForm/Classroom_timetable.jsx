@@ -145,6 +145,7 @@ export class Classroom_timetable extends Component {
                                 id="time"
                                 name="time"
                                 label="Time"
+                                placeholder="08:30AM"
                                 fullWidth
                                 variant="outlined"
                                 autoComplete="08:00am"
@@ -160,6 +161,7 @@ export class Classroom_timetable extends Component {
                                 name="subjectname"
                                 label="Subject Name"
                                 fullWidth
+                                placeholder="English"
                                 variant="outlined"
                                 autoComplete="Maths"
                                 value={this.state.subjectname}
@@ -172,6 +174,7 @@ export class Classroom_timetable extends Component {
                                 id="subjectcode"
                                 name="subjectcode"
                                 label="Subject Code"
+                                placeholder="Eng06"
                                 fullWidth
                                 variant="outlined"
                                 autoComplete="His06"
@@ -185,6 +188,7 @@ export class Classroom_timetable extends Component {
                                 id="title"
                                 name="title"
                                 label="Title"
+                                placeholder="Mr/Ms/Mrs"
                                 fullWidth
                                 variant="outlined"
                                 autoComplete="Mr"
@@ -217,16 +221,7 @@ export class Classroom_timetable extends Component {
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <Button
-                                size="large"
-                                color="primary"
-                                variant="contained"
-                                style={{marginLeft:"25%",width:"50%"}}
-                                startIcon={
-                                    <AddCircleRoundedIcon />}
-                            >Add More Details</Button>
-                        </Grid>
+
                     </MyGrid1>
                     <Grid item xs={12}>
                         <Button
