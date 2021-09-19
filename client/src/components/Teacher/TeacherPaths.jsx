@@ -13,6 +13,10 @@ import MaterialsUpdateForm from "./SubjectMaterial/MaterialsUpdateForm/Materials
 import UpdateExamTimetable from "./ExamTimetableUpdateForm/UpdateExamTimetable";
 import View_classroom from "./ClassroomTimetableTeacherView/View_classroom";
 import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/ClassroomTimetableStudentView";
+import Attendance from "./Attendance/Attendance";
+import AddEvent from "../Public/Events/AddEvent/AddEvent";
+import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
+
 
 class TeacherPaths extends Component{
     render() {
@@ -20,16 +24,22 @@ class TeacherPaths extends Component{
             <Router>
                 <Switch>
                     {/*paths of Subject Materials function*/}
-                    <Route path="/teacher/subjectMaterial/noticeInsertForm/:subject" component={NoticeInsertForm} exact/>
-                    <Route path="/teacher/subjectMaterial/subjectMaterialInsertForm/:subject" component={SubjectMaterialInsertionForm} exact/>
+                    <Route path="/teacher/subjectMaterial/noticeInsertForm/:subject/:grade" component={NoticeInsertForm} exact/>
+                    <Route path="/teacher/subjectMaterial/subjectMaterialInsertForm/:subject/:grade" component={SubjectMaterialInsertionForm} exact/>
                     <Route path="/teacher/subjectMaterial/MathematicsStudentView/:subject" component={MathematicsSubjectView} exact/>
                     <Route path="/teacher/subjectMaterial/SubjectMaterialTeachersView" component={SubjectMaterialTeachersView} exact/>
                     <Route path="/teacher/subjectMaterial/ScienceSubjectView/:subject" component={ScienceSubjectView} exact/>
                     <Route path="/teacher/subjectMaterial/noticeUpdateForm/:id" component={NoticeUpdateForm} exact/>
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
 
+                    {/*Adding Event for Teacher*/}
+                    <Route path="/addEvent" component={AddEvent} exact/>
+                    <Route path="/displayEvent" component={DisplayEvents} exact/>
+
                     {/*test hussain*/}
-                    <Route path="/teacher/subjectMaterial/:subject" component={SubjectMaterialTeachersView} exact/>
+                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
+                    {/*Attendance Page*/}
+                    <Route path="/teacher/attendace" component={Attendance} exact/>
 
                     {/*path for insert classroomTimetable form*/}
                     <Route path="/teacher/classroom_timetable/TimetableInsertForm" component={Classroom_timetable} exact/>

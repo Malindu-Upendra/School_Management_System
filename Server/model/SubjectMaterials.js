@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 //Data Structure Of SubjectNotice
 const subjectMaterialSchema = Schema({
+
     term: {
         type: String,
         required: true,
@@ -29,6 +30,10 @@ const subjectMaterialSchema = Schema({
     },
     cloudinaryID:{
         type: String
+    },
+    grade:{
+        type:Number,
+        required:true
     },
     role:{
         type: String,

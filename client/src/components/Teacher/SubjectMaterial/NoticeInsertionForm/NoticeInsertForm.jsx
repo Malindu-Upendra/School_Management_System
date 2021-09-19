@@ -16,21 +16,19 @@ function Alert(props) {
 }
 
 class NoticeInsertForm extends Component{
-    // constructor(props) {
-    //     super(props);
-    // }
-
     state = {
         noticeHeading: '',
         noticeDetails: '',
         subjectSelect: '',
         open:false,
-        subject:''
+        grade:0
     }
 
     componentDidMount = () => {
         const subject = this.props.match.params.subject;
-        this.setState({subject:subject})
+        const grade = this.props.match.params.grade;
+        this.setState({subjectSelect:subject})
+        this.setState({grade:grade})
     }
 
     handleChange = (e) => {
@@ -43,7 +41,8 @@ class NoticeInsertForm extends Component{
         const  AddNotices ={
             "noticeHeading": this.state.noticeHeading,
             "noticeDetails": this.state.noticeDetails,
-            "subjectSelect": this.state.subjectSelect
+            "subjectSelect": this.state.subjectSelect,
+            "grade":this.state.grade
         };
         console.log('Data send:', AddNotices)
        await axios.post('http://localhost:5000/teacher/insertSubjectNotices',AddNotices)
@@ -54,7 +53,7 @@ class NoticeInsertForm extends Component{
                         this.setState({open:false});
                     }, 5000);
                     await setTimeout(() => {
-                        window.location.reload(false);
+                        window.location = `/teacher/subjectMaterial/${this.state.subjectSelect}/${this.state.grade}`
                     }, 2000);
                 }
             })

@@ -17,6 +17,10 @@ const subjectNoticeSchema = Schema({
         type: String,
         required: true
     },
+    grade:{
+        type:Number,
+        required:true
+    },
     role:{
         type: String,
         default: "teacher"

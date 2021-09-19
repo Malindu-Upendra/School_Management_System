@@ -10,6 +10,7 @@ import axios from "axios";
 import MuiAlert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import decode from "jwt-decode";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -28,12 +29,15 @@ class SubjectMaterialInsertionForm extends Component{
         lectureLink: '',
         lessonUpload: '',
         open:false,
-        subject:''
+        grade:0,
+        username:''
     }
 
     componentDidMount = () => {
+        const grade = this.props.match.params.grade;
         const subject = this.props.match.params.subject;
-        this.setState({subject:subject})
+        this.setState({grade:grade})
+        this.setState({subjectChoose:subject})
     }
 
     handleChange = (e) => {
@@ -55,6 +59,7 @@ class SubjectMaterialInsertionForm extends Component{
         AddSubjectMaterials.append("unitName", this.state.unitName);
         AddSubjectMaterials.append("lectureLink", this.state.lectureLink);
         AddSubjectMaterials.append("lessonUpload", this.state.lessonUpload);
+        AddSubjectMaterials.append("grade", this.state.grade);
 
         console.log('Data send:', AddSubjectMaterials)
         await axios.post('http://localhost:5000/teacher/insertSubjectMaterials',AddSubjectMaterials)
@@ -65,7 +70,7 @@ class SubjectMaterialInsertionForm extends Component{
                         this.setState({open:false});
                     }, 5000);
                     await setTimeout(() => {
-                        window.location.reload(false);
+                        window.location = `/teacher/subjectMaterial/${this.state.subjectChoose}/${this.state.grade}`
                     }, 2000);
                 }
             })
