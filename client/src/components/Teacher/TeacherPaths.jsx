@@ -16,6 +16,7 @@ import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/Class
 import Attendance from "./Attendance/Attendance";
 import AddEvent from "../Public/Events/AddEvent/AddEvent";
 import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
+//import ReportT from "./SubjectMaterial/ReportGenarationTest/ReportTest";
 
 
 class TeacherPaths extends Component{
@@ -32,12 +33,15 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/noticeUpdateForm/:id" component={NoticeUpdateForm} exact/>
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
 
+                    {/*Proper Working mine (hussain)*/}
+                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
+                    {/*//Report Generation Path*/}
+                    {/*<Route path="/report" component={ReportT} exact/>*/}
+
                     {/*Adding Event for Teacher*/}
                     <Route path="/addEvent" component={AddEvent} exact/>
                     <Route path="/displayEvent" component={DisplayEvents} exact/>
 
-                    {/*test hussain*/}
-                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
                     {/*Attendance Page*/}
                     <Route path="/teacher/attendace" component={Attendance} exact/>
 

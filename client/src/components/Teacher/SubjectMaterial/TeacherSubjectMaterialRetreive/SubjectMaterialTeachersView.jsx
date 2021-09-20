@@ -24,7 +24,8 @@ class SubjectMaterialTeachersView extends Component {
         open:false,
         term:'1',
         subject:'',
-        grade:0
+        grade:0,
+        Search:""
     }
 
     componentDidMount = async () => {
@@ -105,7 +106,20 @@ class SubjectMaterialTeachersView extends Component {
         this.setState({term:term})
     }
 
+    onSearch= (event)=>{
+        this.setState({Search: event.target.value})
+        let dataSearch = this.state.TeacherMaterials.filter(item=>{
+            return Object.keys(item).some(key =>item[key].toString().toLowerCase().includes(this.state.Search.toString().toLowerCase())
+            )
+        });
+        console.warn(dataSearch)
+    }
+    // const [filter,setFilter]= useState('');
+    // const searchText =(event) =>{
+    //     setFilter(event.target.value);
+    // }
     render() {
+
         return(
             <>
                 <div style={{marginLeft:"4%",marginTop:"80px"}}>
@@ -123,7 +137,9 @@ class SubjectMaterialTeachersView extends Component {
                                     <Space direction="vertical" style={{width:"100%"}}>
                                         <Search
                                             placeholder="Search by lesson name"
-                                            // onSearch={this.onSearch}
+                                            // value={filter}
+                                            onSearch={this.onSearch}
+                                            // onchange={searchText.bind(this)}
                                             style={{width:"100%"}}
                                             enterButton
                                         />
