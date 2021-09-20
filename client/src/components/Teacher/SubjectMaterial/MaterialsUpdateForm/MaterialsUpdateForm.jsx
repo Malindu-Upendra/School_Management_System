@@ -158,24 +158,38 @@ class MaterialsUpdateForm extends Component{
                             </FormControl>
                         </Grid>
 
+                        {/*<Grid item xs={12}>*/}
+                        {/*    <FormControl variant="outlined" style={{width:"100%"}}>*/}
+                        {/*        <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>*/}
+                        {/*        <Select*/}
+                        {/*            required*/}
+                        {/*            native*/}
+                        {/*            value={this.state.subjectChoose}*/}
+                        {/*            onChange={this.handleChange}*/}
+                        {/*            label="Select Subject"*/}
+                        {/*            inputProps={{*/}
+                        {/*                name: 'subjectChoose',*/}
+                        {/*                id: 'outlined-age-native-simple',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <option aria-label="None" value="" />*/}
+                        {/*            <option value={"Mathematics"}>Mathematics</option>*/}
+                        {/*        </Select>*/}
+                        {/*    </FormControl>*/}
+                        {/*</Grid>*/}
+
                         <Grid item xs={12}>
-                            <FormControl variant="outlined" style={{width:"100%"}}>
-                                <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>
-                                <Select
-                                    required
-                                    native
-                                    value={this.state.subjectChoose}
-                                    onChange={this.handleChange}
-                                    label="Select Subject"
-                                    inputProps={{
-                                        name: 'subjectChoose',
-                                        id: 'outlined-age-native-simple',
-                                    }}
-                                >
-                                    <option aria-label="None" value="" />
-                                    <option value={"Mathematics"}>Mathematics</option>
-                                </Select>
-                            </FormControl>
+                            <TextField
+                                required
+                                id="lessonName"
+                                name="subjectChoose"
+                                value={this.state.subjectChoose}
+                                // onChange={this.handleChange}
+                                label="Select Subject"
+                                placeholder="Select Subject "
+                                fullWidth
+                                autoComplete=""
+                            />
                         </Grid>
 
                         <Grid item xs={12}>
