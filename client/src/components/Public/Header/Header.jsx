@@ -129,7 +129,6 @@ export default function Header() {
     const handleCloseOther = () => {
         setAnchorEltwo(null)
     }
-
     const handleUserName = (event) => {
         setUsername(event.target.value)
     }
@@ -381,7 +380,6 @@ export default function Header() {
                                                 >
                                                     Add Exam TimeTable
                                                 </MenuItem>
-
                                             </Menu>
                                         </Grid>
                                         <Grid item className={classes.menuItem}>
