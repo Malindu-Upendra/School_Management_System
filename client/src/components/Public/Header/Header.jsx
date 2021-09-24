@@ -280,12 +280,6 @@ export default function Header() {
 
                             </Menu>
                         </Grid>
-                        <Grid item className={classes.menuItem}>
-                            <Button
-                                className={classes.menuBtn}
-                                onClick={()=> window.location.href="/admin/attendance"}
-                            >Attendance</Button>
-                        </Grid>
                     </Grid>
                     </>
     //--------------------------------------------------------------------------------------------------------------
@@ -390,6 +384,12 @@ export default function Header() {
 
                                             </Menu>
                                         </Grid>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button
+                                                className={classes.menuBtn}
+                                                onClick={()=> window.location.href="/teacher/attendance"}
+                                            >Attendance</Button>
+                                        </Grid>
                                     </Grid>
                                 </>
     //--------------------------------------------------------------------------------------------------------------
@@ -402,7 +402,7 @@ export default function Header() {
                             <>
                             <Grid container>
                                 <Grid item className={classes.menuItem}>
-                                    <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
+                                    <Button className={classes.menuBtn}>Home</Button>
                                 </Grid>
                                 <Grid item className={classes.menuItem}>
                                     <Button className={classes.menuBtn}
@@ -450,10 +450,6 @@ export default function Header() {
                             :
                                 user === 'teacher' ?
                                     <>
-                                        <Grid item className={classes.menuItem}>
-                                            <Button className={classes.menuBtn}
-                                                    onClick={()=> window.location.href=""}>Profile</Button>
-                                        </Grid>
                                         <Grid item className={classes.menuItem}>
                                             <Button onClick={handleLogout} className={classes.menuBtn}>
                                                 <i className="fas fa-sign-out-alt"></i>
