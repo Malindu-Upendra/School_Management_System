@@ -6,6 +6,7 @@ const upload = require('../utils/multer.js');
 const router = express.Router();
 const Grade5 = require('../model/Grade_5');
 const Teacher = require('../model/Teacher')
+const Attendance = require('../model/Attendance')
 
 //***********Crud for Subject Notices**********************************
 //----------------------------------insert the subject notices---------------------------------------
@@ -223,5 +224,40 @@ router.get('/getS',async (req,res)=>{
 })
 //---------------------------------- end of mahir's part -------------------------------------------
 
+//attendance retrieve for teacher
+router.get('/getDates',async (req,res) => {
+
+    try {
+        const result = await Attendance.aggregate([
+            {
+                $sort:{
+                    'attendanceDate':-1
+                }
+            },
+                {
+                $group:{
+                    _id: {attendanceDate:"$attendanceDate"}
+                }
+            }
+        ])
+
+        res.send({data:result,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getAllDetailsOfAttendance',async (req,res) => {
+
+    try {
+        const result = await Attendance.find()
+
+        res.send({data:result,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+
+})
 
 module.exports = router;
