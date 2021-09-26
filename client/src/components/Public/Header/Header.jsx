@@ -88,6 +88,7 @@ export default function Header() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEltwo,setAnchorEltwo] = React.useState(null);
+    const [anchorEl3,setAnchorEl3] = React.useState(null)
     const [user,setUser] = React.useState(null);
     const [username,setUsername] = React.useState(null);
     const [password,setPassword] = React.useState(null);
@@ -135,6 +136,14 @@ export default function Header() {
 
     const handlePassword = (event) => {
         setPassword(event.target.value)
+    }
+
+    const handleClickClickGrades = (event) => {
+        setAnchorEl3(event.currentTarget)
+    }
+
+    const handleCloseGrades = () => {
+        setAnchorEl3(null)
     }
 
     const handleSubmit = async (event) => {
@@ -315,7 +324,9 @@ export default function Header() {
                                 <>
                                     <Grid container>
                                         <Grid item className={classes.menuItem}>
-                                            <Button style={{background:"#006666"}} className={classes.menuBtn}>Home</Button>
+                                            <Button className={classes.menuBtn}
+                                                    onClick={()=> window.location.href="/displayEvent"}
+                                            >Events</Button>
                                         </Grid>
                                         <Grid item className={classes.menuItem}>
                                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
@@ -341,6 +352,32 @@ export default function Header() {
                                                 <Divider dark/>
                                                     </div>
                                                     ))}
+                                            </Menu>
+                                        </Grid>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClickClickGrades}>
+                                                Grades
+                                                <KeyboardArrowDownIcon />
+                                            </Button>
+                                            <Menu
+                                                id="simple-menu"
+                                                anchorEl={anchorEl3}
+                                                keepMounted
+                                                open={Boolean(anchorEl3)}
+                                                onClose={handleCloseGrades}
+                                                style={{width:"300px"}}
+                                            >
+                                                {selectedGrades.map((item) => (
+                                                    <div>
+                                                        <MenuItem
+                                                            style={{background:"#006666",color:"white",width:"200px"}}
+                                                            onClick={()=> window.location.href=`/teacher/StudentGradeTable/${item}/${subject}`}
+                                                        >
+                                                            Grade {item}
+                                                        </MenuItem>
+                                                        <Divider dark/>
+                                                    </div>
+                                                ))}
                                             </Menu>
                                         </Grid>
                                         <Grid item className={classes.menuItem}>

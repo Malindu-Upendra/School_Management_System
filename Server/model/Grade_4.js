@@ -19,21 +19,21 @@ const grade4Schema = Schema({
     },
     term1 : {
         Sinhala: { type: String, default:'not inserted' },
-        MatheMatics: { type: String, default:'not inserted' },
+        Mathematics: { type: String, default:'not inserted' },
         Environment: { type: String, default:'not inserted' },
         English: { type: String, default:'not inserted' },
         Buddhism: { type: String, default:'not inserted' }
     },
     term2 : {
         Sinhala: { type: String, default:'not inserted' },
-        MatheMatics: { type: String, default:'not inserted' },
+        Mathematics: { type: String, default:'not inserted' },
         Environment: { type: String, default:'not inserted' },
         English: { type: String, default:'not inserted' },
         Buddhism: { type: String, default:'not inserted' }
     },
     term3 : {
         Sinhala: { type: String, default:'not inserted' },
-        MatheMatics: { type: String, default:'not inserted' },
+        Mathematics: { type: String, default:'not inserted' },
         Environment: { type: String, default:'not inserted' },
         English: { type: String, default:'not inserted' },
         Buddhism: { type: String, default:'not inserted' }

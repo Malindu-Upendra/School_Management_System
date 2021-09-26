@@ -14,20 +14,6 @@ const Grade9 = require('../model/Grade_9')
 
 const router = express.Router();
 
-router.post('/test',async (req,res) => {
-
-    const data = req.body;
-
-    try{
-        const gradeInsert = new Grade1(data);
-        const result = await gradeInsert.save()
-        res.send({data:result,success:true});
-    }catch (e) {
-        console.log(e)
-    }
-
-})
-
 router.post('/addStudent',async (req,res) => {
 
     const body = req.body;
@@ -126,12 +112,50 @@ router.get('/getStudents',async (req,res) => {
 
 })
 
-router.delete('/deleteStudent/:id', (req,res) =>{
+router.delete('/deleteStudent/:id', async (req,res) =>{
 
     const id = req.params.id;
-    console.log(id);
+
     try {
-        Student.findByIdAndDelete({_id:id}).exec();
+        const result = await Student.findOne({_id:id}).select('administrationNum grade')
+
+        await Student.findByIdAndDelete({_id:id}).exec();
+
+        const result2 = await User.findOne({username:result.administrationNum})
+
+        await User.findByIdAndDelete({_id:result2._id}).exec()
+
+        let result3 = null
+
+        if(result.grade === "1"){
+            result3 = await Grade1.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade1.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "2"){
+            result3 = await Grade2.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade2.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "3"){
+            result3 = await Grade3.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade3.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "4"){
+            result3 = await Grade4.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade4.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "5"){
+            result3 = await Grade5.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade5.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "6"){
+            result3 = await Grade6.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade6.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "7"){
+            result3 = await Grade7.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade7.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "8"){
+            result3 = await Grade8.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade8.findByIdAndDelete({_id:result3._id}).exec()
+        }else if(result.grade === "9"){
+            result3 = await Grade9.findOne({ObjectIDOfUser:id}).select('_id');
+            await Grade9.findByIdAndDelete({_id:result3._id}).exec()
+        }
+
         res.send({success: true})
     }catch (e) {
         res.send({success: false})
@@ -163,9 +187,11 @@ router.post('/addTeacher',async (req,res) => {
         const teacher = new Teacher(tbody);
 
         //put result in front of await
-        await teacher.save();
-        // const user = new User({username:result.administrationNum,name:result.name,password:result.password,role:result.role})
-        // await user.save();
+        const result = await teacher.save();
+
+        const user = new User({username:result.empNum,name:result.fullName,password:result.password,role:"teacher"})
+
+        await user.save();
 
         res.send({success:true})
     }catch (e) {

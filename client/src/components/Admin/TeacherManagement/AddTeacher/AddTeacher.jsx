@@ -15,6 +15,7 @@ import { Form } from "react-bootstrap";
 import FormLabel from '@material-ui/core/FormLabel';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
+import MenuItem from '@material-ui/core/MenuItem';
 import axios from "axios";
 
 class AddTeacher extends Component{
@@ -25,6 +26,7 @@ class AddTeacher extends Component{
         fullName:'',
         gender:'',
         email:'',
+        password:'',
         section:'',
         subject:'',
         grade:0,
@@ -43,6 +45,56 @@ class AddTeacher extends Component{
             { value: "11", label: "Grade 11" },
             { value: "12", label: "Grade 12" },
             { value: "13", label: "Grade 13" },
+        ],
+        subjects : [
+            {
+                value: 'Sinhala',
+                label: 'Sinhala',
+            },
+            {
+                value: 'Mathematics',
+                label: 'Mathematics',
+            },
+            {
+                value: 'Science',
+                label: 'Science',
+            },
+            {
+                value: 'HealthStudies',
+                label: 'HealthStudies',
+            },
+            {
+                value: 'English',
+                label: 'English',
+            },
+            {
+                value: 'Buddhism',
+                label: 'Buddhism',
+            },
+            {
+                value: 'History',
+                label: 'History',
+            },
+            {
+                value: 'Geography',
+                label: 'Geography',
+            },
+            {
+                value: 'Civics',
+                label: 'Civics',
+            },
+            {
+                value: 'Art',
+                label: 'Art',
+            },
+            {
+                value: 'Tamil',
+                label: 'Tamil',
+            },
+            {
+                value: 'Islam',
+                label: 'Islam',
+            }
         ]
     }
 
@@ -66,6 +118,10 @@ class AddTeacher extends Component{
         this.setState({checkedB: event.target.checked})
     }
 
+    handleSubject = (event) => {
+        this.setState({subject:event.target.value});
+    }
+
     handleSubmit = (event) => {
         //event.preventDefault();
 
@@ -74,6 +130,7 @@ class AddTeacher extends Component{
             fullName : this.state.fullName,
             gender: this.state.gender,
             email: this.state.email,
+            password: this.state.password,
             sectionalHead: this.state.checkedB,
             section: this.state.section,
             selectedGrades: this.state.selectedOptions,
@@ -145,8 +202,17 @@ class AddTeacher extends Component{
                             label="Email"
                             onChange={this.handleChange}
                             fullWidth
-                            //type="text"
-
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            required
+                            id="address1"
+                            name="password"
+                            label="Password"
+                            onChange={this.handleChange}
+                            fullWidth
+                            type="password"
                         />
                     </Grid>
 
@@ -197,13 +263,22 @@ class AddTeacher extends Component{
 
                     <Grid item xs={12}>
                         <TextField
-                            id="address2"
-                            name="subject"
-                            label="Subject"
-                            type="text"
-                            onChange={this.handleChange}
+                            id="standard-select-currency"
+                            select
+                            label="Select"
+                            value={this.state.subject}
+                            onChange={this.handleSubject}
+                            helperText="Please select the Subject"
+                            variant="standard"
                             fullWidth
-                        />
+                            style={{marginTop:'20px'}}
+                        >
+                            {this.state.subjects.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
                     </Grid>
 
                     <Grid item xs={12}>
