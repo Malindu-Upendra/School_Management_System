@@ -4,9 +4,17 @@ const SubjectMaterial = require('../model/SubjectMaterials')
 const cloudinary = require('../utils/cloudinary.js');
 const upload = require('../utils/multer.js');
 const router = express.Router();
-const Grade5 = require('../model/Grade_5');
 const Teacher = require('../model/Teacher')
 const Attendance = require('../model/Attendance')
+const Grade1 = require('../model/Grade_1');
+const Grade2 = require('../model/Grade_2');
+const Grade3 = require('../model/Grade_3');
+const Grade4 = require('../model/Grade_4');
+const Grade5 = require('../model/Grade_5');
+const Grade6 = require('../model/Grade_6');
+const Grade7 = require('../model/Grade_7');
+const Grade8 = require('../model/Grade_8');
+const Grade9 = require('../model/Grade_9');
 
 //***********Crud for Subject Notices**********************************
 //----------------------------------insert the subject notices---------------------------------------
@@ -198,25 +206,85 @@ router.get('/getSpecificTeacher/:empNum',async (req,res) => {
 //test grade inserting
 //---------------------------------- mahir's part -------------------------------------------
 
+router.get('/test',async (req,res) => {
 
-router.get('/getStudent',async (req,res)=>{
+    const subject = "MatheMatics"
 
-    try{
-        const result = await Grade1.find()
-        res.send({data:result});
+    try {
+        const result = await Grade5.find().select(`term1.${subject}`)
+        res.send({data: result})
     }catch (e) {
         console.log(e)
     }
 
 })
 
-router.get('/getS',async (req,res)=>{
 
-    const subject = 'MatheMatics'
+router.get('/getStudentGrades/:grade/:subject',async (req,res)=>{
+
+    const subject = req.params.subject;
+    const grade = req.params.grade;
+
+    let result = null;
 
     try{
-        const result = await Grade5.find().select(`term1.${subject}`)
-        res.send({data:result});
+
+        if(grade === '1'){
+            result = await Grade1.find()
+        }else if(grade === '2'){
+            result = await Grade2.find()
+        }else if(grade === '3'){
+            result = await Grade3.find()
+        }else if(grade === '4'){
+            result = await Grade4.find()
+        }else if(grade === '5'){
+            result = await Grade5.find()
+        }else if(grade === '6'){
+            result = await Grade6.find()
+        }else if(grade === '7'){
+            result = await Grade7.find()
+        }else if(grade === '8'){
+            result = await Grade8.find()
+        }else if(grade === '9'){
+            result = await Grade9.find()
+        }
+
+        res.send({data:result,success:true});
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getSpecificGrades/:grade/:subject',async (req,res)=>{
+
+    const subject = req.params.subject;
+    const grade = req.params.grade;
+
+    let result = null;
+
+    try{
+        if(grade === '1'){
+            result = await Grade1.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '2'){
+            result = await Grade2.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '3'){
+            result = await Grade3.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '4'){
+            result = await Grade4.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '5'){
+             result = await Grade5.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '6'){
+            result = await Grade6.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '7'){
+            result = await Grade7.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '8'){
+            result = await Grade8.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }else if(grade === '9'){
+            result = await Grade9.find().select(`term1.${subject} term2.${subject} term3.${subject} RegistrationNumber name`)
+        }
+
+        res.send({data:result,success:true});
     }catch (e) {
         console.log(e)
     }
