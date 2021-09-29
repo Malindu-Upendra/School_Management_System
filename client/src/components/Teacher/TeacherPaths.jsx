@@ -16,7 +16,11 @@ import ClassroomTimetableStudentView from "./ClassroomTimetableStudentView/Class
 import Attendance from "./Attendance/Attendance";
 import AddEvent from "../Public/Events/AddEvent/AddEvent";
 import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
-
+import ReportGenerationForAttendance from "./Attendance/ReportGeneration";
+import StudentGradeTable from "./GradeManagement/StudentGradeTable";
+import EditStudentResult from "./GradeManagement/EditStudentResult";
+import GradeInsertTable from "./GradeManagement/GradeInsertTable";
+import InsertStudentResult from "./GradeManagement/InsertStudentResult";
 
 class TeacherPaths extends Component{
     render() {
@@ -32,14 +36,23 @@ class TeacherPaths extends Component{
                     <Route path="/teacher/subjectMaterial/noticeUpdateForm/:id" component={NoticeUpdateForm} exact/>
                     <Route path="/teacher/subjectMaterial/materialUpdateForm/:id" component={MaterialsUpdateForm} exact/>
 
+                    {/*Proper Working mine (hussain)*/}
+                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
+
                     {/*Adding Event for Teacher*/}
                     <Route path="/addEvent" component={AddEvent} exact/>
                     <Route path="/displayEvent" component={DisplayEvents} exact/>
+                    {/*Report generation for Attendance*/}
+                    <Route path="/teacher/attendance/report" component={ReportGenerationForAttendance} exact/>
 
-                    {/*test hussain*/}
-                    <Route path="/teacher/subjectMaterial/:subject/:grade" component={SubjectMaterialTeachersView} exact/>
+                    {/*Grades Management*/}
+                    <Route path="/teacher/StudentGradeTable/:grade/:subject" component={StudentGradeTable} exact/>
+                    <Route path="/teacher/EditStudentResult" component={EditStudentResult} exact/>
+                    <Route path="/teacher/GradeInsertTable" component={GradeInsertTable} exact/>
+                    <Route path="/teacher/InsertStudentResult" component={InsertStudentResult} exact/>
+
                     {/*Attendance Page*/}
-                    <Route path="/teacher/attendace" component={Attendance} exact/>
+                    <Route path="/teacher/attendance" component={Attendance} exact/>
 
                     {/*path for insert classroomTimetable form*/}
                     <Route path="/teacher/classroom_timetable/TimetableInsertForm" component={Classroom_timetable} exact/>

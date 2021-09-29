@@ -84,32 +84,6 @@ router.get('/getAttendance/:username',async (req,res) => {
 
 })
 
-router.get('/getDates',async (req,res) => {
 
-    try {
-        const result = await Attendance.aggregate([{
-            $group:{
-                _id: {attendanceDate:"$attendanceDate"}
-            }
-        }])
-
-        res.send({data:result,success:true})
-    }catch (e) {
-        console.log(e)
-    }
-
-})
-
-router.get('/getAllDetailsOfAttendance',async (req,res) => {
-
-    try {
-        const result = await Attendance.find()
-
-        res.send({data:result,success:true})
-    }catch (e) {
-        console.log(e)
-    }
-
-})
 
 module.exports = router;

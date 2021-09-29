@@ -1,144 +1,136 @@
 import * as React from 'react';
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import {Card, CardActions, Container} from "@material-ui/core";
 import {Component} from "react";
+import { Calendar, Button ,Modal ,Row, Col ,Typography} from 'antd';
+import { FilePdfOutlined } from '@ant-design/icons';
 import axios from "axios";
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import CardContent from "@material-ui/core/CardContent";
+import ReportGenerationForAttendance from "./ReportGeneration";
 
 class Attendance extends Component {
 
     state = {
-        dates: [],
-        attendance:[],
-        testColumns:[],
-        testRows:[],
-        currentDates:[]
+        StudentAttendance:[],
+        currentDates:[],
+        open:false,
+        dateForModal:'',
+        attendanceForModal:[],
+        numberOfMonth:0,
+        month:'',
+        visible:false
     }
 
+
     componentDidMount = async () => {
-        const m = new Date()
 
-        console.log(m.getDay())
-
-        const dt = new Date();
-
-        const month = dt.getMonth() + 1;
-        const year = dt.getFullYear();
-
-        const daysInMonth = new Date(year, month, 0).getDate();
-
-        let sdate = 4;
-        let sday = ""
-
-        for(let i =1;i<=daysInMonth;i++){
-
-            switch (sdate) {
-                case 1 : sday = "Sunday"
-                break;
-                case 2 : sday = "Monday"
-                    break;
-                case 3 : sday = "Tuesday"
-                    break;
-                case 4 : sday = "Wednesday"
-                    break;
-                case 5 : sday = "Thursday"
-                    break;
-                case 6 : sday = "Friday"
-                    break;
-                case 7 : sday = "Saturday"
-                    break;
-                default:sday = null
-                    break;
-            }
-
-            ++sdate;
-
-            this.state.currentDates.push({date:i+"/"+month+"/"+year,day:sday})
-
-            if(sdate === 8){
-                sdate = 1
-            }
-        }
-
-        await axios.get('http://localhost:5000/student/getDates').then(async res => {
+        await axios.get('http://localhost:5000/teacher/getAllDetailsOfAttendance').then(async res => {
             if(res.data.success){
-                await this.setState({dates:res.data.data});
-                await this.state.dates.map(async (c,index) => {
-                    await this.state.testColumns.push({field:"day"+(index+1),headerName: c._id.attendanceDate,width: 210})
-                    // this.state.attendance.map(async (s) => {
-                    //     await this.state.testRows.
-                    //     // if(c._id.attendanceDate === s.attendanceDate){
-                    //     //     console.log(s)
-                    //     // }
-                    // })
+                await this.setState({StudentAttendance:res.data.data});
+            }
+        })
+
+    }
+
+    handleDate = async (d) => {
+        const date = new Date(d);
+        const currentDate = date.getDate()+ "/" +(date.getMonth()+1)+ "/" +date.getFullYear()
+
+        await this.state.StudentAttendance.map(async (item) => {
+
+                    if (currentDate === item.attendanceDate){
+                       await this.state.attendanceForModal.push({name: item.name, registrationNum: item.username})
+                }
                 })
-            }
-        })
 
-        await axios.get('http://localhost:5000/student/getAllDetailsOfAttendance').then(async res => {
-            if(res.data.success){
-                await this.setState({attendance:res.data.data});
-            }
-        })
+        Modal.info({
+            title: `Attendance on ${currentDate}`,
+            content: (
+                <div>
+                    {this.state.attendanceForModal.length === 0 ?
+                        <Typography>
+                            <Typography.Title style={{textAlign:"center"}}>
+                            No Attendance Marked For The Day
+                            </Typography.Title>
+                        </Typography>
+                        :
+                        <>
+                    <Row>
+                        <Col span={12}>Name</Col>
+                        <Col span={12}>Registration Number</Col>
+                    </Row>
+                    <Row>
+                        {this.state.attendanceForModal.map((item,index) => (
+                            <>
+                        <Col span={16}>{(index + 1) + " " + item.name}</Col>
+                        <Col span={8}>{item.registrationNum}</Col>
+                            </>
+                            ))}
+                    </Row>
+                        </>
+                    }
+                </div>
+            ),
+            onOk:() => {this.emptyArray()},
+        });
+    }
 
-        // await this.state.dates.map(async (c,index) => {
-        //     await this.state.testColumns.push({field:"day"+(index+1),headerName: c._id.attendanceDate,width: 210})
-        //     // this.state.attendance.map(async (s) => {
-        //     //     await this.state.testRows.
-        //     //     // if(c._id.attendanceDate === s.attendanceDate){
-        //     //     //     console.log(s)
-        //     //     // }
-        //     // })
-        // })
+    emptyArray = () => {
+        this.setState({attendanceForModal:[]})
+    }
 
-        // this.state.testColumns.map((test) => {
-        //     console.log(test.headerName)
-        // })
+    dateCellRender = (value) => {
+        return (
+            <ul className="events">
+                <Button onClick={this.handleDate.bind(this,value)}>View</Button>
+            </ul>
+        );
+    }
 
-        // console.log(this.state.testColumns)
-        // console.log(columns)
+    getMonthData = (value) => {
+        if (value.month() === 8) {
+            return 1394;
+        }
+    }
 
+    monthCellRender = (value) => {
+        const num = this.getMonthData(value);
+        return num ? (
+            <div className="notes-month">
+                <section>{num}</section>
+            </div>
+        ) : null;
+    }
+
+    handleReportGeneration = () => {
+        this.setState({visible:true})
+    }
+
+    handleCancel = () => {
+        this.setState({visible:false})
     }
 
     render() {
         return (
-            <>
-                <Container>
-                    <div style={{width: "100%", marginTop: "50px"}}>
-                        <Typography variant="h6" style={{textAlign: "center"}} gutterBottom>
-                            Student's Attendance
-                        </Typography>
-                        <Button style={{width: "100%"}} variant="contained" color="primary">
-                            Generate Report
-                        </Button>
-                    </div>
-                </Container >
-                <Container maxWidth="lg" style={{marginTop:"20px",width:"90%"}}>
-                <Grid container spacing={1} style={{margin:"auto"}}>
-                    {this.state.currentDates.map((item) => (
-                    <Grid item style={{width:"14%"}}>
-                        <Card>
-                            <CardContent>
-                                <Typography variant="h5" color="text.secondary" gutterBottom>
-                                   {item.date}
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }}>
-                                    {item.day}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Learn More</Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
-                    ))}
-                </Grid>
-                </Container>
-            </>
-        );
+            <div style={{width:'100%'}}>
+            <div style={{width:"85%",margin:"auto",marginTop:"50px",boxShadow: "0 1rem 2rem rgba(0,0,0,0.2)"}}>
+                <Typography.Title style={{textAlign:"center"}}>
+                    Attendance
+                </Typography.Title>
+                <Button type="primary" style={{width:"100%",fontSize:"15px"}} onClick={this.handleReportGeneration} icon={<FilePdfOutlined />} size="large">
+                    Generate The Report
+                </Button>
+                <Calendar dateCellRender={this.dateCellRender} monthCellRender={this.monthCellRender}/>
+            </div>
+        <Modal
+            visible={this.state.visible}
+            title="Report Generation"
+            onCancel={this.handleCancel}
+            footer={null}
+            width={'100%'}
+            style={{top:10}}
+        >
+            <ReportGenerationForAttendance/>
+        </Modal>
+        </div>
+        )
     }
 }
 

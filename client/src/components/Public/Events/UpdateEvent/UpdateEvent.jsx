@@ -15,6 +15,10 @@ import {FormControl, InputGroup} from "react-bootstrap";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import {Alert} from "@material-ui/lab";
 import Snackbar from "@material-ui/core/Snackbar";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import Loader from "react-loader-spinner";
+import Modal from "@material-ui/core/Modal";
 
 class UpdateEvent extends Component{
 
@@ -32,7 +36,8 @@ class UpdateEvent extends Component{
         previewImage:'',
         minimumDate:'',
         cloudinaryID:'',
-        open:false
+        open:false,
+        openWait:false
     }
 
     componentDidMount = async () => {
@@ -103,8 +108,11 @@ class UpdateEvent extends Component{
         Event.append("phoneNumber", this.state.phoneNumber);
         Event.append("cloudinaryID", this.state.cloudinaryID);
 
+        this.setState({openWait:true});
+
         await axios.put('http://localhost:5000/public/updateSpecificEvent',Event).then(async res => {
             if(res.data.success){
+                this.setState({openWait:false});
                 this.setState({open:true});
                 await setTimeout(() => {
                     this.setState({open:false});
@@ -314,6 +322,33 @@ class UpdateEvent extends Component{
                 Successfully Updated!
             </Alert>
         </Snackbar>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={this.state.openWait}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                    style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                >
+                    <Fade in={this.state.openWait}>
+                        <div style={{height:'500px',width:'500px'}}>
+                            <div style={{textAlign:'center'}}>
+                                <Loader
+                                    visible={this.state.decision}
+                                    type="Rings"
+                                    color="#80ff80"
+                                    height={350}
+                                    width={350}
+                                    timeout={300000} //3 secs
+                                />
+                                <h4 style={{color:'white'}}>Updating... Please Wait</h4>
+                            </div>
+                        </div>
+                    </Fade>
+                </Modal>
             </>
         )
     }

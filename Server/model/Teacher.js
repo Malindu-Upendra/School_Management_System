@@ -19,6 +19,9 @@ const teacherSchema = Schema({
     email:{
         type: String,
     },
+    password: {
+        type: String
+    },
     sectionalHead:{
         type: Boolean,
     },

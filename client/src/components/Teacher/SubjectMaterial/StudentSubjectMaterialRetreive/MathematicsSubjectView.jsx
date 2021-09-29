@@ -138,6 +138,7 @@ class MathematicsSubjectView extends Component{
                               width:"97%",
                               border:"black",
                               borderStyle:"solid",
+                              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                               borderWidth:"1px"}}>
                         {this.state.Materials.map((Materials) => (
                             <>
@@ -147,6 +148,7 @@ class MathematicsSubjectView extends Component{
                             type="inner"
                             title={Materials.week}
                             style={{border:"#527a7a",
+                                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 borderStyle:"solid",
                                 borderWidth:"1px"}}
                         >
