@@ -140,7 +140,7 @@ class NoticeInsertForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
-                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subject}`}
+                                onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectSelect}/${this.state.grade}`}
                             >
                                 cancel
                             </Button>

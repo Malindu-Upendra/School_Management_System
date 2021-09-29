@@ -85,7 +85,7 @@ class MaterialsUpdateForm extends Component{
                         this.setState({open:false});
                     }, 5000);
                     await setTimeout(() => {
-                        window.location.reload(false);
+                        window.location = `/teacher/subjectMaterial/${this.state.subjectChoose}`;
                     }, 2000);
                 }
             })
