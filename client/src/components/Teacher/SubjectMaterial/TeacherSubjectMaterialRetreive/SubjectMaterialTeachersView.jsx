@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Col, Row} from "react-bootstrap";
 import Typography from "@material-ui/core/Typography";
-import {Card, Divider, Space} from "antd";
+import {Card, Divider, Modal, Space} from "antd";
 import Search from "antd/es/input/Search";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -12,6 +12,9 @@ import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import axios from "axios";
 import MuiAlert from "@material-ui/lab/Alert";
 import Snackbar from "@material-ui/core/Snackbar";
+import { FilePdfOutlined } from '@ant-design/icons';
+import {Document, Page, PDFViewer, StyleSheet, Text, View} from "@react-pdf/renderer";
+
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -25,7 +28,9 @@ class SubjectMaterialTeachersView extends Component {
         term:'1',
         subject:'',
         grade:0,
-        Search:""
+        Search:"",
+        visible:false,
+        terms:[{id:'1'},{id:'2'},{id:'3'}]
     }
 
     componentDidMount = async () => {
@@ -106,6 +111,15 @@ class SubjectMaterialTeachersView extends Component {
         this.setState({term:term})
     }
 
+    handleReportGeneration = () => {
+        this.setState({visible:true})
+    }
+
+    handleCancel = () => {
+        this.setState({visible:false})
+    }
+
+
     onSearch= (event)=>{
         this.setState({Search: event.target.value})
         let dataSearch = this.state.TeacherMaterials.filter(item=>{
@@ -148,7 +162,8 @@ class SubjectMaterialTeachersView extends Component {
                             </Col>
                         </Row>
                     </div>
-                    {/***********************************Notice box ********************************/}<>
+                    {/***********************************Notice box ********************************/}
+                    <>
                     {this.state.TeacherNotices.map((Notices) => (
                         <>
                         {/*{Notices.subjectSelect==='Mathematics' ?*/}
@@ -234,6 +249,7 @@ class SubjectMaterialTeachersView extends Component {
                             width:"90%",
                             marginLeft:"4%",
                             border:"black",
+                            // boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                             borderStyle:"solid",
                             borderWidth:"1px"}}
                         className="site-button-ghost-wrapper">
@@ -272,9 +288,30 @@ class SubjectMaterialTeachersView extends Component {
                     <Card title={"Term 0"+this.state.term}
                           style={{marginTop:"40px",
                               width:"97%",
-                              border:"black",
-                              borderStyle:"solid",
-                              borderWidth:"1px"}}>
+                              // border:"black",
+                              // borderStyle:"solid",
+                              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                              // borderWidth:"1px"
+                          }}>
+                        {/**-------------------Report Generation Button --------------------------**/}
+
+                        <Button
+                            variant="contained"
+                            color="default"
+                            // className={classes.button}
+                            startIcon={<FilePdfOutlined/>}
+                            // onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}/${this.state.grade}`}
+                            onClick={this.handleReportGeneration}
+                            style={{marginLeft:"75%",
+                                width:"25%",
+                                marginBottom:"1%",
+                                backgroundColor: " #204060",
+                                color:"white"}}
+                        >
+                            Report Generation
+                        </Button>
+
+                        {/***-----------------------------------------------------------------------------***/}
 
                         {this.state.TeacherMaterials.map((Materials) => (
                             <>
@@ -283,15 +320,18 @@ class SubjectMaterialTeachersView extends Component {
                         <Card
                             type="inner"
                             title=   {Materials.week}
-                            style={{border:"#527a7a",
-                                borderStyle:"solid",
-                                borderWidth:"1px",
+                            style={{
+                                // border:"#527a7a",
+                                // borderStyle:"solid",
+                                // borderWidth:"1px",
+                                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                                 padding:"2%"
                             }}
                         >
                             <Divider
                                 orientation="left"
-                                style={{fontSize:"22px"}}
+                                style={{fontSize:"22px",
+                                }}
                             >
                                 {Materials.unitName}
                             </Divider>
@@ -347,15 +387,107 @@ class SubjectMaterialTeachersView extends Component {
                             </>
                         ))}
                     </Card>
+
+                    {/**************************** Successful message Alert ************************************************/}
                     <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
                         <Alert onClose={this.handleClose} severity="success">
                             Successfully Deleted!
                         </Alert>
                     </Snackbar>
+
+                    {/**********************Report Generation Part**********************************************************/}
+                    <Modal
+                        visible={this.state.visible}
+                        title="Report Generation For Subject Material"
+                        onCancel={this.handleCancel}
+                        footer={null}
+                        width={'100%'}
+                        style={{top:10}}
+                    >
+                        <PDFViewer style={{width:'100%',height:'700px'}}>
+                            <Document>
+                                {this.state.terms.map((item) => (
+                                    <>
+                                        <Page  style={styles.page}>
+                                            <View style={styles.section}>
+                                                <Text style={styles.text2}>{"Subject: " + this.state.subject}</Text>
+                                            </View>
+                                            <View style={styles.section}>
+                                                <Text style={styles.text3}>Term 0{item.id}</Text>
+                                            </View>
+                                            <View style={styles.header}>
+                                                <Text style={styles.text1}>Week </Text>
+                                                <Text style={styles.text1}>Lecture Topic</Text>
+                                            </View>
+                                            {this.state.TeacherMaterials.map((Materials) => (
+                                                <>
+                                                    {Materials.term===item.id &&
+                                                    <View style={styles.section}>
+                                                        <Text style={styles.text}>{Materials.week}</Text>
+                                                        <Text style={styles.text}>{Materials.unitName}</Text>
+                                                    </View> }
+                                                </>
+                                            ))}
+                                        </Page>
+                                    </>
+                                ))}
+                            </Document>
+                        </PDFViewer>
+                    </Modal>
+
+             {/***************************************** End Report Part ****************************************************/}
                 </div>
             </>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    page: {
+        flexDirection: 'column',
+        marginTop:'20px',
+        width:'100%',
+        height:'60%'
+    },
+    section: {
+        marginBottom:'10px',
+        flexDirection: 'row',
+        width:'90%',
+        marginLeft:'auto',
+        marginRight:'auto'
+    },
+    header: {
+        marginBottom:'10px',
+        flexDirection: 'row',
+        width:'90%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        backgroundColor:'#006666',
+    },
+    text: {
+        textAlign:'center',
+        width:'100%',
+        fontSize:'13px'
+    },
+    text1: {
+        textAlign:'center',
+        width:'100%',
+        fontSize:'17px',
+        color:'whitesmoke'
+    },
+    text2: {
+        textAlign:'center',
+        width:'100%',
+        fontSize:'20px',
+        color: '#334d4d'
+    },
+    text3: {
+        textAlign:'center',
+        width:'100%',
+        fontSize:'18px',
+        color: '#006666'
+    }
+});
+
 
 export default SubjectMaterialTeachersView;

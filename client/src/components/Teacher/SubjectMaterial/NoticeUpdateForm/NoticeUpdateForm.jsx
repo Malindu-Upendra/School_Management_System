@@ -69,6 +69,7 @@ class NoticeUpdateForm extends Component{
                     }, 5000);
                     await setTimeout(() => {
                         window.location = `/teacher/subjectMaterial/${this.state.subjectSelect}`
+                        // window.location = `/teacher/subjectMaterial/${this.state.subjectSelect}/${this.state.grade}`
                     }, 2000);
                 }
             })
@@ -162,6 +163,7 @@ class NoticeUpdateForm extends Component{
                                 color="primary"
                                 style={{marginTop:"15px",width:"100%"}}
                                 startIcon={<ArrowBackIcon />}
+                                // onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectSelect}/${this.state.grade}`}
                                 onClick={()=> window.location.href=`/teacher/subjectMaterial/${this.state.subjectSelect}`}
                             >
                                 Cancel
