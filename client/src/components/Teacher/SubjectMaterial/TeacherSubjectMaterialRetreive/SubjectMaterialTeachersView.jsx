@@ -30,7 +30,9 @@ class SubjectMaterialTeachersView extends Component {
         grade:0,
         Search:"",
         visible:false,
-        terms:[{id:'1'},{id:'2'},{id:'3'}]
+        terms:[{id:'1'},{id:'2'},{id:'3'}],
+        search:false,
+        searchedMaterial:''
     }
 
     componentDidMount = async () => {
@@ -51,7 +53,6 @@ class SubjectMaterialTeachersView extends Component {
             this.setState({TeacherMaterials: TeacherMaterials});
         }).catch(err => err.message)
 
-        console.log(this.state.TeacherMaterials);
     }
 
     handleNoticeDelete = (id) => {
@@ -120,18 +121,19 @@ class SubjectMaterialTeachersView extends Component {
     }
 
 
-    onSearch= (event)=>{
-        this.setState({Search: event.target.value})
-        let dataSearch = this.state.TeacherMaterials.filter(item=>{
-            return Object.keys(item).some(key =>item[key].toString().toLowerCase().includes(this.state.Search.toString().toLowerCase())
-            )
-        });
-        console.warn(dataSearch)
+    onSearch = (value) => {
+        if(value !== '') {
+            this.state.TeacherMaterials.map((item) => {
+                if (value === item.unitName) {
+                    this.setState({searchedMaterial: item})
+                    this.setState({search: true})
+                } else {
+                    console.log("item not found " + value + " " + item.unitName)
+                }
+            })
+        }
     }
-    // const [filter,setFilter]= useState('');
-    // const searchText =(event) =>{
-    //     setFilter(event.target.value);
-    // }
+
     render() {
 
         return(
@@ -283,7 +285,111 @@ class SubjectMaterialTeachersView extends Component {
                             Term 03
                         </Button>
                     </div>
+                    {/***************************************************************************************/}
+                    {/**************************************search function**********************************/}
+                    {/***************************************************************************************/}
+                    {this.state.search ?
 
+                        <div>
+                            <Card title={"Term 0"+this.state.term}
+                                  style={{marginTop:"40px",
+                                      width:"97%",
+                                      // border:"black",
+                                      // borderStyle:"solid",
+                                      boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                                      // borderWidth:"1px"
+                                  }}>
+                                {/**-------------------Report Generation Button --------------------------**/}
+
+                                <Button
+                                    variant="contained"
+                                    color="default"
+                                    // className={classes.button}
+                                    startIcon={<FilePdfOutlined/>}
+                                    // onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}/${this.state.grade}`}
+                                    onClick={this.handleReportGeneration}
+                                    style={{marginLeft:"75%",
+                                        width:"25%",
+                                        marginBottom:"1%",
+                                        backgroundColor: " #204060",
+                                        color:"white"}}
+                                >
+                                    Report Generation
+                                </Button>
+
+                                {/***-----------------------------------------------------------------------------***/}
+
+                                            <Card
+                                                type="inner"
+                                                title={this.state.searchedMaterial.week}
+                                                style={{
+                                                    // border:"#527a7a",
+                                                    // borderStyle:"solid",
+                                                    // borderWidth:"1px",
+                                                    boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                                                    padding:"2%"
+                                                }}
+                                            >
+                                                <Divider
+                                                    orientation="left"
+                                                    style={{fontSize:"22px",
+                                                    }}
+                                                >
+                                                    {this.state.searchedMaterial.unitName}
+                                                </Divider>
+
+                                                <a href={this.state.searchedMaterial.lessonUpload}>
+                                                    <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                                        <PictureAsPdfIcon/>
+                                                        {" "}
+                                                        {this.state.searchedMaterial.cloudinaryID}
+                                                    </Typography>
+                                                </a>
+
+                                                <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                                    <PlayCircleOutlineIcon/>
+                                                    {" "}
+                                                    {this.state.searchedMaterial.lectureLink}
+                                                </Typography>
+                                                <p></p>
+                                                <Row>
+                                                    <Col>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            // className={classes.button}
+                                                            startIcon={<DeleteIcon />}
+                                                            onClick={this.handleMaterialDelete.bind(this,this.state.searchedMaterial._id)}
+                                                            style={{marginLeft:"60%",width:"30%"}}
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                    </Col>
+
+                                                    <Col>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="default"
+                                                            // className={classes.button}
+                                                            onClick={this.handleEditMaterials.bind(this,this.state.searchedMaterial._id)}
+                                                            startIcon={<BorderColorIcon />}
+                                                            style={{marginLeft:"10px",width:"30%",backgroundColor: "#282c34",color:"white"}}
+                                                        >
+                                                            Edit
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Card>
+                                            <Divider style={{border:"#527a7a",
+                                                borderStyle:"solid",
+                                                borderWidth:"1px"}}
+                                            />
+                            </Card>
+                        </div>
+
+                        :
+
+                     <div>
                     {/***********************************Display Materials ********************************/}
                     <Card title={"Term 0"+this.state.term}
                           style={{marginTop:"40px",
@@ -387,6 +493,11 @@ class SubjectMaterialTeachersView extends Component {
                             </>
                         ))}
                     </Card>
+                    </div>}
+
+                    {/***************************************************************************************/}
+                    {/**************************************search function**********************************/}
+                    {/***************************************************************************************/}
 
                     {/**************************** Successful message Alert ************************************************/}
                     <Snackbar open={this.state.open} autoHideDuration={5000} onClose={this.handleClose}>
