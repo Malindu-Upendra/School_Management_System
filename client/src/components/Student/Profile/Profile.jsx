@@ -7,6 +7,9 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Zoom from '@material-ui/core/Zoom';
 import axios from "axios";
 import decode from "jwt-decode";
+import ReportGenerationForAttendance from "../ReportGeneration/ReportGeneration";
+import {Modal} from "antd";
+import * as React from "react";
 
 class Profile extends Component{
 
@@ -17,7 +20,8 @@ class Profile extends Component{
         studentDetails:'',
         decision:false,
         grades:[],
-        term:'1'
+        term:'1',
+        visible:false
     }
 
     componentDidMount = async () => {
@@ -67,6 +71,14 @@ class Profile extends Component{
         this.setState({term:term})
     }
 
+    handleReport = () => {
+        this.setState({visible:true})
+    }
+
+    handleCancel = () => {
+        this.setState({visible:false})
+    }
+
     render() {
         return(
             <div style={{marginTop:"40px"}}>
@@ -77,6 +89,7 @@ class Profile extends Component{
                             <div className="container" style={{height:"623px",overflowY:"scroll",border:'1px solid'}}>
                                 <Form >
                                     <h4 style={{textAlign:"center"}}>Grades</h4>
+                                    <Button style={{width:'100%',marginBottom:'5px'}} onClick={this.handleReport} variant="info">Download Report Card</Button>
                                     <ButtonGroup aria-label="Basic example" style={{width:"100%"}}>
                                         <Button variant="secondary" onClick={this.handleTerm.bind(this,'1')}>Term 01</Button>
                                         <Button variant="secondary" onClick={this.handleTerm.bind(this,'2')}>Term 02</Button>
@@ -141,6 +154,16 @@ class Profile extends Component{
                     </Row>
                     }
                 </Container>
+                <Modal
+                    visible={this.state.visible}
+                    title="Report Generation"
+                    onCancel={this.handleCancel}
+                    footer={null}
+                    width={'100%'}
+                    style={{top:10}}
+                >
+                    <ReportGenerationForAttendance/>
+                </Modal>
             </div>
         )
     }

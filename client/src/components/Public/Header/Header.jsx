@@ -231,7 +231,7 @@ export default function Header() {
                         <>
                     <Grid container>
                         <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn}>Home</Button>
+                            <Button className={classes.menuBtn} onClick={()=> window.location.href="/"}>Home</Button>
                         </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
@@ -300,7 +300,7 @@ export default function Header() {
                         <>
                         <Grid container>
                             <Grid item className={classes.menuItem}>
-                                <Button className={classes.menuBtn}>Home</Button>
+                                <Button className={classes.menuBtn} onClick={()=> window.location.href="/"}>Home</Button>
                             </Grid>
                             <Grid item className={classes.menuItem}>
                                 <Button className={classes.menuBtn}
@@ -323,6 +323,9 @@ export default function Header() {
     //--------------------------------------------------------------------------------------------------------------
                                 <>
                                     <Grid container>
+                                        <Grid item className={classes.menuItem}>
+                                            <Button className={classes.menuBtn} onClick={()=> window.location.href="/"}>Home</Button>
+                                        </Grid>
                                         <Grid item className={classes.menuItem}>
                                             <Button className={classes.menuBtn}
                                                     onClick={()=> window.location.href="/displayEvent"}
@@ -437,18 +440,13 @@ export default function Header() {
                             <>
                             <Grid container>
                                 <Grid item className={classes.menuItem}>
-                                    <Button className={classes.menuBtn}>Home</Button>
+                                    <Button className={classes.menuBtn} onClick={()=> window.location.href="/"}>Home</Button>
                                 </Grid>
                                 <Grid item className={classes.menuItem}>
                                     <Button className={classes.menuBtn}
                                             onClick={()=> window.location.href="/displayEvent"}
                                     >Events</Button>
                                 </Grid>
-                                {/*<Grid item className={classes.menuItem}>*/}
-                                {/*    <Button className={classes.menuBtn}*/}
-                                {/*            onClick={()=> window.location.href="/report"}*/}
-                                {/*    >Report</Button>*/}
-                                {/*</Grid>*/}
                             </Grid>
                             </>
     //--------------------------------------------------------------------------------------------------------------
