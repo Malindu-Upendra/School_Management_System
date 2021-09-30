@@ -206,50 +206,533 @@ router.get('/getSpecificTeacher/:empNum',async (req,res) => {
 //test grade inserting
 //---------------------------------- mahir's part -------------------------------------------
 
-router.get('/test',async (req,res) => {
-
-    const subject = "MatheMatics"
+router.put('/updateGrades/term1',async (req,res) =>{
 
     try {
-        const result = await Grade5.find().select(`term1.${subject}`)
-        res.send({data: result})
+        const body = req.body;
+
+        if(body.grade === '1'){
+            if(body.subject === 'Sinhala'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }
+        }else if(body.grade === '2'){
+            if(body.subject === 'Sinhala'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }
+        }else if(body.grade === "3"){
+            if(body.subject === "Sinhala"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === "Mathematics"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }
+        }else if(body.grade === '4'){
+            if(body.subject === 'Sinhala'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }
+        }else if(body.grade === '5'){
+            if(body.subject === 'Sinhala'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }
+        }else if(body.grade === '6'){
+            if(body.subject === 'Sinhala'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Islam': body.result}})
+            }
+        }else if(body.grade === '7'){
+            if(body.subject === 'Sinhala'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Islam': body.result}})
+            }
+        }else if(body.grade === '8'){
+            if(body.subject === 'Sinhala'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Islam': body.result}})
+            }
+        }else if(body.grade === '9'){
+            if(body.subject === 'Sinhala'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term1.Islam': body.result}})
+            }
+        }
+
+        res.send({success: true});
+    }catch (e) {
+        console.log(e)
+    }
+})
+
+router.put('/updateGrades/term2',async (req,res)=>{
+
+    try {
+        const body = req.body;
+
+        if(body.grade === '1'){
+            if(body.subject === 'Sinhala'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }
+        }else if(body.grade === '2'){
+            if(body.subject === 'Sinhala'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }
+        }else if(body.grade === "3"){
+            if(body.subject === "Sinhala"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === "Mathematics"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }
+        }else if(body.grade === '4'){
+            if(body.subject === 'Sinhala'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }
+        }else if(body.grade === '5'){
+            if(body.subject === 'Sinhala'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }
+        }else if(body.grade === '6'){
+            if(body.subject === 'Sinhala'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Islam': body.result}})
+            }
+        }else if(body.grade === '7'){
+            if(body.subject === 'Sinhala'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Islam': body.result}})
+            }
+        }else if(body.grade === '8'){
+            if(body.subject === 'Sinhala'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Islam': body.result}})
+            }
+        }else if(body.grade === '9'){
+            if(body.subject === 'Sinhala'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term2.Islam': body.result}})
+            }
+        }
+
+        res.send({success: true});
     }catch (e) {
         console.log(e)
     }
 
 })
 
+router.put('/updateGrades/term3',async (req,res)=>{
 
-router.get('/getStudentGrades/:grade/:subject',async (req,res)=>{
+    try {
+        const body = req.body;
 
-    const subject = req.params.subject;
-    const grade = req.params.grade;
-
-    let result = null;
-
-    try{
-
-        if(grade === '1'){
-            result = await Grade1.find()
-        }else if(grade === '2'){
-            result = await Grade2.find()
-        }else if(grade === '3'){
-            result = await Grade3.find()
-        }else if(grade === '4'){
-            result = await Grade4.find()
-        }else if(grade === '5'){
-            result = await Grade5.find()
-        }else if(grade === '6'){
-            result = await Grade6.find()
-        }else if(grade === '7'){
-            result = await Grade7.find()
-        }else if(grade === '8'){
-            result = await Grade8.find()
-        }else if(grade === '9'){
-            result = await Grade9.find()
+        if(body.grade === '1'){
+            if(body.subject === 'Sinhala'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade1.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }
+        }else if(body.grade === '2'){
+            if(body.subject === 'Sinhala'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade2.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }
+        }else if(body.grade === "3"){
+            if(body.subject === "Sinhala"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === "Mathematics"){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade3.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }
+        }else if(body.grade === '4'){
+            if(body.subject === 'Sinhala'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade4.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }
+        }else if(body.grade === '5'){
+            if(body.subject === 'Sinhala'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Environment'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Environment': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else if(body.subject === 'Buddhism'){
+                await Grade5.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }
+        }else if(body.grade === '6'){
+            if(body.subject === 'Sinhala'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade6.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Islam': body.result}})
+            }
+        }else if(body.grade === '7'){
+            if(body.subject === 'Sinhala'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade7.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Islam': body.result}})
+            }
+        }else if(body.grade === '8'){
+            if(body.subject === 'Sinhala'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade8.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Islam': body.result}})
+            }
+        }else if(body.grade === '9'){
+            if(body.subject === 'Sinhala'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Sinhala': body.result}})
+            }else  if(body.subject === 'Mathematics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Mathematics': body.result}})
+            }else if(body.subject === 'Science'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Science': body.result}})
+            }else if(body.subject === 'HealthStudies'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.HealthStudies': body.result}})
+            }else if(body.subject === 'English'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.English': body.result}})
+            }else  if(body.subject === 'Buddhism'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Buddhism': body.result}})
+            }else if(body.subject === 'History'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.History': body.result}})
+            }else if(body.subject === 'Geography'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Geography': body.result}})
+            }else if(body.subject === 'Civics'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Civics': body.result}})
+            }else  if(body.subject === 'Art'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Art': body.result}})
+            }else if(body.subject === 'Tamil'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Tamil': body.result}})
+            }else if(body.subject === 'Islam'){
+                await Grade9.findByIdAndUpdate({_id: body._id}, {$set: {'term3.Islam': body.result}})
+            }
         }
 
-        res.send({data:result,success:true});
+        res.send({success: true});
     }catch (e) {
         console.log(e)
     }

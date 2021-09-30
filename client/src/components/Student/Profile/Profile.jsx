@@ -15,7 +15,9 @@ class Profile extends Component{
         attendanceDate:'',
         userID:'',
         studentDetails:'',
-        decision:false
+        decision:false,
+        grades:[],
+        term:'1'
     }
 
     componentDidMount = async () => {
@@ -31,9 +33,13 @@ class Profile extends Component{
             await axios.get(`http://localhost:5000/student/getAttendance/${this.state.userID}`).then(res => {
                 this.setState({decision:res.data.result})
             })
+
+            await axios.get(`http://localhost:5000/student/getGrades/${this.state.userID}/${this.state.studentDetails.grade}`).then(res => {
+                if(res.data.success) {
+                    this.setState({grades: res.data.data})
+                }})
         }
 
-        console.log(this.state.decision)
     }
 
     markAttendance = async (event) => {
@@ -57,6 +63,10 @@ class Profile extends Component{
         })
     }
 
+    handleTerm = (term) => {
+        this.setState({term:term})
+    }
+
     render() {
         return(
             <div style={{marginTop:"40px"}}>
@@ -68,51 +78,22 @@ class Profile extends Component{
                                 <Form >
                                     <h4 style={{textAlign:"center"}}>Grades</h4>
                                     <ButtonGroup aria-label="Basic example" style={{width:"100%"}}>
-                                        <Button variant="secondary">Term 01</Button>
-                                        <Button variant="secondary">Term 02</Button>
-                                        <Button variant="secondary">Term 03</Button>
+                                        <Button variant="secondary" onClick={this.handleTerm.bind(this,'1')}>Term 01</Button>
+                                        <Button variant="secondary" onClick={this.handleTerm.bind(this,'2')}>Term 02</Button>
+                                        <Button variant="secondary" onClick={this.handleTerm.bind(this,'3')}>Term 03</Button>
                                     </ButtonGroup>
-                                    <Form.Group>
-                                        <Form.Label>subject 01</Form.Label>
-                                        <Form.Control type="email" />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 01</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 02</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 03</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 04</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 05</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 06</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 07</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 08</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>subject 09</Form.Label>
-                                        <Form.Control type="email"/>
-                                    </Form.Group>
+                                    {this.state.grades.map((item) => (
+                                        item.grades.map((grade) => (
+                                            <>
+                                            {this.state.term === item.term &&
+                                                <Form.Group>
+                                                    <Form.Label>{grade.subject}</Form.Label>
+                                                    <Form.Control type="text" value={grade.result} readOnly />
+                                                </Form.Group>
+                                            }
+                                            </>
+                                        ))
+                                    ))}
                                 </Form>
                             </div>
                         </Zoom>
@@ -121,31 +102,31 @@ class Profile extends Component{
                                 <h4 style={{textAlign:"center"}}>Details</h4>
                                 <Form.Group>
                                     <Form.Label>Administration Number</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.administrationNum}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.administrationNum} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Name</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.name}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.name} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" value={this.state.studentDetails.email}/>
+                                    <Form.Control type="email" value={this.state.studentDetails.email} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.password}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.password} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Grade</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.grade}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.grade} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Age</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.age}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.age} readOnly />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="text" value={this.state.studentDetails.birthday}/>
+                                    <Form.Control type="text" value={this.state.studentDetails.birthday} readOnly />
                                 </Form.Group>
                             </Form>
                         </Zoom>
