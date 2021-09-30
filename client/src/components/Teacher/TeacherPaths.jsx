@@ -18,12 +18,15 @@ import AddEvent from "../Public/Events/AddEvent/AddEvent";
 import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
 import ReportGenerationForAttendance from "./Attendance/ReportGeneration";
 import StudentGradeTable from "./GradeManagement/StudentGradeTable";
+import HomePage from "../Public/Home/HomePage";
 
 class TeacherPaths extends Component{
     render() {
         return(
             <Router>
                 <Switch>
+
+                    <Route path="/" component={HomePage} exact/>
                     {/*paths of Subject Materials function*/}
                     <Route path="/teacher/subjectMaterial/noticeInsertForm/:subject/:grade" component={NoticeInsertForm} exact/>
                     <Route path="/teacher/subjectMaterial/subjectMaterialInsertForm/:subject/:grade" component={SubjectMaterialInsertionForm} exact/>
