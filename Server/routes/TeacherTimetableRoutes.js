@@ -1,5 +1,6 @@
 const express = require('express');
 const Classroom = require('../model/ClassroomTimetable.js')
+const Exam = require('../model/ExamTimetable.js')
 
 const router = express.Router();
 
@@ -70,6 +71,22 @@ router.put('/updateClassroomTimetable',async(req,res)=>{
         console.log(e)
     }
 
+})
+
+//**************************Crud for Exam Time table******************************************************
+
+router.post('/insertexam',async (req,res)=>{
+    const et  = req.body;
+
+    const etable = new Exam (et);
+
+    try{
+        await etable.save();
+        res.send({success:'true',message:'Inserted'})
+
+    }catch (e){
+        console.log(e);
+    }
 })
 
 module.exports= router;
