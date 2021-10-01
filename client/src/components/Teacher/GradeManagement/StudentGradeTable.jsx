@@ -31,7 +31,9 @@ class StudentGradeTable extends Component {
         open: false,
         student: '',
         result: '',
-        updated: false
+        updated: false,
+        isModalVisible:false,
+        selectedStudent:''
     }
 
     componentDidMount = async () => {
@@ -44,9 +46,22 @@ class StudentGradeTable extends Component {
         await axios.get(`http://localhost:5000/teacher/getSpecificGrades/${grade}/${subject}`).then(res => {
             if (res.data.success) {
                 this.setState({data: res.data.data})
+                
             }
         })
 
+    }
+
+    onSearch =  (item) => {
+         this.state.data.forEach(async(detail, index) => {
+
+            if (item === detail.RegistrationNumber) {
+                await this.setState({student:detail});
+                this.setState({open:true});
+
+            }
+        })
+        console.log(this.state.student);
     }
 
     termHandler = async (term) => {
