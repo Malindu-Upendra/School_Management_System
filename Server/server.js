@@ -24,6 +24,7 @@ catch((err) => console.log(err.message));
 app.use('/admin',admin);
 app.use('/teacher',teacher);
 app.use('/classroom',timetable);
+app.use('/exam',timetable)
 app.use('/student',student);
 app.use('/public',public);
 app.use('/login',user);

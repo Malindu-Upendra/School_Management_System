@@ -1,7 +1,9 @@
-import {Component} from "react";
+import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table,Container} from "react-bootstrap";
 import axios from "axios";
+import {Space} from "antd";
+import Search from "antd/es/input/Search";
 
 export class ClassroomTimetableStudentView extends Component {
     state = {
@@ -28,6 +30,19 @@ export class ClassroomTimetableStudentView extends Component {
 
 
             <Container style={{width: "100%", border: "2px solid", marginTop: "10%", padding: "1%",borderColor:"lightBlue"}}>
+
+                <div style={{width:"40%",marginLeft:"60%",marginBottom:"2%"}}>
+                    <Space direction="vertical" style={{width:"100%"}}>
+                        <Search
+                            placeholder="Search by Grade"
+                            // value={filter}
+                            onSearch={this.onSearch}
+                            // onchange={searchText.bind(this)}
+                            style={{width:"100%"}}
+                            enterButton
+                        />
+                    </Space>
+                </div>
 
                 <Table bordered responsive style={{border: "1px solid",borderColor:"lightBlue"}}>
                     <thead>
