@@ -341,6 +341,7 @@ class SubjectMaterialTeachersView extends Component {
                     {/**************************************search function**********************************/}
                     {/***************************************************************************************/}
 
+
                     {this.state.empty ?
                         <>
                         </>
@@ -356,6 +357,128 @@ class SubjectMaterialTeachersView extends Component {
                                           // borderWidth:"1px"
                                       }}>
                                     {/**-------------------Report Generation Button --------------------------**/}
+
+
+                                                <a href={this.state.searchedMaterial.lessonUpload}>
+                                                    <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                                        <PictureAsPdfIcon/>
+                                                        {" "}
+                                                        {this.state.searchedMaterial.cloudinaryID}
+                                                    </Typography>
+                                                </a>
+
+                                                <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                                    <PlayCircleOutlineIcon/>
+                                                    {" "}
+                                                    {this.state.searchedMaterial.lectureLink}
+                                                </Typography>
+                                                <p/>
+                                                <Row>
+                                                    <Col>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            // className={classes.button}
+                                                            startIcon={<DeleteIcon />}
+                                                            onClick={this.handleMaterialDelete.bind(this,this.state.searchedMaterial._id)}
+                                                            style={{marginLeft:"60%",width:"30%"}}
+                                                        >
+                                                            Delete
+                                                        </Button>
+                                                    </Col>
+
+                                                    <Col>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="default"
+                                                            // className={classes.button}
+                                                            onClick={this.handleEditMaterials.bind(this,this.state.searchedMaterial._id)}
+                                                            startIcon={<BorderColorIcon />}
+                                                            style={{marginLeft:"10px",width:"30%",backgroundColor: "#282c34",color:"white"}}
+                                                        >
+                                                            Edit
+                                                        </Button>
+                                                    </Col>
+                                                </Row>
+                                            </Card>
+                                            <Divider style={{border:"#527a7a",
+                                                borderStyle:"solid",
+                                                borderWidth:"1px"}}
+                                            />
+                            </Card>
+                        </div>
+
+                        :
+
+                     <div>
+                    {/***********************************Display Materials ********************************/}
+                    <Card title={"Term 0"+this.state.term}
+                          style={{marginTop:"40px",
+                              width:"97%",
+                              // border:"black",
+                              // borderStyle:"solid",
+                              boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                              // borderWidth:"1px"
+                          }}>
+                        {/**-------------------Report Generation Button --------------------------**/}
+
+                        <Button
+                            variant="contained"
+                            color="default"
+                            // className={classes.button}
+                            startIcon={<FilePdfOutlined/>}
+                            // onClick={()=> window.location.href=`/teacher/subjectMaterial/subjectMaterialInsertForm/${this.state.subject}/${this.state.grade}`}
+                            onClick={this.handleReportGeneration}
+                            style={{marginLeft:"75%",
+                                width:"25%",
+                                marginBottom:"1%",
+                                backgroundColor: " #204060",
+                                color:"white"}}
+                        >
+                            Report Generation
+                        </Button>
+
+                        {/***-----------------------------------------------------------------------------***/}
+
+                        {this.state.TeacherMaterials.map((Materials) => (
+                            <>
+                            {Materials.term===this.state.term &&
+                                <>
+                        <Card
+                            type="inner"
+                            title=   {Materials.week}
+                            style={{
+                                // border:"#527a7a",
+                                // borderStyle:"solid",
+                                // borderWidth:"1px",
+                                boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                                padding:"2%"
+                            }}
+                        >
+                            <Divider
+                                orientation="left"
+                                style={{fontSize:"22px",
+                                }}
+                            >
+                                {Materials.unitName}
+                            </Divider>
+
+                            <a href={Materials.lessonUpload}>
+                            <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                <PictureAsPdfIcon/>
+                                {" "}
+                                {Materials.cloudinaryID}
+                            </Typography>
+                            </a>
+
+                            <Typography variant="subtitle1" style={{textAlign:"left"}} gutterBottom>
+                                <PlayCircleOutlineIcon/>
+                                {" "}
+                                {Materials.lectureLink}
+                            </Typography>
+                            <p/>
+                            <Row>
+                                <Col>
 
                                     <Button
                                         variant="contained"
