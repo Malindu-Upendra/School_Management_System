@@ -38,4 +38,38 @@ router.delete('/deletecTable/:id',async(req,res)=>{
 
 })
 
+//**************************Update for Classroom Time table******************************************************
+
+router.get('/getSpecificRow/:id',async (req,res)=>{
+    try{
+        const timetables = await Classroom.findOne({_id:req.params.id});
+        res.json({timetables,success:true});
+    }catch (e){
+        console.log(e)
+    }
+
+})
+
+router.put('/updateClassroomTimetable',async(req,res)=>{
+    const body = req.body;
+
+    try{
+        await Classroom.findByIdAndUpdate({_id:body.id},{
+            grade:body.grade,
+            day:body.day,
+            subjectname:body.subjectname,
+            title:body.title,
+            time:body.time,
+            subjectcode:body.subjectcode,
+            teacher:body.teacher,
+            link:body.link
+
+        })
+        res.send({success:true,message:"Successfully Updated"})
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
 module.exports= router;
