@@ -50,16 +50,17 @@ const MyGrid2 = styled(Grid)({
 
 export class Exam_timetable extends Component {
 
-       state = {
-            grade:"",
-            term: "",
-            date: "",
-            examtype: "",
-           starttime: "",
-           endtime: "",
-            subjectcode: "",
-            subjectname: ""
-        }
+
+    state = {
+        grade:"",
+        term: "",
+        date: "",
+        examtype: "",
+        starttime: "",
+        endtime: "",
+        subjectcode: "",
+        subjectname: ""
+    }
 
 
 
@@ -83,7 +84,7 @@ export class Exam_timetable extends Component {
             endtime: this.state.endtime,
             subjectname: this.state.subjectname,
             subjectcode: this.state.subjectcode
-    }
+        }
         console.log(etimetable)
 
         axios.post('http://localhost:5000/exam/insertexam',etimetable).
@@ -110,32 +111,32 @@ export class Exam_timetable extends Component {
 
                     <MyGrid item xs={12} sm={6}>
                         <MyText style={{border:"1px solid", borderColor:"blue"}}
-                            required
-                            id="grade"
-                            name="grade"
-                            label="Grade"
-                            fullWidth
-                            placeholder="eg: Grade 07"
-                            variant="filled"
-                            autoComplete="Grade"
-                            InputLabelProps={{shrink:true}}
-                            value={this.state.grade}
-                            onChange={this.handleChange}
+                                required
+                                id="grade"
+                                name="grade"
+                                label="Grade"
+                                fullWidth
+                                placeholder="eg: Grade 07"
+                                variant="filled"
+                                autoComplete="Grade"
+                                InputLabelProps={{shrink:true}}
+                                value={this.state.grade}
+                                onChange={this.handleChange}
                         />
                     </MyGrid>
                     <MyGrid item xs={12} sm={6}>
                         <MyForm variant="filled">
                             <InputLabel id="demo-simple-select-outlined-label" >Term* </InputLabel>
                             <MySelect style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                label="Term"
-                                name="term"
-                                fullWidth
-                                InputLabelProps={{shrink:true}}
-                                value={this.state.term}
-                                onChange={this.handleChange}
+                                      required
+                                      labelId="demo-simple-select-outlined-label"
+                                      id="demo-simple-select-outlined"
+                                      label="Term"
+                                      name="term"
+                                      fullWidth
+                                      InputLabelProps={{shrink:true}}
+                                      value={this.state.term}
+                                      onChange={this.handleChange}
                             >
                                 <MenuItem value="">
                                     <em>None</em>
@@ -152,17 +153,17 @@ export class Exam_timetable extends Component {
 
                         <Grid item xs={12} sm={6}>
                             <TextField style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                id="date"
-                                name="date"
-                                label="Date"
-                                type="date"
-                                fullWidth
-                                variant="filled"
-                                InputLabelProps={{shrink:true}}
-                                autoComplete="date"
-                                value={this.state.date}
-                                onChange={this.handleChange}
+                                       required
+                                       id="date"
+                                       name="date"
+                                       label="Date"
+                                       type="date"
+                                       fullWidth
+                                       variant="filled"
+                                       InputLabelProps={{shrink:true}}
+                                       autoComplete="date"
+                                       value={this.state.date}
+                                       onChange={this.handleChange}
                             />
                         </Grid>
 
@@ -195,76 +196,66 @@ export class Exam_timetable extends Component {
 
                         <Grid item xs={12} sm={6}>
                             <TextField style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                id="stime"
-                                name="starttime"
-                                label="Starting Time"
+                                       required
+                                       id="stime"
+                                       name="starttime"
+                                       label="Starting Time"
                                        type="time"
-                                fullWidth
-                                variant="filled"
-                                autoComplete="stime"
-                                InputLabelProps={{shrink:true}}
-                                value={this.state.starttime}
-                                onChange={this.handleChange}
+                                       fullWidth
+                                       variant="filled"
+                                       autoComplete="stime"
+                                       InputLabelProps={{shrink:true}}
+                                       value={this.state.starttime}
+                                       onChange={this.handleChange}
 
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                id="etime"
-                                name="endtime"
-                                label="Ending Time"
-                                fullWidth
+                                       required
+                                       id="etime"
+                                       name="endtime"
+                                       label="Ending Time"
+                                       fullWidth
                                        type="time"
-                                variant="filled"
-                                autoComplete="Ending Time"
-                                InputLabelProps={{shrink:true}}
-                                value={this.state.endtime}
-                                onChange={this.handleChange}
+                                       variant="filled"
+                                       autoComplete="Ending Time"
+                                       InputLabelProps={{shrink:true}}
+                                       value={this.state.endtime}
+                                       onChange={this.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                id="subjectcode"
-                                name="subjectcode"
-                                label="Subject Code"
-                                fullWidth
-                                variant="filled"
-                                autoComplete="His06"
-                                placeholder="eg:math06"
-                                InputLabelProps={{shrink:true}}
-                                value={this.state.subjectcode}
-                                onChange={this.handleChange}
+                                       required
+                                       id="subjectcode"
+                                       name="subjectcode"
+                                       label="Subject Code"
+                                       fullWidth
+                                       variant="filled"
+                                       autoComplete="His06"
+                                       placeholder="eg:math06"
+                                       InputLabelProps={{shrink:true}}
+                                       value={this.state.subjectcode}
+                                       onChange={this.handleChange}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField style={{border:"1px solid", borderColor:"blue"}}
-                                required
-                                id="subjectname"
-                                name="subjectname"
-                                label="Subject Name"
-                                fullWidth
-                                placeholder="Maths"
-                                variant="filled"
-                                autoComplete="Maths"
-                                InputLabelProps={{shrink:true}}
-                                value={this.state.subjectname}
-                                onChange={this.handleChange}
+                                       required
+                                       id="subjectname"
+                                       name="subjectname"
+                                       label="Subject Name"
+                                       fullWidth
+                                       placeholder="Maths"
+                                       variant="filled"
+                                       autoComplete="Maths"
+                                       InputLabelProps={{shrink:true}}
+                                       value={this.state.subjectname}
+                                       onChange={this.handleChange}
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <Button
-                                size="large"
-                                color="primary"
-                                variant="contained"
-                                style={{marginLeft:"25%",width:"50%"}}
-                                startIcon={
-                                    <AddCircleRoundedIcon />}
-                            >Add More Details</Button>
-                        </Grid>
                     </MyGrid1>
                     <Grid item xs={12}>
                         <Button
