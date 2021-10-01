@@ -32,17 +32,22 @@ export class View_classroom extends Component {
         })
     })
 
+    handleUpdate = (id) => {
+        console.log(id)
+        window.location = `/teacher/classroom_timetable/TimetableUpdateForm/${id}`
+    }
+
     render() {
 
         return (
 
 
 
-            <Container style={{width: "100%", border: "2px solid", marginTop: "10%", padding: "1%"}}>
+            <Container style={{width: "100%", border: "2px solid", marginTop: "3%", padding: "1%"}}>
 
                 <Table bordered responsive style={{border: "1px solid",}}>
                     <thead>
-                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "blue"}}>
+                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "#282c34",color:"white"}}>
 
                         <td colSpan={7}>Grade-06</td>
 
@@ -60,104 +65,33 @@ export class View_classroom extends Component {
                     </thead>
                     {this.state.classroom.map(ttable => (
                         <>
-                            {ttable.grade==='Grade-06'?
-                            <>
-                    <tbody>
+                            <tbody>
 
-                        <tr style={{textAlign: "center"}}>
+                            <tr style={{textAlign: "center"}}>
 
-                            <td>{ttable.day}</td>
-                            <td>{ttable.time}</td>
-                            <td><Table>
-                                <tr>
-                                    <td>{ttable.title}</td>
-                                    <td>{ttable.teacher}</td>
-                                </tr>
-                            </Table></td>
-                            <td>{ttable.subjectname}</td>
-                            <td>{ttable.subjectcode}</td>
-                            <td>{ttable.link}</td>
+                                <td>{ttable.day}</td>
+                                <td>{ttable.time}</td>
+                                <td><Table>
+                                    <tr>
+                                        <td>{ttable.title}</td>
+                                        <td>{ttable.teacher}</td>
+                                    </tr>
+                                </Table></td>
+                                <td>{ttable.subjectname}</td>
+                                <td>{ttable.subjectcode}</td>
+                                <td>{ttable.link}</td>
 
-                        </tr>
+                            </tr>
 
-                    </tbody>
-                                <tr>
-                                    <td colSpan={7}> <Grid item xs={12} style={{marginBottom:"2%"}}>
-                                        <Button
-                                            size="large"
-                                            color="primary"
-                                            variant="contained"
-                                            style={{marginLeft: "16%", width: "25%"}}
-                                            onClick={this.handleSubmit}
-                                            startIcon={
-                                                <UpdateIcon/>}
-                                        >Update Timetable Row</Button>
-
-                                        <Button
-                                            size="large"
-                                            color="secondary"
-                                            variant="contained"
-                                            style={{marginLeft: "15%", width: "25%"}}
-                                            onClick={this.deleteClassroom.bind(this,ttable._id)}
-                                            startIcon={
-                                                <DeleteIcon/>}
-                                        >Delete Timetable Row</Button>
-                                    </Grid>
-                                    </td>
-                                </tr>
-                            </>
-                            :null }
-                        </>
-                    ))}
-                </Table>
-
-
-
-                <Table bordered responsive style={{border: "1px solid",}}>
-                    <thead>
-                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "blue"}}>
-                        <td colSpan={7}>Grade-07</td>
-                    </tr>
-
-                    <tr style={{textAlign: "center"}}>
-
-                        <th>Day</th>
-                        <th>Time</th>
-                        <th>Teacher Incharge</th>
-                        <th>Subject</th>
-                        <th>Subject Code</th>
-                        <th>link</th>
-                    </tr>
-                    </thead>
-                    {this.state.classroom.map(ttable => (
-                        <>{ttable.grade==='Grade-07'?
-                            <>
-                                <tbody>
-
-                                <tr style={{textAlign: "center"}}>
-
-                                    <td>{ttable.day}</td>
-                                    <td>{ttable.time}</td>
-                                    <td><Table>
-                                        <tr>
-                                            <td>{ttable.title}</td>
-                                            <td>{ttable.teacher}</td>
-                                        </tr>
-                                    </Table></td>
-                                    <td>{ttable.subjectname}</td>
-                                    <td>{ttable.subjectcode}</td>
-                                    <td>{ttable.link}</td>
-                                </tr>
-
-                                </tbody>
-                                <tr>
-                                    <td colSpan={7}> <Grid item xs={12} style={{marginBottom:"2%"}}>
+                            </tbody>
+                            <tr>
+                                <td colSpan={7}> <Grid item xs={12} style={{marginBottom:"2%"}}>
                                     <Button
                                         size="large"
                                         color="primary"
                                         variant="contained"
                                         style={{marginLeft: "16%", width: "25%"}}
-                                        onClick={this.handleSubmit}
+                                        onClick={this.handleUpdate.bind(this,ttable._id)}
                                         startIcon={
                                             <UpdateIcon/>}
                                     >Update Timetable Row</Button>
@@ -172,160 +106,12 @@ export class View_classroom extends Component {
                                             <DeleteIcon/>}
                                     >Delete Timetable Row</Button>
                                 </Grid>
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
 
-                            </>
-                            :null }
-                        </>
-                    ))}
-
-
-                </Table>
-
-                <Table bordered responsive style={{border: "1px solid",}}>
-                    <thead>
-                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "blue"}}>
-
-                        <td colSpan={7}>Grade-08</td>
-
-                    </tr>
-
-                    <tr style={{textAlign: "center"}}>
-
-                        <th>Day</th>
-                        <th>Time</th>
-                        <th>Teacher Incharge</th>
-                        <th>Subject</th>
-                        <th>Subject Code</th>
-                        <th>link</th>
-                    </tr>
-                    </thead>
-                    {this.state.classroom.map(ttable => (
-                        <>{ttable.grade==='Grade-08'?
-                            <>
-                                <tbody>
-
-                                <tr style={{textAlign: "center"}}>
-
-                                    <td>{ttable.day}</td>
-                                    <td>{ttable.time}</td>
-                                    <td><Table>
-                                        <tr>
-                                            <td>{ttable.title}</td>
-                                            <td>{ttable.teacher}</td>
-                                        </tr>
-                                    </Table></td>
-                                    <td>{ttable.subjectname}</td>
-                                    <td>{ttable.subjectcode}</td>
-                                    <td>{ttable.link}</td>
-
-                                </tr>
-
-                                </tbody>
-
-                                <tr>
-                                    <td colSpan={7}> <Grid item xs={12} style={{marginBottom:"2%"}}>
-                                        <Button
-                                            size="large"
-                                            color="primary"
-                                            variant="contained"
-                                            style={{marginLeft: "16%", width: "25%"}}
-                                            onClick={this.handleSubmit}
-                                            startIcon={
-                                                <UpdateIcon/>}
-                                        >Update Timetable Row</Button>
-
-                                        <Button
-                                            size="large"
-                                            color="secondary"
-                                            variant="contained"
-                                            style={{marginLeft: "15%", width: "25%"}}
-                                            onClick={this.deleteClassroom.bind(this,ttable._id)}
-                                            startIcon={
-                                                <DeleteIcon/>}
-                                        >Delete Timetable Row</Button>
-                                    </Grid>
-                                    </td>
-                                </tr>
-                            </>
-                            :null }
                         </>
                     ))}
                 </Table>
-
-
-
-                <Table bordered responsive style={{border: "1px solid",}}>
-                    <thead>
-                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "blue"}}>
-
-                        <td colSpan={7}>Grade-09</td>
-
-                    </tr>
-
-                    <tr style={{textAlign: "center"}}>
-
-                        <th>Day</th>
-                        <th>Time</th>
-                        <th>Teacher Incharge</th>
-                        <th>Subject</th>
-                        <th>Subject Code</th>
-                        <th>link</th>
-                    </tr>
-                    </thead>
-                    {this.state.classroom.map(ttable => (
-                        <>{ttable.grade==='Grade-09'?
-                            <>
-                                <tbody>
-
-                                <tr style={{textAlign: "center"}}>
-
-                                    <td>{ttable.day}</td>
-                                    <td>{ttable.time}</td>
-                                    <td><Table>
-                                        <tr>
-                                            <td>{ttable.title}</td>
-                                            <td>{ttable.teacher}</td>
-                                        </tr>
-                                    </Table></td>
-                                    <td>{ttable.subjectname}</td>
-                                    <td>{ttable.subjectcode}</td>
-                                    <td>{ttable.link}</td>
-
-                                </tr>
-
-                                </tbody>
-                                <tr>
-                                    <td colSpan={7}> <Grid item xs={12} style={{marginBottom:"2%"}}>
-                                        <Button
-                                            size="large"
-                                            color="primary"
-                                            variant="contained"
-                                            style={{marginLeft: "16%", width: "25%"}}
-                                            onClick={this.handleSubmit}
-                                            startIcon={
-                                                <UpdateIcon/>}
-                                        >Update Timetable Row</Button>
-
-                                        <Button
-                                            size="large"
-                                            color="secondary"
-                                            variant="contained"
-                                            style={{marginLeft: "15%", width: "25%"}}
-                                            onClick={this.deleteClassroom.bind(this,ttable._id)}
-                                            startIcon={
-                                                <DeleteIcon/>}
-                                        >Delete Timetable Row</Button>
-                                    </Grid>
-                                    </td>
-                                </tr>
-                            </>
-                            :null }
-                        </>
-                    ))}
-                </Table>
-
             </Container>
 
 

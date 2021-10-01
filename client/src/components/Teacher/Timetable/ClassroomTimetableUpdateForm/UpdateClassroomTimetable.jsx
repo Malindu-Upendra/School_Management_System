@@ -48,14 +48,35 @@ const MyGrid2 = styled(Grid)({
 export class UpdateClassroomTimetable extends Component {
 
     state = {
+        id:'',
         grade:"",
-        day: "",
-        subjectname: "",
-        title: "",
-        time: "",
-        subjectcode: "",
-        teacher: "",
-        link: ""
+        day:"",
+        subjectname:"",
+        title:"",
+        time:"",
+        subjectcode:"",
+        teacher:"",
+        link:""
+    }
+
+    componentDidMount = () =>{
+        const id = this.props.match.params.id;
+        console.log(id);
+
+        axios.get(`http://localhost:5000/classroom/getSpecificRow/${id}`).then(res=>{
+            if(res.data.success){
+                const table = res.data.timetables;
+                this.setState({id:table._id})
+                this.setState({grade: table.grade})
+                this.setState({day: table.day})
+                this.setState({subjectname: table.subjectname})
+                this.setState({title: table.title})
+                this.setState({time: table.time})
+                this.setState({subjectcode: table.subjectcode})
+                this.setState({teacher: table.teacher})
+                this.setState({link: table.link})
+            }
+        })
     }
 
     handleChange = (event) => {
@@ -66,6 +87,7 @@ export class UpdateClassroomTimetable extends Component {
     handleSubmit = (event) =>{
         event.preventDefault();
         let timetable = {
+            id:this.state.id,
             grade: this.state.grade,
             day: this.state.day,
             subjectname: this.state.subjectname,
@@ -74,16 +96,17 @@ export class UpdateClassroomTimetable extends Component {
             subjectcode: this.state.subjectcode,
             teacher: this.state.teacher,
             link: this.state.link
-        }
-        console.log(timetable)
+        };
+        console.log('data send',timetable)
 
-        axios.post('http://localhost:5000',timetable).
+        axios.put(`http://localhost:5000/classroom/updateClassroomTimetable`,timetable).
         then(response => {
             if (response.data.success) {
                 alert(response.data.message)
-                window.location = '/'
+
+                window.location = '/teacher/classroom_timetable/TeachersView'
             } else {
-                alert('Failed to insert')
+                alert('Failed to Update')
             }
         })
             .catch(err => console.log(err));
