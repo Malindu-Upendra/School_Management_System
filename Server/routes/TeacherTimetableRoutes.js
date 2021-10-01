@@ -89,4 +89,14 @@ router.post('/insertexam',async (req,res)=>{
     }
 })
 
+router.get('/getExamTimetable',async (req,res)=>{
+    try{
+        const etimetable = await Exam.find();
+        res.json({etimetable});
+    }catch (e){
+        console.log(e)
+    }
+
+})
+
 module.exports= router;
