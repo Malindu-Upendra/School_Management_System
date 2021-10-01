@@ -99,4 +99,16 @@ router.get('/getExamTimetable',async (req,res)=>{
 
 })
 
+
+router.delete('/deleteExamTimetable/:id',async(req,res)=>{
+    const id = req.params.id;
+    try{
+        await Exam.findByIdAndRemove(id);
+        res.send({success:true,message:"Successfully Deleted"});
+    }catch (e){
+        console.log(e)
+    }
+
+})
+
 module.exports= router;
