@@ -351,7 +351,7 @@ class SubjectMaterialTeachersView extends Component {
                                                     {" "}
                                                     {this.state.searchedMaterial.lectureLink}
                                                 </Typography>
-                                                <p></p>
+                                                <p/>
                                                 <Row>
                                                     <Col>
                                                         <Button
@@ -455,7 +455,7 @@ class SubjectMaterialTeachersView extends Component {
                                 {" "}
                                 {Materials.lectureLink}
                             </Typography>
-                            <p></p>
+                            <p/>
                             <Row>
                                 <Col>
                                     <Button

@@ -4,6 +4,7 @@ import {Button, TextField, FormControl, Grid, MenuItem, Select, InputLabel,} fro
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import axios from "axios";
+import decode from "jwt-decode";
 
 const MyGrid = styled(Grid)({
     marginBottom:"5%",
@@ -56,12 +57,25 @@ export class Classroom_timetable extends Component {
             time: "",
             subjectcode: "",
             teacher: "",
-            link: ""
+            link: "",
+            grades:[]
         }
+
+    componentDidMount = async () => {
+        await this.setState({username:decode(sessionStorage.token).username})
+
+        await axios.get(`http://localhost:5000/teacher/getSpecificTeacher/${this.state.username}`).then(async res => {
+            if (res.data.success) {
+                await this.setState({grades:res.data.data.selectedGrades});
+            }
+        })
+
+    }
 
     handleChange = (event) => {
         const {name,value} = event.target;
         this.setState({[name]:value});
+        console.log(value)
     }
 
     handleSubmit = (event) =>{
@@ -82,7 +96,7 @@ export class Classroom_timetable extends Component {
         then(response => {
             if (response.data.success) {
                 alert(response.data.message)
-                window.location = '/'
+                window.location = '/teacher/classroom_timetable/TeachersView'
             } else {
                 alert('Failed to insert')
             }
@@ -90,7 +104,6 @@ export class Classroom_timetable extends Component {
             .catch(err => console.log(err));
 
     };
-
 
     render() {
         return (
@@ -100,18 +113,26 @@ export class Classroom_timetable extends Component {
                 <MyGrid2 container spacing={1}>
 
                     <MyGrid item xs={12}>
-                        <MyText
-                            required
-                            id="grade"
-                            name="grade"
-                            label="Grade"
-                            placeholder="Grade-06"
-                            fullWidth
-                            variant="outlined"
-                            autoComplete="Grade"
-                            value={this.state.grade}
-                            onChange={this.handleChange}
-                        />
+                        <MyForm variant="outlined">
+                            <InputLabel id="demo-simple-select-outlined-label">Grade *</InputLabel>
+                            <MySelect
+                                required
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                label="Grade"
+                                fullWidth
+                                name="grade"
+                                value={this.state.grade}
+                                onChange={this.handleChange}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                {this.state.grades.map((item) => (
+                                    <MenuItem value={item}>Grade {item}</MenuItem>
+                                ))}
+                            </MySelect>
+                        </MyForm>
                     </MyGrid>
                     <MyGrid1 container spacing={3}>
 

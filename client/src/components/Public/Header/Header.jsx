@@ -410,7 +410,7 @@ export default function Header() {
                                                 </MenuItem>
                                                 <MenuItem
                                                     style={{background:"#006666",color:"white"}}
-                                                    onClick={()=> window.location.href=""}
+                                                    onClick={()=> window.location.href="/teacher/exam_timetable/TimetableTeacherView"}
                                                 >
                                                     View Exam TimeTable
                                                 </MenuItem>
