@@ -8,19 +8,27 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import DeleteIcon from "@material-ui/icons/Delete";
 import {Space} from "antd";
 import Search from "antd/es/input/Search";
+import decode from "jwt-decode";
 
 export class Exam_Timetable_TeacherView extends Component {
     state = {
         exam:[],
-
+        grades:[]
 
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:5000/exam/getExamTimetable').
+    componentDidMount = async () => {
+        await this.setState({username:decode(sessionStorage.token).username})
+
+        await axios.get(`http://localhost:5000/teacher/getSpecificTeacher/${this.state.username}`).then(async res => {
+            if (res.data.success) {
+                await this.setState({grades:res.data.data.selectedGrades});
+            }
+        })
+
+        await axios.get('http://localhost:5000/exam/getExamTimetable').
         then(res=>{
             const table = res.data.etimetable;
-            console.log(table);
             this.setState({exam:table});
         }).catch(err=> err.message)
     }
@@ -42,7 +50,7 @@ export class Exam_Timetable_TeacherView extends Component {
 
 
             <Container style={{width: "100%",  marginTop: "5%", padding: "1%"}}>
-                <div style={{width:"40%",marginLeft:"50%",marginBottom:"2%"}}>
+                <div style={{width:"40%",marginLeft:"60%",marginBottom:"2%"}}>
                     <Space direction="vertical" style={{width:"100%"}}>
                         <Search
                             placeholder="Search by Grade"
@@ -55,12 +63,12 @@ export class Exam_Timetable_TeacherView extends Component {
                     </Space>
                 </div>
 
-
+                {this.state.grades.map((item) => (
                 <Table bordered responsive style={{border: "1px solid"}}>
                     <thead>
                     <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "#282c34",color:"white"}}>
 
-                        <td colSpan={6}>Grade-06 1st Term</td>
+                        <td colSpan={6}>Grade {item} Exam Time Table</td>
 
                     </tr>
 
@@ -76,9 +84,7 @@ export class Exam_Timetable_TeacherView extends Component {
                     {this.state.exam.map(ttable => (
                         <>
 
-                            {ttable.grade==='Grade-06'?
-                                <>
-                                    {ttable.term==='1st Term'?
+                            {parseInt(ttable.grade)===item &&
                                         <>
                                             <tbody>
 
@@ -122,63 +128,12 @@ export class Exam_Timetable_TeacherView extends Component {
                                                 </Grid>
                                                 </td>
                                             </tr>
-                                        </>
-                                        :null }
                                 </>
-                                :null}
+                                }
                         </>
                     ))}
                 </Table>
-
-                <Table bordered responsive style={{border: "1px solid"}}>
-                    <thead>
-                    <tr style={{border: "1px solid", textAlign: "center", backgroundColor: "#282c34",color:"white"}}>
-
-                        <td colSpan={6}>Grade-07 1st Term</td>
-
-                    </tr>
-
-                    <tr style={{textAlign: "center"}}>
-
-                        <th>Date</th>
-                        <th>Exam Type</th>
-                        <th>Time</th>
-                        <th>Subject</th>
-                        <th>Subject Code</th>
-                    </tr>
-                    </thead>
-                    {this.state.exam.map(ttable => (
-                        <>
-
-                            {ttable.grade==='Grade-07'?
-                                <>
-                                    {ttable.term==='1st Term'?
-                                        <>
-                                            <tbody>
-
-                                            <tr style={{textAlign: "center"}}>
-
-                                                <td>{ttable.date}</td>
-                                                <td>{ttable.examtype}</td>
-                                                <td><
-                                                    Table>
-                                                    <tr>
-                                                        <td>{ttable.starttime}</td>
-                                                        <td>{ttable.endtime}</td>
-                                                    </tr>
-                                                </Table>
-                                                </td>
-                                                <td>{ttable.subjectname}</td>
-                                                <td>{ttable.subjectcode}</td>
-                                            </tr>
-                                            </tbody>
-                                        </>
-                                        :null }
-                                </>
-                                :null}
-                        </>
-                    ))}
-                </Table>
+                ))}
 
             </Container>
 

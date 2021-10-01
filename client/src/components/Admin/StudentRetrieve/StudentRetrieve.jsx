@@ -114,7 +114,6 @@ class StudentRetrieve extends Component{
     };
 
     onSearch = (item) => {
-        console.log(item);
         let count = 0;
 
         if(item === ""){
