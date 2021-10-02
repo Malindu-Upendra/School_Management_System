@@ -178,6 +178,22 @@ router.get('/getGeneratedId',async (req,res) => {
 
 })
 
+router.get('/getGeneratedIdForTeacher',async (req,res) => {
+
+    try{
+        const teacher = await Teacher.findOne().limit(1).sort({$natural:-1})
+        const test = teacher.empNum;
+        const afterDivided = test.split("");
+        let num = parseInt(afterDivided[2] + afterDivided[3] + afterDivided[4] + afterDivided[5]);
+        const id = "TR000"+(num + 1);
+
+        res.send({id:id,success:true});
+    }catch (e) {
+        console.log(e);
+    }
+
+})
+
 router.post('/addTeacher',async (req,res) => {
 
     const tbody = req.body;

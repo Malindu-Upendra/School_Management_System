@@ -95,6 +95,7 @@ export default function Header() {
     const [name,setName] = React.useState(null);
     const [subject,setSubject] = React.useState(null);
     const [selectedGrades,setSelectedGrades] = React.useState([])
+    const [classGrade,setClassGrade] = React.useState('')
 
     useEffect (() => {
         if(sessionStorage.token) {
@@ -113,6 +114,15 @@ export default function Header() {
                     }
                 })
             }
+
+            if (user === 'student') {
+                axios.get(`http://localhost:5000/student/getSubjects/${username}`).then(res => {
+                     if (res.data.success) {
+                         setSelectedGrades(res.data.data);
+                         setClassGrade(res.data.grade)
+                }
+            })
+        }
 
     },[user,username,selectedGrades]);
 
@@ -147,24 +157,20 @@ export default function Header() {
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
 
         const user = {
             username:username,
             password:password
         }
 
-        await axios.post('http://localhost:5000/login/login',user).then(res => {
+        await axios.post('http://localhost:5000/login/login',user).then(async res => {
             if(res.data.success){
-                window.location.reload(false);
                 sessionStorage.setItem("token",res.data.token)
 
                 if(sessionStorage.token) {
-                    setUser(decode(sessionStorage.token).position);
-                }
-
-                if(user === 'Admin'){
-                    window.location = '/'
+                   await setUser(decode(sessionStorage.token).position);
+                    window.location = "/"
+                    window.location.reload(false);
                 }
 
             }else{
@@ -230,9 +236,6 @@ export default function Header() {
     // -------------------------------------------------------------------------------------------------------------
                         <>
                     <Grid container>
-                        <Grid item className={classes.menuItem}>
-                            <Button className={classes.menuBtn} onClick={()=> window.location.href="/"}>Home</Button>
-                        </Grid>
                         <Grid item className={classes.menuItem}>
                             <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
                                 teacher
@@ -308,9 +311,56 @@ export default function Header() {
                                 >Events</Button>
                             </Grid>
                             <Grid item className={classes.menuItem}>
-                                <Button className={classes.menuBtn}
-                                        onClick={()=> window.location.href="/displayEvent"}
-                                >Timetable</Button>
+                                <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClick}>
+                                    Subject Material
+                                    <KeyboardArrowDownIcon />
+                                </Button>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    style={{width:"300px"}}
+                                >
+                                    {selectedGrades.map((item) => (
+                                        <div>
+                                            <MenuItem
+                                                style={{background:"#006666",color:"white",width:"200px"}}
+                                                onClick={()=> window.location.href=`/getSubjectMaterials/${classGrade}/${item}`}
+                                            >
+                                                {item}
+                                            </MenuItem>
+                                            <Divider dark/>
+                                        </div>
+                                    ))}
+                                </Menu>
+                            </Grid>
+                            <Grid item className={classes.menuItem}>
+                                <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClickOther}>
+                                    Time Table
+                                    <KeyboardArrowDownIcon />
+                                </Button>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEltwo}
+                                    keepMounted
+                                    open={Boolean(anchorEltwo)}
+                                    onClose={handleCloseOther}
+                                >
+                                    <MenuItem
+                                        style={{background:"#006666",color:"white"}}
+                                        onClick={()=> window.location.href=`/getClassRoomTimeTable/${classGrade}`}
+                                    >
+                                        View Classroom TimeTable
+                                    </MenuItem>
+                                    <MenuItem
+                                        style={{background:"#006666",color:"white"}}
+                                        onClick={()=> window.location.href=`/getExamTimeTable/${classGrade}`}
+                                    >
+                                        View Exam TimeTable
+                                    </MenuItem>
+                                </Menu>
                             </Grid>
                         </Grid>
                         </>
@@ -446,6 +496,32 @@ export default function Header() {
                                     <Button className={classes.menuBtn}
                                             onClick={()=> window.location.href="/displayEvent"}
                                     >Events</Button>
+                                </Grid>
+                                <Grid item className={classes.menuItem}>
+                                    <Button className={classes.menuBtn} aria-haspopup="true" onClick={handleClickOther}>
+                                        Time Table
+                                        <KeyboardArrowDownIcon />
+                                    </Button>
+                                    <Menu
+                                        id="simple-menu"
+                                        anchorEl={anchorEltwo}
+                                        keepMounted
+                                        open={Boolean(anchorEltwo)}
+                                        onClose={handleCloseOther}
+                                    >
+                                        <MenuItem
+                                            style={{background:"#006666",color:"white"}}
+                                            onClick={()=> window.location.href="/getClassRoomTimeTables"}
+                                        >
+                                            View Classroom TimeTable
+                                        </MenuItem>
+                                        <MenuItem
+                                            style={{background:"#006666",color:"white"}}
+                                            onClick={()=> window.location.href="/getExamTimeTables"}
+                                        >
+                                            View Exam TimeTable
+                                        </MenuItem>
+                                    </Menu>
                                 </Grid>
                             </Grid>
                             </>

@@ -98,9 +98,15 @@ class AddTeacher extends Component{
         ]
     }
 
-    componentDidMount = () => {
+    componentDidMount =async () => {
         this.setState({selectedDate:new Date()})
         console.log(this.state.selectedDate)
+
+        await axios.get('http://localhost:5000/admin/getGeneratedIdForTeacher').then(res => {
+            if(res.data.success){
+                this.setState({empNum:res.data.id})
+            }
+        })
     }
 
     selectCategory = async (e) => {
@@ -168,7 +174,7 @@ class AddTeacher extends Component{
                             id="address1"
                             name="empNum"
                             label="Employee Number"
-                            onChange={this.handleChange}
+                            value={this.state.empNum}
                             fullWidth
                             required
                         />

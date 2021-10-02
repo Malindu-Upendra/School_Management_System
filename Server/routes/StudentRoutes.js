@@ -14,6 +14,10 @@ const Grade6 = require('../model/Grade_6')
 const Grade7 = require('../model/Grade_7')
 const Grade8 = require('../model/Grade_8')
 const Grade9 = require('../model/Grade_9')
+const SubjectNotice = require('../model/SubjectNotice.js')
+const SubjectMaterial = require('../model/SubjectMaterials')
+const Classroom = require("../model/ClassroomTimetable");
+const Exam = require('../model/ExamTimetable.js')
 
 router.post('/addEvent',upload.single("flyer"),async (req,res) => {
 
@@ -529,6 +533,91 @@ router.get('/getGrades/:username/:grade', async (req,res) => {
 
         res.send({data: studentGrades, success: true})
     } catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getSubjects/:username', async (req,res) => {
+
+    try{
+        let subjects = [];
+        const username = req.params.username;
+
+        const result = await Student.findOne({administrationNum:username})
+
+        const grade = result.grade;
+
+        if(grade === '1' || grade === '2' || grade === '3' || grade === '4' || grade === '5'){
+            subjects.push('Sinhala');
+            subjects.push('Mathematics')
+            subjects.push('Environment')
+            subjects.push('English')
+            subjects.push('Buddhism')
+        }else if(grade === '6' || grade === '7' || grade === '8' || grade === '9'){
+            subjects.push('Sinhala');
+            subjects.push('Mathematics');
+            subjects.push('Science');
+            subjects.push('HealthStudies');
+            subjects.push('English');
+            subjects.push('Buddhism');
+            subjects.push('History');
+            subjects.push('Geography');
+            subjects.push('Civics');
+            subjects.push('Art');
+            subjects.push('Tamil');
+            subjects.push('Islam');
+        }
+
+        res.send({data:subjects,grade:grade,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+
+})
+
+router.get('/getSubjectMaterials/:subject/:grade',async (req,res) => {
+    const subject = req.params.subject;
+    const g = parseInt(req.params.grade);
+
+    try {
+        const subjectMaterials = await SubjectMaterial.find({subjectChoose:subject,grade:g});
+        res.send({data:subjectMaterials,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+})
+
+router.get('/getSubjectNotices/:subject/:grade',async (req,res) => {
+    const subject = req.params.subject;
+    const grade = req.params.grade;
+    try {
+        const subjectNotices = await SubjectNotice.find({subjectSelect:subject,grade:grade});
+        res.send({data:subjectNotices,success:true})
+    }catch (e) {
+        console.log(e)
+    }
+})
+
+router.get('/getSpecificClassRoomTimeTable/:grade',async (req,res)=>{
+    try{
+        const grade = req.params.grade;
+
+        const timetable = await Classroom.find({grade:grade});
+        res.json({timetable});
+    }catch (e){
+        console.log(e)
+    }
+
+})
+
+router.get('/getSpecificExamTimetable/:grade',async (req,res)=>{
+    try{
+        const grade = req.params.grade;
+
+        const timetable = await Exam.find({grade:grade});
+        res.json({timetable});
+    }catch (e){
         console.log(e)
     }
 

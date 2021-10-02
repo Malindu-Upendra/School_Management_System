@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ImgBg  from '../SvgImages/bg.jpg'
-import logo from '../SvgImages/logo.png'
-import {Carousel} from "react-bootstrap";
 
 const Section = styled.section`
   height: 100vh;
@@ -11,11 +9,9 @@ const Section = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  //background: #131313;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1)),
   url(${ImgBg});
   height: auto;
-  //background-position:center;
   background-size: cover;
 `;
 
@@ -31,11 +27,9 @@ const Container = styled.div`
 
 const ColumnLeft = styled.div`
   display: flex;
-  //color: #fff;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //padding: 5rem 2rem;
   h1 {
     margin-bottom: 0.5rem;
     font-size: 4rem;
@@ -57,7 +51,7 @@ const Hero = () => {
                         transition={{ duration: 7 }}
                     >
                         <h3>
-                            <img src="/Assets/H2MD.png" alt="" style={{maxWidth: 600,
+                                <img src="/Assets/H2MD.png" alt="" style={{maxWidth: 600,
                                 boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 20), 0 16px 120px 0 rgba(0, 0, 0, 1.19)"
                             }} />
                         </h3>

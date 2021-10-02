@@ -112,26 +112,18 @@ class NoticeInsertForm extends Component{
                         </Grid>
 
                         <Grid item xs={12}>
-                            <FormControl variant="outlined" style={{width:"100%"}}>
-                                <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>
-                                <Select
-                                    required
-                                    native
-                                    value={this.state.subjectSelect}
-                                    onChange={this.handleChange}
-                                    label="Select Subject"
-                                    inputProps={{
-                                        name: 'subjectSelect',
-                                        id: 'outlined-age-native-simple',
-                                    }}
-                                >
-                                    <option aria-label="None" value="" />
-                                    <option value={"Mathematics"}>Mathematics</option>
-                                    <option value={"Science"}>Science</option>
-                                    <option value={"English"}>English</option>
-                                    <option value={"History"}>History</option>
-                                </Select>
-                            </FormControl>
+                            <TextField
+                                required
+                                id="noticeDescription"
+                                name="subjectSelect"
+                                value={this.state.subjectSelect}
+                                onChange={this.handleChange}
+                                label="Subject"
+                                placeholder="Describe the Notice"
+                                multiline
+                                fullWidth
+                                autoComplete=""
+                            />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>

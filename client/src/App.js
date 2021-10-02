@@ -16,10 +16,10 @@ class App extends Component{
         user:''
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
 
         if(sessionStorage.token) {
-            this.setState({user:decode(sessionStorage.token).position});
+          await this.setState({user:decode(sessionStorage.token).position});
         }else {
             this.setState({user: 'guest'})
         }

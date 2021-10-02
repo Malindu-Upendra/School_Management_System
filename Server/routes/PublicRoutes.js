@@ -104,4 +104,8 @@ router.delete('/deleteEvent/:cid/:eid',async (req,res) => {
 
 })
 
+router.get('/getClassroomTimetables',async (req,res) => {
+
+})
+
 module.exports = router;

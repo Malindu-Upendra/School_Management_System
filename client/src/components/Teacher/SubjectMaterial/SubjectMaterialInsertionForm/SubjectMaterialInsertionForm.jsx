@@ -17,10 +17,6 @@ function Alert(props) {
 }
 
 class SubjectMaterialInsertionForm extends Component{
-    // constructor(props) {
-    //     super(props);
-    // }
-
     state = {
         term: '',
         week: '',
@@ -151,26 +147,18 @@ class SubjectMaterialInsertionForm extends Component{
                         </Grid>
 
                         <Grid item xs={12}>
-                        <FormControl variant="outlined" style={{width:"100%"}}>
-                            <InputLabel htmlFor="outlined-age-native-simple">Select Subject</InputLabel>
-                            <Select
+                            <TextField
                                 required
-                                native
+                                id="lecLink"
+                                name="subjectChoose"
                                 value={this.state.subjectChoose}
                                 onChange={this.handleChange}
-                                label="Select Subject"
-                                inputProps={{
-                                    name: 'subjectChoose',
-                                    id: 'outlined-age-native-simple',
-                                }}
-                            >
-                                <option aria-label="None" value="" />
-                                <option value={"Mathematics"}>Mathematics</option>
-                                <option value={"Science"}>Science</option>
-                                <option value={"English"}>English</option>
-                                <option value={"History"}>History</option>
-                            </Select>
-                        </FormControl>
+                                label="Subject"
+                                variant="outlined"
+                                multiline
+                                fullWidth
+                                autoComplete=""
+                            />
                     </Grid>
 
                         <Grid item xs={12}>

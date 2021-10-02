@@ -5,6 +5,9 @@ import AddEvent from "../Public/Events/AddEvent/AddEvent";
 import DisplayEvents from "../Public/Events/DisplayEvents/DisplayEvents";
 import UpdateEvent from "../Public/Events/UpdateEvent/UpdateEvent";
 import HomePage from "../Public/Home/HomePage";
+import SubjectMaterials from "./SubjectMaterials/SubjectMaterials";
+import ClassroomTimeTable from "./Timetables/ClassroomTimeTable";
+import ExamTimetable from "./Timetables/ExamTimeTable";
 
 class StudentPaths extends Component{
 
@@ -18,6 +21,9 @@ class StudentPaths extends Component{
                     <Route path="/addEvent" component={AddEvent} exact/>
                     <Route path="/displayEvent" component={DisplayEvents} exact/>
                     <Route path="/updateEvent/:id" component={UpdateEvent} exact/>
+                    <Route path="/getSubjectMaterials/:grade/:subject" component={SubjectMaterials} exact/>
+                    <Route path="/getClassRoomTimeTable/:grade" component={ClassroomTimeTable} exact/>
+                    <Route path="/getExamTimeTable/:grade" component={ExamTimetable} exact/>
                 </Switch>
             </Router>
 
