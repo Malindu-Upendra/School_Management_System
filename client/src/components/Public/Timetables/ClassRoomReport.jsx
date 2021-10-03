@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import { ClassroomTimetable } from './classroomTimetable'
+import { ComponentToPrint } from './classroomTimetable'
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
@@ -26,7 +26,7 @@ const ReportTest = () => {
                     </Button>
                 </Grid>
 
-                <ClassroomTimetable ref={componentRef} />
+                <ComponentToPrint ref={componentRef} />
             </div>
         </div>
     );

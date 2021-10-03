@@ -1,10 +1,11 @@
 import React from "react";
 import {Table,Container} from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {Space} from "antd";
 import Search from "antd/es/input/Search";
 
-export class ClassroomTimetable extends React.PureComponent {
+export class ComponentToPrint extends React.PureComponent {
     state = {
         classroom:[],
         Grades:[{grade:'1'},{grade:'2'},{grade:'3'},{grade:'4'},{grade:'5'},{grade:'6'},{grade:'7'},{grade:'8'},{grade:'9'},{grade:'10'}]
@@ -23,7 +24,7 @@ export class ClassroomTimetable extends React.PureComponent {
 
         return (
 
-            <>
+            <div>
             <h3 style={{textAlign:'center',marginTop:'20px'}}>ClassRoom Timetables</h3>
             <Container style={{width: "100%", border: "2px solid", marginTop: "2%", padding: "1%",borderColor:"lightBlue"}}>
 
@@ -88,11 +89,10 @@ export class ClassroomTimetable extends React.PureComponent {
                 </Table>
                 ))}
             </Container>
-            </>
+            </div>
         )
     }
 
 }
 
-export default ClassroomTimetable;
 
