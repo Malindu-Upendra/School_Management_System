@@ -5,7 +5,7 @@ Technologies: MERN stack
 2. Backend: Express js, Mongo client
 3. Database: Mongo DB
 
-How to get started with your app:
+# How to get started with your app:
 
 Prerequisites
 1. Node js v12 or above should be installed
