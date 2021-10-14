@@ -1,18 +1,31 @@
-# School_Management_System
+-------------------------------------------------------------------------------------
+# Group-ID: 2021S2_REG_WE_56
+# Project name: School_Management_System
+-------------------------------------------------------------------------------------
+# Group Details
+Member Details:
+   Name            StudentID       UserName
+* Perera R.D.D     IT19148328      DILANDEVINDA
+* M.N.M. Hussain   IT19148182      MNM-Hussain
+* Upendra Y.A.M    IT19074382      Malindu-Upendra
+* M.A.M Mahir      IT19179018      MahirAzeem
+--------------------------------------------------------------------------------------
+# Project Description:
 
-Technologies: MERN stack
+
+--------------------------------------------------------------------------------------
+# Technologies: MERN stack
 1. Front end: React js
 2. Backend: Express js, Mongo client
 3. Database: Mongo DB
-
+--------------------------------------------------------------------------------------
 # How to get started with your app:
-
 Prerequisites
 1. Node js v12 or above should be installed
-2. Github shuld be installed
+2. Git should be installed
 3. Any IDE that supports javascript should be installed(VS Code or Webstorm)
 
-Procedure of setting up prerequisites and rin the project
+Procedure of setting up prerequisites and run the project
 1. Open the IDE
 2. Clone the project using: https://github.com/Malindu-Upendra/School_Management_System
 3. Open two terminals one for frontend and backend
@@ -23,7 +36,7 @@ Procedure of setting up prerequisites and rin the project
 8. Once all the packages are installed in both frontend and the backend you can run "npm start" command in the backend to start the backend server
 9. once the backend server is started you can run the npm start "npm start" command in the frontend terminal to start the frontend server.This will usually run the frontend on port number 3000
 10. Initially web application will be loaded in your browser or you can open up any browser and type the following url http://localhost:3000 and this will load the web application
-
+-------------------------------------------------------------------------------------------
 
 1 explanation about project
 2 list down functions
