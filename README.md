@@ -6,12 +6,11 @@
 Member Details:
    Name           | StudentID   |    UserName
 ------------------|-------------|--------------------
-1. Perera R.D.D   | IT19148328  |    DILANDEVINDA
-2. M.N.M. Hussain | IT19148182  |    MNM-Hussain
-3. Upendra Y.A.M  | IT19074382  |    Malindu-Upendra
-4. M.A.M Mahir    | IT19179018  |    MahirAzeem
-
---------------------------------------------------------------------------------------
+   Perera R.D.D   | IT19148328  |    DILANDEVINDA
+   M.N.M. Hussain | IT19148182  |    MNM-Hussain
+   Upendra Y.A.M  | IT19074382  |    Malindu-Upendra
+   M.A.M Mahir    | IT19179018  |    MahirAzeem
+------------------------------------------------------
 # Project Description:
 
 
