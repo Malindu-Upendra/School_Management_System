@@ -46,22 +46,24 @@ Procedure of setting up prerequisites and run the project
 -------------------------------------------------------------------------------------------
 
 -----Login Credientials----------
-As an Admin:
-Username: Admin 
-Password: Admin
---------------------
-As a Teacher:
-Username: TR0001
-Password: ahmed123
+01. As an Admin:
+* Username: Admin
+* Password: Admin
+---------------------------
+
+02. As a Teacher:
+* Username: TR0001
+* Password: ahmed123
 
 OR
 
-Username: TR0003
-Password: dilan123
-----------------------
-As a Student:
-Username: ST00011
-Password: malindu123
+* Username: TR0003
+* Password: dilan123
+
+--------------------------
+03. As a Student:
+* Username: ST00011
+* Password: malindu123
 
 
 
