@@ -13,6 +13,12 @@ Member Details:
 ------------------------------------------------------
 # Project Description:
 
+Our project is School Management System. We automated the main functionalities of a school taking the current pandemic into consideration.
+Our project consist of eight functions. Student Management and Teacher Management are the functions which are used for the handling of Teacher and Student related data's.
+
+In our system, Student and Teachers are the main actors. Creation of a Student in our system is taken place through Student Management. A student is able to view their results(Grades Management), view notices and subject material(Subject Material Management) and also view timetable(Timetable management). Additionally the student is also able to mark their attendance in their own profile provided.
+
+Teacher's are the next main important actor in our system. A teacher is added to the system through Teacher Management. Teachers are responsible in handling timetable related duties through Timetable Management and as well as manage study materials through Study Material Management. Teachers are also responsible in assigning grades to the exams done by the student using the Grades Management System. Our system also compromises of Event Management, where a teacher is able to add any event specific to our school.
 
 --------------------------------------------------------------------------------------
 # Technologies: MERN stack
@@ -39,9 +45,29 @@ Procedure of setting up prerequisites and run the project
 10. Initially web application will be loaded in your browser or you can open up any browser and type the following url http://localhost:3000 and this will load the web application
 -------------------------------------------------------------------------------------------
 
-1 explanation about project
-2 list down functions
-3 brief explanation about each function
-4 list down user roles
-5 brief explanation what user roles do in this app
-6 instructions to use each function user wise
+-----Login Credientials----------
+As an Admin:
+Username: Admin 
+Password: Admin
+--------------------
+As a Teacher:
+Username: TR0001
+Password: ahmed123
+
+OR
+
+Username: TR0003
+Password: dilan123
+----------------------
+As a Student:
+Username: ST00011
+Password: malindu123
+
+
+
+
+
+
+
+
+
